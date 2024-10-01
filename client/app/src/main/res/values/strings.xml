@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">WAP_OR</string>
+    <string name="id_txt">
+        (아이디)
+    </string>
+    <string name="pw_txt">
+        (비번)
+    </string>
+    <string name="login_txt">
+        LOG IN
+    </string>
+    <string name="social_login_txt">
+        Login in with social account
+    </string>
+</resources>
