@@ -4,15 +4,15 @@
     <shared>
       <config>
         <device id="_android_virtual_device_id_New_Device_API_34" />
+        <device id="_device_class_phone" />
+        <device id="pixel" />
+        <device id="pixel_4_xl" />
+        <device id="_device_class_desktop" />
+        <device id="pixel_tablet" />
+        <device id="_device_class_foldable" />
         <device id="Nexus 6" />
         <device id="pixel_6_pro" />
         <device id="desktop_small" />
-        <device id="_device_class_tablet" />
-        <device id="_device_class_phone" />
-        <device id="pixel_tablet" />
-        <device id="pixel_4a" />
-        <device id="tv_720p" />
-        <device id="pixel_8" />
       </config>
     </shared>
     <layouts>
@@ -33,7 +33,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6951d1bb-4375-4a05-95e3-c60bdec42e72" name="Changes" comment="" />
+    <list default="true" id="6951d1bb-4375-4a05-95e3-c60bdec42e72" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/kakao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/wapor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

@@ -15,7 +15,9 @@
         android:layout_width="170dp"
         android:layout_height="71dp"
         android:layout_marginTop="227dp"
+        android:layout_marginBottom="634dp"
         android:layout_marginStart="133dp"
+        android:layout_marginEnd="127dp"
         android:contentDescription="App Logo"
         android:src="@drawable/logo"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +30,9 @@
         android:layout_width="265dp"
         android:layout_height="35dp"
         android:layout_marginTop="394dp"
+        android:layout_marginBottom="503dp"
         android:layout_marginStart="83dp"
+        android:layout_marginEnd="82dp"
         android:background="#D9D9D9"
         android:hint="(아이디)"
         android:gravity="center"
@@ -48,18 +52,16 @@
         android:hint="(비번)"
         android:inputType="textPassword" />
 
-
-
-    <!-- 카카오 로그인 버튼 -->
-
-    <!-- 로그인 버튼 -->
     <!-- Remember Me 체크박스 -->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="499dp"
+        android:layout_marginBottom="406dp"
         android:layout_marginStart="163dp"
-        android:layout_marginTop="502dp"
+        android:layout_marginEnd="162dp"
+
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -72,30 +74,34 @@
             android:button="@null" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="88dp"
+            android:layout_height="24dp"
             android:layout_marginTop="3dp"
             android:gravity="center_vertical"
             android:text=" Remember me"
-            android:textSize="20sp" />
+            android:textSize="12sp" />
     </LinearLayout>
-
+    <!-- 카카오 로그인 버튼 -->
     <ImageButton
         android:id="@+id/kakaoLoginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="604dp"
+        android:layout_width="275dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginEnd="82dp"
+        android:layout_marginTop="630dp"
+        android:layout_marginBottom="242dp"
         android:src="@drawable/kakao_login_medium_narrow"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <!-- 로그인 버튼 -->
     <Button
         android:id="@+id/loginButton"
         android:layout_width="265dp"
         android:layout_height="57dp"
         android:layout_marginStart="83dp"
+        android:layout_marginEnd="82dp"
         android:layout_marginTop="797dp"
+        android:layout_marginBottom="78dp"
         android:text="LOG IN"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
