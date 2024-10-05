@@ -12,4 +12,7 @@
     <string name="social_login_txt">
         Login in with social account
     </string>
+    <string name="wrong_intput_txt">
+        *아이디와 비밀번호를 확인해주세요.
+    </string>
 </resources>

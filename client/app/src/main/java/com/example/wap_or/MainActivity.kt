@@ -16,7 +16,7 @@ import com.example.wap_or.ui.theme.WAP_ORTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.acticity_login_test)
         }
     }
 
