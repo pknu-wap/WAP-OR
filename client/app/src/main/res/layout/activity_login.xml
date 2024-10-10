@@ -23,9 +23,9 @@
     app:layout_constraintTop_toTopOf="parent"
 />
     <EditText
+        android:id="@+id/login"
         android:layout_width="265dp"
         android:layout_height="49dp"
-        android:id="@+id/login"
         android:layout_marginTop="380dp"
         android:layout_marginBottom="503dp"
         android:layout_marginStart="86dp"
@@ -52,9 +52,9 @@
         app:layout_constraintStart_toStartOf="@+id/login"
         />
     <TextView
+        android:id="@+id/wrongInputText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/wrongInputText"
         android:layout_marginTop="28dp"
         android:text="@string/wrong_intput_txt"
         android:textAppearance="@style/alert_style"
