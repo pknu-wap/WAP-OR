@@ -48,3 +48,6 @@ Thumbs.db
 
 # 프로젝트 문서 파일
 HELP.md
+
+# 민감한 정보가 들어있는 secret.properties 파일을 무시
+src/main/resources/secret.properties
