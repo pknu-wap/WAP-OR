@@ -74,6 +74,7 @@
         android:layout_marginBottom="215dp"
         android:layout_marginStart="157dp"
         android:layout_marginEnd="150dp"
+        android:background="@android:color/transparent"
         android:clickable="true"
         android:focusable="true"
         android:onClick="onKakaoLoginClick"
@@ -115,6 +116,7 @@
             android:gravity="center"
             android:text="@string/kakao_login_txt"
             android:textAppearance="@style/kakao_login_style"
+            android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
