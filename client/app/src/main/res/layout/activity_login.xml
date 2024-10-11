@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@drawable/background_login"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="0dp">
@@ -32,6 +32,7 @@
         android:layout_marginEnd="79dp"
         android:background="#E7E7E7"
         android:hint="아이디 입력"
+        android:fontFamily="@font/inter_18pt_regular"
         android:paddingStart="12dp"
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
@@ -39,12 +40,13 @@
         app:layout_constraintTop_toTopOf="parent"
         />
     <EditText
+        android:id="@+id/password"
         android:layout_width="265dp"
         android:layout_height="49dp"
-        android:id="@+id/password"
         android:layout_marginTop="11dp"
         android:background="#E7E7E7"
         android:hint="비밀번호 입력"
+        android:fontFamily="@font/inter_18pt_regular"
         android:paddingStart="12dp"
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
@@ -65,11 +67,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
     <FrameLayout
+        android:id="@+id/kakaoLoginButton"
         android:layout_width="123dp"
         android:layout_height="122dp"
-        android:id="@+id/kakaoLoginButton"
-        android:layout_marginTop="612dp"
-        android:layout_marginBottom="198dp"
+        android:layout_marginTop="595dp"
+        android:layout_marginBottom="215dp"
         android:layout_marginStart="157dp"
         android:layout_marginEnd="150dp"
         android:clickable="true"
@@ -78,9 +80,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <ImageView
+            android:id="@+id/kakaoBackground"
             android:layout_width="83dp"
             android:layout_height="83dp"
-            android:id="@+id/kakaoBackground"
             android:layout_marginBottom="39dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="24dp"
@@ -92,9 +94,9 @@
             />
 
         <ImageView
+            android:id="@+id/kakaologo"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:id="@+id/kakaologo"
             android:layout_marginTop="11dp"
             android:layout_marginBottom="52dp"
             android:layout_marginStart="28dp"
@@ -118,17 +120,29 @@
 
     </FrameLayout>
 <Button
-    android:layout_width="265dp"
-    android:layout_height="57dp"
     android:id="@+id/LoginButton"
-    android:layout_marginTop="797dp"
-    android:layout_marginBottom="78dp"
+    android:layout_width="265dp"
+    android:layout_height="48dp"
+    android:layout_marginTop="762dp"
+    android:layout_marginBottom="122dp"
     android:layout_marginStart="83dp"
     android:layout_marginEnd="82dp"
     android:background="@drawable/rounded_button"
-    android:text="LOG IN"
+    android:text="로그인"
+    android:textAppearance="@style/login_style"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     />
+    <Button
+        android:id="@+id/SignUPButton"
+        android:layout_width="265dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/rounded_button2"
+        android:text="회원가입"
+        android:textAppearance="@style/sign_up_style"
+        app:layout_constraintTop_toBottomOf="@+id/LoginButton"
+        app:layout_constraintStart_toStartOf="@+id/LoginButton"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
