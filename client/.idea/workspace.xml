@@ -3,16 +3,16 @@
   <component name="AndroidLayouts">
     <shared>
       <config>
-        <device id="pixel_8" />
-        <device id="pixel_tablet" />
-        <device id="pixel_fold" />
-        <device id="pixel_2" />
-        <device id="pixel_xl" />
-        <device id="pixel_6" />
-        <device id="pixel_7a" />
-        <device id="_android_virtual_device_id_New_Device_API_28_2" />
         <device id="_android_virtual_device_id_New_Device_2_API_34" />
+        <device id="_device_class_tablet" />
+        <device id="pixel_7_pro" />
         <device id="_device_class_phone" />
+        <device id="desktop_small" />
+        <device id="Nexus 7" />
+        <device id="Nexus 9" />
+        <device id="pixel_c" />
+        <device id="pixel_tablet" />
+        <device id="_android_virtual_device_id_New_Device_API_28_2" />
       </config>
     </shared>
     <layouts>
