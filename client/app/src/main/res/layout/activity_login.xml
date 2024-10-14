@@ -124,7 +124,7 @@
         android:layout_marginTop="45dp"
         android:background="@drawable/rounded_button"
         android:text="로그인"
-        android:textAppearance="@style/login_style"
+        style="@style/login_style"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -136,7 +136,7 @@
         android:layout_marginTop="21dp"
         android:background="@drawable/rounded_button2"
         android:text="회원가입"
-        android:textAppearance="@style/sign_up_style"
+        style="@style/sign_up_style"
         app:layout_constraintTop_toBottomOf="@+id/LoginButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
