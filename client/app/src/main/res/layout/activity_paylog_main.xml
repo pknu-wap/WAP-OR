@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <!-- 상단 툴바 -->
+    <include
+        layout="@layout/activity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="126dp" />
+
+    <!-- 콘텐츠 영역 -->
+    <include
+        layout="@layout/activity_paylog"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- 하단 네비게이션바 -->
+    <include
+        layout="@layout/activity_bottom_navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp" />
+
+</LinearLayout>

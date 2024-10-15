@@ -110,7 +110,7 @@
             android:layout_marginTop="99dp"
             android:gravity="center"
             android:text="@string/kakao_login_txt"
-            android:textAppearance="@style/kakao_login_style"
+            style="@style/kakao_login_style"
             android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
