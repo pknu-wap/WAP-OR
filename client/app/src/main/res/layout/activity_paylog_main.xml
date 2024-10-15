@@ -11,8 +11,6 @@
         layout="@layout/activity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="126dp" />
-
-    <!-- 콘텐츠 영역 -->
     <!-- 상단 타이틀 바 -->
     <FrameLayout
         android:id="@+id/title_bar"
@@ -33,12 +31,31 @@
             android:background="#B5C9DF"
             android:layout_gravity="bottom"/>
     </FrameLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <!-- 콘텐츠 영역 -->
+    <!-- RecyclerView & writeButton -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        />
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- 오버레이로 띄우는 ImageButton -->
+        <ImageButton
+            android:id="@+id/write_post_icon"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/write_icon"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="10dp"
+            android:background="@null"
+            />
+    </FrameLayout>
     <!-- 하단 네비게이션바 -->
     <include
         layout="@layout/activity_bottom_navigation_bar"

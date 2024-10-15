@@ -38,7 +38,7 @@
         android:layout_marginBottom="19.2dp"
         android:layout_marginStart="196dp"
         android:background="#E2F4FF"
-        android:src="@drawable/home_icon"
+        android:src="@drawable/home_icon_selected"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <!-- 네 번째 버튼 -->
