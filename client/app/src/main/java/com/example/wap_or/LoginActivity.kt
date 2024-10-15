@@ -6,6 +6,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -37,7 +38,9 @@ class LoginActivity : AppCompatActivity() {
                 wrongInputTextView.text = "아이디와 비밀번호를 입력하세요."
             } else {
                 wrongInputTextView.visibility = View.GONE
-                Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
+                // PaylogActivity로 이동
+                val intent = Intent(this, PaylogActivity::class.java)
+                startActivity(intent)
                 finish() // LoginActivity 종료
             }
         }

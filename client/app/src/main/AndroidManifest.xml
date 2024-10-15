@@ -25,7 +25,10 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:theme="@style/MyCustomTheme"
-    />
+            android:theme="@style/MyCustomTheme" />
+        <activity
+            android:name=".PaylogActivity"
+            android:exported="true"
+            android:theme="@style/MyCustomTheme" />
     </application>
 </manifest>

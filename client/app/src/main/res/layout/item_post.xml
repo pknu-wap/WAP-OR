@@ -57,7 +57,7 @@
         android:layout_height="73dp"
         android:layout_marginTop="53dp"
         android:layout_marginEnd="7.65dp"
-        android:src="null"
+        android:src="@drawable/ex_img"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
