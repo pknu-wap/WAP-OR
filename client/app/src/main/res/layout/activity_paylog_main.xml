@@ -13,12 +13,32 @@
         android:layout_height="126dp" />
 
     <!-- 콘텐츠 영역 -->
-    <include
-        layout="@layout/activity_paylog"
+    <!-- 상단 타이틀 바 -->
+    <FrameLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="37dp">
+        <!-- 텍스트 뷰 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/paylog_title_txt"
+            style="@style/title_style"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+        <!-- 아래 수평선 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#B5C9DF"
+            android:layout_gravity="bottom"/>
+    </FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
-
+        android:layout_weight="1"
+        />
     <!-- 하단 네비게이션바 -->
     <include
         layout="@layout/activity_bottom_navigation_bar"
