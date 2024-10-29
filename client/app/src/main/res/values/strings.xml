@@ -12,13 +12,4 @@
     <string name="social_login_txt">
         Login in with social account
     </string>
-    <string name="wrong_intput_txt">
-        *아이디와 비밀번호를 확인해주세요.
-    </string>
-    <string name="kakao_login_txt">
-        카카오로 시작하기
-    </string>
-    <string name="paylog_title_txt">
-        PAY LOG
-    </string>
 </resources>
