@@ -1,20 +1,22 @@
 package com.example.wap_or
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.wap_or.ui.theme.WAP_ORTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Theme_WAP_OR)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        // 앱이 처음 실행되면 LoginActivity로 이동
-        val loginIntent = Intent(this, LoginActivity::class.java)
-        startActivity(loginIntent)
-        finish()
-    }
+        setContentView(R.layout.activity_login)
+        }
     }
 
