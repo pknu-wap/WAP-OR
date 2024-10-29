@@ -30,7 +30,7 @@
         />
     <TextView
         android:id="@+id/post_created_date"
-        android:layout_width="39dp"
+        android:layout_width="wrap_content"
         android:layout_height="14dp"
         android:layout_marginTop="17.87dp"
         android:layout_marginEnd="13.47dp"
@@ -118,10 +118,10 @@
         android:layout_marginEnd="5dp"
         android:text="3"
         style="@style/post_category_cash_style"
-        app:layout_constraintBottom_toBottomOf="@id/post_commnet_icon"
-        app:layout_constraintEnd_toStartOf="@id/post_commnet_icon" />
+        app:layout_constraintBottom_toBottomOf="@id/post_comment_icon"
+        app:layout_constraintEnd_toStartOf="@id/post_comment_icon" />
     <ImageView
-        android:id="@+id/post_commnet_icon"
+        android:id="@+id/post_comment_icon"
         android:layout_width="25.23dp"
         android:layout_height="25.23dp"
         android:layout_marginEnd="8dp"
@@ -129,4 +129,5 @@
         android:src="@drawable/post_comment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

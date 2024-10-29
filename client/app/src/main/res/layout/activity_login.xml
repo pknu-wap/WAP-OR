@@ -16,8 +16,8 @@
         android:layout_height="131dp"
         android:contentDescription="App Logo"
         android:src="@drawable/wapor"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText

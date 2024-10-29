@@ -1,12 +1,14 @@
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.wap_or.databinding.ItemPostBinding
 
-// MyViewHolder 클래스 수정
+// MyViewHolder 클래스
 class MyViewHolder(val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root)
 
-// 어댑터 클래스 수정
+// 어댑터 클래스
 class PostAdapter(private val datas: MutableList<Post>) : RecyclerView.Adapter<MyViewHolder>() {
 
     override fun getItemCount(): Int = datas.size
@@ -28,10 +30,23 @@ class PostAdapter(private val datas: MutableList<Post>) : RecyclerView.Adapter<M
         holder.binding.postLikeCount.text = post.likes.toString()
         holder.binding.postCommentCount.text = post.comments.toString()
 
+        // 기본 이미지 리소스 가져오기
+        val context = holder.binding.postMainImg.context
+        val defaultDrawable = ResourcesCompat.getDrawable(context.resources,
+            context.resources.getIdentifier("ex_img", "drawable", context.packageName),
+            null)
+
         // Glide를 사용해 이미지 로드
-//        Glide.with(holder.itemView.context)
-//            .load(post.imageUrl)
-//            .placeholder(R.drawable.user_profile_tmp) // 기본 이미지 설정
-//            .into(holder.binding.userProfile)
+        if (!post.imageUrl.isNullOrEmpty()) {
+            // 이미지 URL이 있으면 Glide로 이미지를 로드
+            Glide.with(context)
+                .load(post.imageUrl)
+                .placeholder(defaultDrawable) // 로딩 중일 때 표시할 기본 이미지
+                .error(defaultDrawable)       // 에러 발생 시 표시할 기본 이미지
+                .into(holder.binding.postMainImg)
+        } else {
+            // 이미지 URL이 없으면 기본 XML 드로어블 사용
+            holder.binding.postMainImg.setImageDrawable(defaultDrawable)
+        }
     }
 }
