@@ -46,6 +46,7 @@
             android:layout_height="match_parent" />
 
         <!-- 오버레이로 띄우는 ImageButton -->
+        <!--디자인 수정 요청-->
         <ImageButton
             android:id="@+id/write_post_icon"
             android:layout_width="56dp"
