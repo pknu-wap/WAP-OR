@@ -4,15 +4,15 @@
     <shared>
       <config>
         <device id="_android_virtual_device_id_New_Device_3_API_34" />
+        <device id="pixel_2" />
+        <device id="pixel_6a" />
+        <device id="Nexus 6" />
+        <device id="pixel_7_pro" />
+        <device id="pixel_tablet" />
+        <device id="_device_class_phone" />
         <device id="Nexus 5X" />
         <device id="pixel_8" />
-        <device id="_device_class_phone" />
-        <device id="pixel_tablet" />
         <device id="desktop_small" />
-        <device id="pixel_7_pro" />
-        <device id="pixel" />
-        <device id="pixel_6a" />
-        <device id="pixel_5" />
       </config>
     </shared>
     <layouts>
@@ -60,8 +60,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6951d1bb-4375-4a05-95e3-c60bdec42e72" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_bottom_navigation_bar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_bottom_navigation_bar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/wap_or/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/wap_or/LoginActivity.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
