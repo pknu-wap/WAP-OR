@@ -7,15 +7,15 @@
     android:background="#3183FF"
     android:paddingBottom="15dp"
     >
-    <ImageButton
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/characterIcon"
         android:layout_width="41dp"
         android:layout_height="41dp"
         android:layout_marginStart="23dp"
-        android:src="@drawable/samkim_icon"
-        android:background="#3183FF"
+        android:src="@mipmap/samkim_icon_toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:shapeAppearanceOverlay="@style/CircularImageView" />
     <ImageView
         android:id="@+id/logo"
         android:layout_width="0dp"
