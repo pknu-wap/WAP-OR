@@ -50,6 +50,7 @@ android {
 }
 
 dependencies {
+    implementation ("com.kakao.sdk:v2-user:2.20.6")
     implementation ("androidx.gridlayout:gridlayout:1.0.0")
     implementation("com.google.android.material:material:1.6.0")
     implementation("com.github.bumptech.glide:glide:4.15.1")
