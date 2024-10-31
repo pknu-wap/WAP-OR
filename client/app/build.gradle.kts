@@ -47,9 +47,18 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    sourceSets {
+        getByName("main") {
+            java {
+                srcDirs("src\\main\\java", "src\\main\\java\\2")
+            }
+        }
+    }
 }
 
 dependencies {
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.kakao.sdk:v2-user:2.20.6")
     implementation ("androidx.gridlayout:gridlayout:1.0.0")
     implementation("com.google.android.material:material:1.6.0")
