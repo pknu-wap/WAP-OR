@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="184dp">
+    <!--상단 userInfo -->
+    <ImageView
+        android:id="@+id/user_profile"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="14.77dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="10.59dp"
+        android:src="@drawable/user_profile_tmp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/post_username"
+        style="@style/post_username_style"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="14.27dp"
+        android:layout_marginStart="10.51dp"
+        android:layout_marginBottom="4.5dp"
+        android:text="와포어 회원1"
+        app:layout_constraintBottom_toBottomOf="@id/user_profile"
+        app:layout_constraintStart_toEndOf="@id/user_profile"
+        />
+    <TextView
+        android:id="@+id/post_created_date"
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"
+        android:layout_marginTop="22.87dp"
+        android:layout_marginEnd="27.82dp"
+        android:text="1시간 전"
+        style="@style/post_created_date_style"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <!--중간 게시물 & 이미지 -->
+    <TextView
+        android:id="@+id/post_main_text"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="118.65dp"
+        android:text="두솥도시락 - 한우함박스테이크\n\n과소비^^♡ "
+        style="@style/post_main_text_style"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <ImageView
+        android:id="@+id/post_main_img"
+        android:layout_width="73dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="22dp"
+        android:src="@drawable/ex_img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <!--하단 카테고리 | cash -->
+    <TextView
+        android:id="@+id/post_category"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_marginBottom="17dp"
+        android:layout_marginStart="29dp"
+        android:text="식비"
+        style="@style/post_category_cash_style"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:id="@+id/division"
+        android:layout_width="11dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="20dp"
+        android:text="|"
+        style="@style/post_category_cash_style"
+        app:layout_constraintBottom_toBottomOf="@id/post_category"
+        app:layout_constraintStart_toEndOf="@id/post_category" />
+    <TextView
+        android:id="@+id/post_cash"
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"
+        android:layout_marginStart="20dp"
+        android:text="8,900 won"
+        style="@style/post_category_cash_style"
+        app:layout_constraintBottom_toBottomOf="@id/division"
+        app:layout_constraintStart_toEndOf="@id/division" />
+    <!--하단 좋아요&댓글-->
+    <TextView
+        android:id="@+id/post_like_count"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginEnd="5dp"
+        android:text="1"
+        style="@style/post_category_cash_style"
+        app:layout_constraintBottom_toBottomOf="@id/post_like_icon"
+        app:layout_constraintEnd_toStartOf="@id/post_like_icon" />
+    <ImageView
+        android:id="@+id/post_like_icon"
+        android:layout_width="22dp"
+        android:layout_height="19dp"
+        android:src="@drawable/post_like"
+        android:layout_marginEnd="24.77dp"
+        app:layout_constraintBottom_toBottomOf="@id/post_comment_count"
+        app:layout_constraintEnd_toStartOf="@id/post_comment_count"/>
+    <TextView
+        android:id="@+id/post_comment_count"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginBottom="3.12dp"
+        android:layout_marginEnd="5dp"
+        android:text="3"
+        style="@style/post_category_cash_style"
+        app:layout_constraintBottom_toBottomOf="@id/post_comment_icon"
+        app:layout_constraintEnd_toStartOf="@id/post_comment_icon" />
+    <ImageView
+        android:id="@+id/post_comment_icon"
+        android:layout_width="25.23dp"
+        android:layout_height="25.23dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="13.77dp"
+        android:src="@drawable/post_comment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
