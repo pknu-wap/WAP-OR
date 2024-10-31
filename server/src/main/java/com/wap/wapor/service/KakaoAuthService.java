@@ -1,32 +1,25 @@
 package com.wap.wapor.service;
 
 import com.wap.wapor.dto.KakaoUserResponse;
+import com.wap.wapor.entity.User;
+import com.wap.wapor.repository.UserRepository;
+import org.springframework.http.*;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Optional;
+
+@Service
 public class KakaoAuthService {
-    private final UserRepository userRepository;
     private final RestTemplate restTemplate;
+    private final UserRepository userRepository;
 
-    public KakaoAuthService(UserRepository userRepository, RestTemplate restTemplate) {
-        this.userRepository = userRepository;
+    public KakaoAuthService(RestTemplate restTemplate, UserRepository userRepository) {
         this.restTemplate = restTemplate;
+        this.userRepository = userRepository;
     }
 
-    public String processKakaoLogin(String accessToken) {
-        KakaoUserResponse kakaoUser = getKakaoUserInfo(accessToken);
-
-        if (kakaoUser == null) {
-            throw new RuntimeException("카카오 사용자 정보를 가져올 수 없습니다.");
-        }
-
-        // 사용자 정보가 DB에 있는지 확인
-        User user = userRepository.findBySocialIdAndProvider(kakaoUser.getId(), UserProvider.KAKAO)
-                .orElseGet(() -> registerNewUser(kakaoUser)); // 신규 사용자인 경우 등록
-
-        // JWT 토큰 생성 로직 추가 가능
-        return "Login successful for user: " + user.getUsername();
-    }
-
-    private KakaoUserResponse getKakaoUserInfo(String accessToken) {
+    public User processKakaoLogin(String accessToken) {
         String userInfoUrl = "https://kapi.kakao.com/v2/user/me";
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(accessToken);
@@ -35,17 +28,25 @@ public class KakaoAuthService {
         ResponseEntity<KakaoUserResponse> response = restTemplate.exchange(
                 userInfoUrl, HttpMethod.GET, request, KakaoUserResponse.class);
 
-        return response.getStatusCode() == HttpStatus.OK ? response.getBody() : null;
-    }
+        if (response.getStatusCode() == HttpStatus.OK) {
+            KakaoUserResponse kakaoUserResponse = response.getBody();
+            assert kakaoUserResponse != null;
+            String identifier = String.valueOf(kakaoUserResponse.getId());
 
-    private User registerNewUser(KakaoUserResponse kakaoUser) {
-        User newUser = new User();
-        newUser.setSocialId(kakaoUser.getId());
-        newUser.setProvider(UserProvider.KAKAO);
-        newUser.setUsername(kakaoUser.getNickname());
-        newUser.setProfileImageUrl(kakaoUser.getProfileImageUrl());
-        newUser.setEmail(kakaoUser.getEmail());
-
-        return userRepository.save(newUser);
+            Optional<User> existingUser = userRepository.findByIdentifierAndUserType(identifier, UserType.KAKAO);
+            if (existingUser.isPresent()) {
+                return existingUser.get(); // 기존 사용자 반환
+            } else {
+                // 새 사용자 등록
+                User newUser = new User();
+                newUser.setUserType(UserType.KAKAO);
+                newUser.setIdentifier(identifier);
+                newUser.setNickname(kakaoUserResponse.getKakao_account().getProfile().getNickname());
+                userRepository.save(newUser);
+                return newUser;
+            }
+        } else {
+            throw new RuntimeException("Failed to retrieve Kakao user info");
+        }
     }
 }

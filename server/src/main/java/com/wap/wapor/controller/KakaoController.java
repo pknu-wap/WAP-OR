@@ -1,29 +1,22 @@
 package com.wap.wapor.controller;
 
-import org.springframework.http.HttpStatus;
+import com.wap.wapor.entity.User;
+import com.wap.wapor.service.KakaoAuthService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
-public class KakaoController {
-
+@RequestMapping("/auth")
+public class KakaoAuthController {
     private final KakaoAuthService kakaoAuthService;
 
-    public KakaoLoginController(KakaoAuthService kakaoAuthService) {
+    public KakaoAuthController(KakaoAuthService kakaoAuthService) {
         this.kakaoAuthService = kakaoAuthService;
     }
 
     @PostMapping("/kakao")
-    public ResponseEntity<String> kakaoLogin(@RequestBody String accessToken) {
-        try {
-            String result = kakaoAuthService.processKakaoLogin(accessToken);
-            return ResponseEntity.ok(result);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
-        }
+    public ResponseEntity<User> kakaoLogin(@RequestBody String accessToken) {
+        User user = kakaoAuthService.processKakaoLogin(accessToken);
+        return ResponseEntity.ok(user);
     }
 }
