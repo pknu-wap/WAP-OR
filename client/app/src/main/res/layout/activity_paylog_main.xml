@@ -36,9 +36,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingLeft="14dp"
-        android:paddingRight="14dp">
+        android:layout_weight="1">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -46,6 +44,7 @@
             android:layout_height="match_parent" />
 
         <!-- 오버레이로 띄우는 ImageButton -->
+        <!--디자인 수정 요청-->
         <ImageButton
             android:id="@+id/write_post_icon"
             android:layout_width="56dp"
@@ -53,6 +52,7 @@
             android:src="@drawable/write_icon"
             android:layout_gravity="bottom|end"
             android:layout_marginBottom="10dp"
+            android:layout_marginEnd="15dp"
             android:background="@null"
             />
     </FrameLayout>

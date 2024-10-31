@@ -4,18 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="126dp"
-    android:background="#E2F4FF"
+    android:background="#3183FF"
     android:paddingBottom="15dp"
     >
-    <ImageButton
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/characterIcon"
         android:layout_width="41dp"
         android:layout_height="41dp"
         android:layout_marginStart="23dp"
-        android:src="@drawable/samkim_icon"
-        android:background="#E2F4FF"
+        android:src="@mipmap/samkim_icon_toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:shapeAppearanceOverlay="@style/CircularImageView" />
     <ImageView
         android:id="@+id/logo"
         android:layout_width="0dp"
@@ -25,8 +25,8 @@
         android:layout_marginBottom="2dp"
         android:layout_marginStart="87dp"
         android:layout_marginEnd="91dp"
-        android:src="@drawable/wapor"
-        android:background="#E2F4FF"
+        android:src="@drawable/wapor_fffffff"
+        android:background="#3183FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/characterIcon"
         app:layout_constraintEnd_toStartOf="@id/alarmIcon"
@@ -39,7 +39,7 @@
         android:layout_marginBottom="2dp"
         android:layout_marginEnd="23dp"
         android:src="@drawable/alarm_icon"
-        android:background="#E2F4FF"
+        android:background="#3183FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

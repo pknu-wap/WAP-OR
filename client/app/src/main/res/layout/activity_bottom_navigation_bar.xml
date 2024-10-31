@@ -1,67 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.gridlayout.widget.GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:background="#E2F4FF"
+    android:background="#FFFFFF"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    app:columnCount="5"
     >
+
     <!-- 첫 번째 버튼 -->
     <ImageButton
         android:id="@+id/mypage_button"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginStart="34dp"
-        android:background="#E2F4FF"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="#FFFFFF"
         android:src="@drawable/mypage_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_column="0"
+        app:layout_columnWeight="1"
+        app:layout_gravity="center" />
 
     <!-- 두 번째 버튼 -->
     <ImageButton
         android:id="@+id/accountpage_button"
-        android:layout_width="26.79dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="18dp"
-        android:layout_marginStart="113dp"
-        android:background="#E2F4FF"
-        android:src="@drawable/accountpage_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="#FFFFFF"
+        android:src="@drawable/account_icon"
+        app:layout_column="1"
+        app:layout_columnWeight="1"
+        app:layout_gravity="center" />
 
     <!-- 세 번째 버튼 -->
     <ImageButton
         android:id="@+id/home_button"
-        android:layout_width="27dp"
-        android:layout_height="26.8dp"
-        android:layout_marginBottom="19.2dp"
-        android:layout_marginStart="196dp"
-        android:background="#E2F4FF"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="#FFFFFF"
         android:src="@drawable/home_icon_selected"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_column="2"
+        app:layout_columnWeight="1"
+        app:layout_gravity="center" />
+
     <!-- 네 번째 버튼 -->
     <ImageButton
         android:id="@+id/likepage_button"
-        android:layout_width="29dp"
-        android:layout_height="25dp"
-        android:layout_marginBottom="22dp"
-        android:layout_marginStart="281dp"
-        android:background="#E2F4FF"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="#FFFFFF"
         android:src="@drawable/like_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_column="3"
+        app:layout_columnWeight="1"
+        app:layout_gravity="center" />
+
     <!-- 다섯 번째 버튼 -->
     <ImageButton
         android:id="@+id/analysispage_button"
-        android:layout_width="29dp"
-        android:layout_height="27dp"
-        android:layout_marginBottom="21dp"
-        android:layout_marginStart="368dp"
-        android:background="#E2F4FF"
-        android:src="@drawable/analysispage_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="#FFFFFF"
+        android:src="@drawable/analysis_icon"
+        app:layout_column="4"
+        app:layout_columnWeight="1"
+        app:layout_gravity="center" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.gridlayout.widget.GridLayout>

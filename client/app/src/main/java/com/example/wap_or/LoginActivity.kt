@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
                 wrongInputTextView.visibility = View.VISIBLE
                 wrongInputTextView.text = "아이디와 비밀번호를 입력하세요."
             } else {
-                wrongInputTextView.visibility = View.GONE
+                wrongInputTextView.text = ""
                 // PaylogActivity로 이동
                 val intent = Intent(this, PaylogActivity::class.java)
                 startActivity(intent)
@@ -53,7 +53,6 @@ class LoginActivity : AppCompatActivity() {
 
     // 카카오 로그인 클릭 처리
     fun onKakaoLoginClick(view: View) {
-        Toast.makeText(this, "카카오 로그인", Toast.LENGTH_SHORT).show()
         // 카카오 로그인 로직 추가
     }
 }
