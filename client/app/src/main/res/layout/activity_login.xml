@@ -16,9 +16,7 @@
         android:layout_height="131dp"
         android:contentDescription="App Logo"
         android:src="@drawable/wapor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+         />
 
     <EditText
         android:id="@+id/login"
@@ -30,10 +28,7 @@
         android:fontFamily="@font/inter_18pt_regular"
         android:paddingStart="12dp"
         android:paddingTop="14dp"
-        android:paddingBottom="14dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingBottom="14dp" />
 
     <EditText
         android:id="@+id/password"

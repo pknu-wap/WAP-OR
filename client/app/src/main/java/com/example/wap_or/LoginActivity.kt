@@ -15,6 +15,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wap_or.model.LoginRequest
 import com.example.wap_or.model.LoginResponse
+import com.example.wap_or.model.TokenRequest
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import android.util.Log
@@ -25,17 +26,35 @@ import org.json.JSONException
 import org.json.JSONObject
 
 interface ApiService {
-    @POST("login/email") // 실제 엔드포인트에 맞게 수정
+    @POST("api/users/login/email") // 실제 엔드포인트에 맞게 수정
     //ex http://localhost:8080/api/users/login/email
     fun login(@Body request: LoginRequest): Call<LoginResponse>
 }
-val retrofit = Retrofit.Builder()
-    .baseUrl("http://34.64.36.255:8080/api/users/") // 실제 백엔드 URL로 변경
-    .addConverterFactory(GsonConverterFactory.create())
-    .build()
+interface KakaoApiService {
+    @POST("auth/kakao")
+    fun sendToken(@Body tokenRequest: TokenRequest): Call<Void>
+}
+object RetrofitInstance {
+    private const val BASE_URL = "http://34.64.36.255:8080/"
 
-val apiService = retrofit.create(ApiService::class.java)
+    // Retrofit 인스턴스 생성
+    private val retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 
+    // ApiService 인스턴스 생성
+    val apiService: ApiService by lazy {
+        retrofit.create(ApiService::class.java)
+    }
+
+    // KakaoApiService 인스턴스 생성
+    val kakaoApiService: KakaoApiService by lazy {
+        retrofit.create(KakaoApiService::class.java)
+    }
+}
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginButton: Button
@@ -81,7 +100,7 @@ class LoginActivity : AppCompatActivity() {
 
         // 로그인 요청을 보냄
         val loginRequest = LoginRequest(identifier = login, password = password)
-        apiService.login(loginRequest).enqueue(object : Callback<LoginResponse> {
+        RetrofitInstance.apiService.login(loginRequest).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 try {
                     when (response.code()) {
@@ -139,6 +158,24 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
+    private fun sendAccessTokenToServer(accessToken: String) {
+        val tokenRequest = TokenRequest(accessToken)
+        val call = RetrofitInstance.kakaoApiService.sendToken(tokenRequest)
+
+        call.enqueue(object : retrofit2.Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: retrofit2.Response<Void>) {
+                if (response.isSuccessful) {
+                    Log.i("TokenSend", "토큰 전송 성공")
+                } else {
+                    Log.e("TokenSend", "토큰 전송 실패: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.e("TokenSend", "토큰 전송 실패", t)
+            }
+        })
+    }
 
 
     private fun performKakaoLogin(view: View) {
@@ -147,6 +184,7 @@ class LoginActivity : AppCompatActivity() {
                 Log.e("KakaoLogin", "로그인 실패", error)
             } else if (token != null) {
                 Log.i("KakaoLogin", "로그인 성공 ${token.accessToken}")
+                sendAccessTokenToServer(token.accessToken)
                 // 여기서 토큰을 저장하거나, 백엔드로 전달하는 후속 작업을 수행하세요
             }
         }
