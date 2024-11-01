@@ -1,7 +1,8 @@
 package com.wap.wapor.service;
 
 import com.wap.wapor.dto.KakaoUserResponse;
-import com.wap.wapor.entity.User;
+import com.wap.wapor.domain.User;
+import com.wap.wapor.domain.UserType;
 import com.wap.wapor.repository.UserRepository;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

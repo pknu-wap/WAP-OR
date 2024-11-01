@@ -1,14 +1,19 @@
 package com.wap.wapor.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class KakaoUserResponse {
     private Long id;
-    private KakaoAccount kakao_account;
-    public  getKakao_account() {
-        return kakao_account;
+
+    @JsonProperty("kakao_account")
+    private KakaoAccount kakaoAccount;
+
+    public KakaoAccount getKakaoAccount() {
+        return kakaoAccount;
     }
 
-    public void setKakao_account(KakaoAccount kakao_account) {
-        this.kakao_account = kakao_account;
+    public void setKakaoAccount(KakaoAccount kakaoAccount) {
+        this.kakaoAccount = kakaoAccount;
     }
 
     public Long getId() {
@@ -19,14 +24,11 @@ public class KakaoUserResponse {
         this.id = id;
     }
 
-
-
-    // Getter, Setter
-
     public static class KakaoAccount {
         private Profile profile;
         private String email;
-        public  getProfile() {
+
+        public Profile getProfile() {
             return profile;
         }
 
@@ -42,13 +44,12 @@ public class KakaoUserResponse {
             this.email = email;
         }
 
-
-
-        // Getter, Setter
-
         public static class Profile {
             private String nickname;
-            private String profile_image_url;
+
+            @JsonProperty("profile_image_url")
+            private String profileImageUrl;
+
             public String getNickname() {
                 return nickname;
             }
@@ -57,17 +58,13 @@ public class KakaoUserResponse {
                 this.nickname = nickname;
             }
 
-            public String getProfile_image_url() {
-                return profile_image_url;
+            public String getProfileImageUrl() {
+                return profileImageUrl;
             }
 
-            public void setProfile_image_url(String profile_image_url) {
-                this.profile_image_url = profile_image_url;
+            public void setProfileImageUrl(String profileImageUrl) {
+                this.profileImageUrl = profileImageUrl;
             }
-
-
-
-            // Getter, Setter
         }
     }
 }

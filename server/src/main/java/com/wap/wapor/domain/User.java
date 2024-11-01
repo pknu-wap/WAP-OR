@@ -1,6 +1,5 @@
 package com.wap.wapor.domain;
 
-
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.Data;
@@ -43,4 +42,3 @@ public class User {
         this.lastLogin = LocalDateTime.now();
     }
 }
-
