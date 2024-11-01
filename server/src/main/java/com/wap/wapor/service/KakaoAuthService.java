@@ -7,6 +7,8 @@ import com.wap.wapor.repository.UserRepository;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
@@ -14,6 +16,8 @@ import java.util.Optional;
 public class KakaoAuthService {
     private final RestTemplate restTemplate;
     private final UserRepository userRepository;
+    private static final Logger logger = LoggerFactory.getLogger(KakaoAuthService.class);
+
 
     public KakaoAuthService(RestTemplate restTemplate, UserRepository userRepository) {
         this.restTemplate = restTemplate;
@@ -28,7 +32,12 @@ public class KakaoAuthService {
 
         ResponseEntity<KakaoUserResponse> response = restTemplate.exchange(
                 userInfoUrl, HttpMethod.GET, request, KakaoUserResponse.class);
-
+        try {
+            KakaoUserResponse responseBody = response.getBody();
+            logger.info("Kakao API Response: {}", responseBody);
+        } catch (Exception e) {
+            logger.error("Error while processing Kakao API response", e);
+        }
         if (response.getStatusCode() == HttpStatus.OK) {
             KakaoUserResponse kakaoUserResponse = response.getBody();
             assert kakaoUserResponse != null;
@@ -42,7 +51,7 @@ public class KakaoAuthService {
                 User newUser = new User();
                 newUser.setUserType(UserType.KAKAO);
                 newUser.setIdentifier(identifier);
-                newUser.setNickname(kakaoUserResponse.getKakao_account().getProfile().getNickname());
+                newUser.setNickname(kakaoUserResponse.getKakaoAccount().getProfile().getNickname());
                 userRepository.save(newUser);
                 return newUser;
             }
