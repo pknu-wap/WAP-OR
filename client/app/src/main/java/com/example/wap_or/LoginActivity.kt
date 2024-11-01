@@ -166,6 +166,9 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Void>, response: retrofit2.Response<Void>) {
                 if (response.isSuccessful) {
                     Log.i("TokenSend", "토큰 전송 성공")
+                    val intent = Intent(this@LoginActivity, PaylogActivity::class.java)
+                    startActivity(intent)
+                    finish() // 현재 액티비티 종료
                 } else {
                     Log.e("TokenSend", "토큰 전송 실패: ${response.code()}")
                 }
