@@ -25,6 +25,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AuthCodeMismatchException.class)
     public ResponseEntity<String> handleAuthCodeMismatchException(AuthCodeMismatchException ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증번호가 일치하지 않습니다.");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증 번호가 일치하지 않습니다.");
     }
 
 
