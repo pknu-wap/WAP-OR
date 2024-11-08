@@ -15,26 +15,29 @@ public class EmailSendService {
     @Autowired
     private JavaMailSender mailSender;
 
-    private int number;
+    private String authCode;  // 임시로 인증 번호를 저장할 변수
 
     @Value("${spring.mail.username}")
     private String setFrom;
 
-    public void createNumber() {
-        this.number = (int)(Math.random() * 900000) + 100000;  // 6자리 인증 번호 생성
+    // 인증 번호 생성 메서드
+    public void createAuthCode() {
+        this.authCode = String.format("%06d", (int)(Math.random() * 900000) + 100000);  // 6자리 인증 번호 생성
     }
 
+    // 인증 번호 생성 후 이메일 전송
     public String joinEmail(String email) {
-        createNumber();
+        createAuthCode(); // 인증 번호 생성
         String toMail = email;
         String title = "[WAPOR] 회원 가입 인증 번호 요청 메일입니다.";
         String content =
-                "회원 가입 인증 번호입니다." + "<br><br>" + number + "<br>" + "인증 번호를 정확하게 입력해 주세요.";
+                "회원 가입 인증 번호입니다." + "<br><br>" + authCode + "<br>" + "인증 번호를 정확하게 입력해 주세요.";
 
-        mailSend(setFrom, toMail, title, content);
-        return Integer.toString(number);
+        mailSend(setFrom, toMail, title, content);  // 이메일 전송
+        return authCode;    // 생성된 인증번호 반환 (확인용)
     }
 
+    // 이메일 전송 메서드
     public void mailSend(String setFrom, String toMail, String title, String content) {
         MimeMessage message = mailSender.createMimeMessage();
         try {
@@ -49,5 +52,10 @@ public class EmailSendService {
         } catch (MessagingException e) {
             System.err.println("이메일 전송 실패: " + e.getMessage());
         }
+    }
+
+    // 인증 번호 확인 메서드
+    public boolean verifyAuthCode(String inputAuthCode) {
+        return authCode != null && authCode.equals(inputAuthCode);  // 인증 번호 일치 여부 반환
     }
 }
