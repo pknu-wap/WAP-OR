@@ -51,16 +51,16 @@ public class EmailSendService {
             helper.setText(content, true);
             mailSender.send(message);
         } catch (MailSendException e) {
-            throw new EmailValidationException("");
+            throw new EmailValidationException("잘못된 이메일 주소입니다.");
         } catch (MessagingException e) {
-            throw new CustomMailSendException("이메일 전송 실패: " + e.getMessage(), e);
+            throw new CustomMailSendException("이메일을 입력해 주세요.");
         }
     }
 
     // 인증 번호 확인 메서드
     public boolean verifyAuthCode(String inputAuthCode) {
         if (authCode == null || !authCode.equals(inputAuthCode)) {
-            throw new AuthCodeMismatchException("");
+            throw new AuthCodeMismatchException("인증 번호를 다시 확인해 주세요.");
         }
         return true;
     }

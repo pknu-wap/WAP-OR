@@ -24,13 +24,13 @@ public class GlobalExceptionHandler {
     // 4. 인증번호 불일치 오류 처리
     @ExceptionHandler(AuthCodeMismatchException.class)
     public ResponseEntity<String> handleAuthCodeMismatchException(AuthCodeMismatchException ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증 번호가 일치하지 않습니다.");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증 번호 불일치: " + ex.getMessage());
     }
 
 
     // 그 외 모든 예외 처리
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleAllExceptions(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류: " + ex.getMessage());
     }
 }
