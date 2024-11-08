@@ -22,8 +22,12 @@ import android.util.Log
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.user.UserApiClient
 import android.content.pm.PackageManager
+import com.google.gson.Gson
+import data.TokenErrorResponse
+import data.TokenSuccessResponse
 import org.json.JSONException
 import org.json.JSONObject
+import retrofit2.http.Header
 
 interface ApiService {
     @POST("api/users/login/email") // 실제 엔드포인트에 맞게 수정
@@ -31,11 +35,13 @@ interface ApiService {
     fun login(@Body request: LoginRequest): Call<LoginResponse>
 }
 interface KakaoApiService {
-    @POST("auth/kakao")
-    fun sendToken(@Body tokenRequest: TokenRequest): Call<Void>
+    @POST("/auth/kakao")
+    fun sendToken(
+        @Header("Authorization") accessToken: String
+    ): Call<TokenSuccessResponse>
 }
 object RetrofitInstance {
-    private const val BASE_URL = "http://34.64.36.255:8080/"
+    private const val BASE_URL = "http://34.47.115.61:8080/"
 
     // Retrofit 인스턴스 생성
     private val retrofit by lazy {
@@ -159,23 +165,36 @@ class LoginActivity : AppCompatActivity() {
         })
     }
     private fun sendAccessTokenToServer(accessToken: String) {
-        val tokenRequest = TokenRequest(accessToken)
-        val call = RetrofitInstance.kakaoApiService.sendToken(tokenRequest)
+        // Bearer 형식으로 헤더에 토큰 추가
+        val call = RetrofitInstance.kakaoApiService.sendToken("Bearer $accessToken")
 
-        call.enqueue(object : retrofit2.Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: retrofit2.Response<Void>) {
+        call.enqueue(object : Callback<TokenSuccessResponse> {
+            override fun onResponse(call: Call<TokenSuccessResponse>, response: Response<TokenSuccessResponse>) {
                 if (response.isSuccessful) {
-                    Log.i("TokenSend", "토큰 전송 성공")
+                    // 성공 응답 처리
+                    val responseBody = response.body()
+                    Log.i("TokenSend", "토큰 전송 성공: ${responseBody?.nickname}")
+
                     val intent = Intent(this@LoginActivity, PaylogActivity::class.java)
                     startActivity(intent)
                     finish() // 현재 액티비티 종료
                 } else {
-                    Log.e("TokenSend", "토큰 전송 실패: ${response.code()}")
+                    // 실패 응답 처리 - 상태 코드와 메시지 로그에 출력
+                    val errorBodyString = response.errorBody()?.string()
+                    val statusCode = response.code() // 상태 코드 가져오기
+
+                    if (errorBodyString != null) {
+                        val gson = Gson()
+                        val errorResponse = gson.fromJson(errorBodyString, TokenErrorResponse::class.java)
+                        Log.e("TokenSend", "토큰 전송 실패 - 상태 코드: $statusCode, 에러: ${errorResponse.error}")
+                    } else {
+                        Log.e("TokenSend", "토큰 전송 실패 - 상태 코드: $statusCode, 알 수 없는 오류 발생")
+                    }
                 }
             }
 
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                Log.e("TokenSend", "토큰 전송 실패", t)
+            override fun onFailure(call: Call<TokenSuccessResponse>, t: Throwable) {
+                Log.e("TokenSend", "토큰 전송 실패 - 네트워크 오류", t)
             }
         })
     }
