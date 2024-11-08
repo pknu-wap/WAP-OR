@@ -18,8 +18,8 @@ public class EmailController {
     // 이메일 인증 번호 전송
     @PostMapping("/mailSend")
     public ResponseEntity<String> mailSend(@RequestBody @Valid EmailLoginRequest emailRequest) {
-        emailService.joinEmail(emailRequest.getIdentifier());  // 인증 번호 전송
-        return ResponseEntity.ok("인증 번호가 전송되었습니다.");
+        String authCode = emailService.joinEmail(emailRequest.getIdentifier());  // 인증 번호 전송
+        return ResponseEntity.ok("인증 번호가 전송되었습니다. 인증 번호: " + authCode);
     }
 
     // 인증 번호 확인
