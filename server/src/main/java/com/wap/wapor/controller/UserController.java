@@ -20,17 +20,6 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    /*
-
-    @PostMapping("/login/kakao")
-    public ResponseEntity<?> kakaoLogin(@RequestBody KakaoLoginRequest kakaoLoginRequest) {
-        if (kakaoLoginRequest.getUserType() != UserType.KAKAO) {
-            return userService.kakaoLogin(kakaoLoginRequest);
-        }
-    }
-
-     */
-
     @PostMapping("/login/email")
     public ResponseEntity<LoginResponse> emailLogin(@RequestBody EmailLoginRequest emailLoginRequest) {
         // identifier 값으로 사용자를 검색

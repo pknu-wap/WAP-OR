@@ -15,14 +15,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    /*
-    public ResponseEntity<?> kakaoLogin(LoginRequest loginRequest) {
-        // 카카오 로그인 처리 로직 작성
-        return ResponseEntity.ok("Kakao login successful");
-    }
-
-     */
-
     public ResponseEntity<?> emailLogin(EmailLoginRequest emailLoginRequest) {
         // identifier 값으로 사용자를 검색
         // 검색된 사용자가 없으면 user 변수에 null 할당
