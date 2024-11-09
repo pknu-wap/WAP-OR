@@ -20,13 +20,23 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이메일 유효성 오류: " + ex.getMessage());
     }
 
-
-    // 4. 인증번호 불일치 오류 처리
+    // 3. 인증번호 불일치 오류 처리
     @ExceptionHandler(AuthCodeMismatchException.class)
     public ResponseEntity<String> handleAuthCodeMismatchException(AuthCodeMismatchException ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증 번호 불일치: " + ex.getMessage());
     }
 
+    // 4. 제한 시간 만료 오류 처리
+    @ExceptionHandler(AuthCodeExpiredException.class)
+    public ResponseEntity<String> handleAuthCodeExpiredException(AuthCodeExpiredException ex) {
+        return ResponseEntity.status(HttpStatus.GONE).body("제한 시간 만료: " + ex.getMessage());
+    }
+
+    // 5. Redis 서버 연결 오류 처리
+    @ExceptionHandler(RedisConnectionException.class)
+    public ResponseEntity<String> handleRedisConnectionException(RedisConnectionException ex) {
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Redis 서버 연결 오류: " + ex.getMessage());
+    }
 
     // 그 외 모든 예외 처리
     @ExceptionHandler(Exception.class)
