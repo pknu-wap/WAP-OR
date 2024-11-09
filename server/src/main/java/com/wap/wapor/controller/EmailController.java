@@ -3,6 +3,7 @@ package com.wap.wapor.controller;
 import com.wap.wapor.dto.EmailCheck;
 import com.wap.wapor.dto.EmailLoginRequest;
 import com.wap.wapor.exception.AuthCodeMismatchException;
+import com.wap.wapor.dto.EmailSignUpRequest;
 import com.wap.wapor.service.EmailSendService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class EmailController {
 
     // 이메일 인증 번호 전송
     @PostMapping("/mailSend")
-    public ResponseEntity<String> mailSend(@RequestBody @Valid EmailLoginRequest emailRequest) {
+    public ResponseEntity<String> mailSend(@RequestBody @Valid EmailSignUpRequest emailRequest) {
         String authCode = emailService.joinEmail(emailRequest.getIdentifier());  // 인증 번호 전송
         return ResponseEntity.ok("인증 번호가 전송되었습니다. 인증 번호: " + authCode);
     }
