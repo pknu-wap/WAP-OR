@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:includeFontPadding="false"
+    >
+    <TextView
+        android:id="@+id/signUpTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="81.33dp"
+        android:layout_marginStart="28dp"
+        android:text="회원가입"
+        android:textAppearance="@style/sign_up_title_style"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <TextView
+        android:id="@+id/signUpSubTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7.56dp"
+        android:text="가입을 통해 다양한 서비스를 만나보세요 !"
+        android:textSize="13sp"
+        android:textColor="#000000"
+        android:fontFamily="@font/inter_18pt_regular"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/signUpTitleText"
+        app:layout_constraintTop_toBottomOf="@id/signUpTitleText"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
