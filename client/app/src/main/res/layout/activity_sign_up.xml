@@ -76,6 +76,22 @@
         app:layout_constraintTop_toTopOf="@id/Email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.349"/>
+    <TextView
+        android:id="@+id/wrongInputText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9.13dp"
+        android:layout_marginStart="10.7dp"
+        android:text="이메일이 유효하지 않습니다."
+        android:textAppearance="@style/alert_style2"
+        android:textSize="11sp"
+        android:textColor="#FF6464"
+        android:fontFamily="@font/inter_18pt_regular"
+        android:gravity="center"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/Email"
+        app:layout_constraintStart_toStartOf="@+id/Email"
+        />
     <EditText
         android:id="@+id/CertificationNumber"
         android:layout_width="0dp"
@@ -89,6 +105,7 @@
         android:paddingStart="10.7dp"
         android:paddingTop="14.08dp"
         android:paddingBottom="14.92dp"
+        android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/Email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/SubmitButton2"
@@ -102,12 +119,13 @@
         android:background="@drawable/rounded_button3"
         android:text="인증하기"
         style="@style/submit_style"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@id/CertificationNumber"
         app:layout_constraintTop_toTopOf="@id/CertificationNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.349" />
     <TextView
-        android:id="@+id/wrongInputText"
+        android:id="@+id/wrongInputText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="9.13dp"

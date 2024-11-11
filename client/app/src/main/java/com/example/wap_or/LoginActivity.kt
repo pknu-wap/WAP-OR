@@ -68,6 +68,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var wrongInputTextView: TextView
+    private lateinit var signUpButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_WAP_OR)
@@ -83,10 +84,16 @@ class LoginActivity : AppCompatActivity() {
         loginEditText = findViewById(R.id.login)
         passwordEditText = findViewById(R.id.password)
         wrongInputTextView = findViewById(R.id.wrongInputText)
+        signUpButton = findViewById(R.id.SignUPButton)
 
         // 로그인 버튼 클릭 이벤트
         loginButton.setOnClickListener {
             performLogin()
+        }
+        signUpButton.setOnClickListener {
+            val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
+            startActivity(intent)
+            finish() // 현재 액티비티 종료
         }
 
         // 카카오 로그인 버튼 클릭 이벤트
