@@ -1,26 +1,28 @@
 package com.example.wap_or
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import java.util.regex.Pattern
-import android.graphics.Color
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.ImageView
-import android.content.Intent
 import com.example.wap_or.model.EmailRequest
+import com.example.wap_or.utils.Constants
 import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
-import android.util.Log
-import retrofit2.Callback
-import retrofit2.Response
-import com.example.wap_or.utils.Constants
+import java.util.regex.Pattern
+
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -36,6 +38,8 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var lockIcon: ImageView
     private lateinit var lockIcon2: ImageView
     private lateinit var signupButton: Button
+    private lateinit var timerTextView: TextView
+    private var timeLeftInMillis = (5 * 60 * 1000).toLong()
     interface ApiService {
         @POST("mailSend")
         fun sendEmail(@Body emailRequest: EmailRequest): Call<Void>
@@ -72,18 +76,14 @@ class SignUpActivity : AppCompatActivity() {
         lockIcon = findViewById(R.id.lockIcon)
         lockIcon2 = findViewById(R.id.lockIcon2)
         signupButton = findViewById(R.id.SignUPButton)
+        timerTextView = findViewById(R.id.timer);
         var condition1 = false
         var condition2 = false
-
 
         submitButton.setOnClickListener {
             val email = emailEditText.text.toString()
             if (isValidEmail(email)) {
                 sendEmailRequest(email)
-                wrongInputText.visibility = View.GONE
-                CertificationNumEditText.visibility = View.VISIBLE
-                submitButton2.visibility = View.VISIBLE
-                // 이메일 유효 시 처리할 코드 추가 ex) 타이머
                 //if()
 //             {
 //                //이미 가입한 이메일인 경우
@@ -108,7 +108,7 @@ class SignUpActivity : AppCompatActivity() {
 
                 // 가입하기 조건 1 충족
                 condition1 = true;
-
+                checkConditionsAndShowSignupButton(condition1, condition2)
                 //이메일, 인증번호 EditText, button 비활성화
                 emailEditText.isEnabled = false
                 submitButton.isEnabled = false
@@ -169,7 +169,8 @@ class SignUpActivity : AppCompatActivity() {
                     lockIcon2.setImageResource(R.drawable.unlock_icon)
                     passwordEditText.isEnabled = false
                     passwordReInputEditText.isEnabled = false
-                    condition2 = true;
+                    condition2 = true
+                    checkConditionsAndShowSignupButton(condition1, condition2)
                 }
                 else
                 {
@@ -182,17 +183,19 @@ class SignUpActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
-        if (condition1 && condition2) {
-            signupButton.visibility = View.VISIBLE
-        }
         signupButton.setOnClickListener{
             val intent = Intent(this, PaylogActivity::class.java)
             startActivity(intent)
             finish()
         }
     }
-
-
+    fun checkConditionsAndShowSignupButton(condition1: Boolean, condition2: Boolean) {
+        if (condition1 && condition2) {
+            signupButton.visibility = View.VISIBLE
+        } else {
+            signupButton.visibility = View.INVISIBLE
+        }
+    }
     // 이메일 유효성 검사 함수
     private fun isValidEmail(email: String): Boolean {
         val emailPattern = Pattern.compile("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.(\\.[a-zA-Z]{2,3})$")
@@ -221,12 +224,38 @@ class SignUpActivity : AppCompatActivity() {
     fun arePasswordsMatching(password: String, rePassword: String): Boolean {
         return password == rePassword
     }
+    private fun startTimer() {
+        object : CountDownTimer(timeLeftInMillis, 1000) {
+            // 1초마다 호출
+            override fun onTick(millisUntilFinished: Long) {
+                timeLeftInMillis = millisUntilFinished
+                updateTimer()
+            }
+
+            override fun onFinish() {
+                timerTextView.setText("00:00")
+            }
+        }.start()
+    }
+    private fun updateTimer() {
+        val minutes = (timeLeftInMillis / 1000).toInt() / 60
+        val seconds = (timeLeftInMillis / 1000).toInt() % 60
+
+        val timeLeftText = String.format("%02d:%02d", minutes, seconds)
+        timerTextView.setText(timeLeftText)
+    }
     private fun sendEmailRequest(email: String) {
         val emailRequest = EmailRequest(identifier = email)
 
         RetrofitInstance.apiService.sendEmail(emailRequest).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                if (response.isSuccessful) { // 200번대 코드 확인
+                if (response.isSuccessful) {
+                    wrongInputText.visibility = View.GONE
+                    CertificationNumEditText.visibility = View.VISIBLE
+                    submitButton2.visibility = View.VISIBLE
+                    // 타이머 시작
+                    startTimer();
+                    // 이메일 유효 시 처리할 코드 추가 ex) 타이머
                     Log.d("Retrofit", "이메일 요청 성공!")
                 } else {
                     // 에러 코드와 함께 에러 메시지 로깅
