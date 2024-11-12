@@ -28,6 +28,7 @@ import data.TokenSuccessResponse
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.http.Header
+import com.example.wap_or.utils.Constants
 
 interface ApiService {
     @POST("api/users/login/email") // 실제 엔드포인트에 맞게 수정
@@ -41,7 +42,7 @@ interface KakaoApiService {
     ): Call<TokenSuccessResponse>
 }
 object RetrofitInstance {
-    private const val BASE_URL = "http://34.47.115.61:8080/"
+    private const val BASE_URL = Constants.BASE_URL
 
     // Retrofit 인스턴스 생성
     private val retrofit by lazy {
