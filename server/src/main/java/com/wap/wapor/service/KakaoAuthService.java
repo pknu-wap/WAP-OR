@@ -32,12 +32,12 @@ public class KakaoAuthService {
 
         ResponseEntity<KakaoUserResponse> response = restTemplate.exchange(
                 userInfoUrl, HttpMethod.GET, request, KakaoUserResponse.class);
-        try {
+       /* try {
             KakaoUserResponse responseBody = response.getBody();
             logger.info("Kakao API Response: {}", responseBody);
         } catch (Exception e) {
             logger.error("Error while processing Kakao API response", e);
-        }
+        }  */
         if (response.getStatusCode() == HttpStatus.OK) {
             KakaoUserResponse kakaoUserResponse = response.getBody();
             assert kakaoUserResponse != null;
