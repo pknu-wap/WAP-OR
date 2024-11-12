@@ -51,3 +51,6 @@ HELP.md
 
 # 민감한 정보가 들어있는 secret.properties 파일을 무시
 src/main/resources/secret.properties
+
+# Redis 서버의 메모리 상태를 저장한 파일
+dump.rdb
