@@ -23,16 +23,22 @@ public class GlobalExceptionHandler {
     // 3. 인증번호 불일치 오류 처리
     @ExceptionHandler(AuthCodeMismatchException.class)
     public ResponseEntity<String> handleAuthCodeMismatchException(AuthCodeMismatchException ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증 번호 불일치: " + ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증 번호 오류: " + ex.getMessage());
     }
 
-    // 4. 제한 시간 만료 오류 처리
+    // 4. 인증번호 만료 오류 처리 (제한 시간 만료)
     @ExceptionHandler(AuthCodeExpiredException.class)
     public ResponseEntity<String> handleAuthCodeExpiredException(AuthCodeExpiredException ex) {
-        return ResponseEntity.status(HttpStatus.GONE).body("제한 시간 만료: " + ex.getMessage());
+        return ResponseEntity.status(HttpStatus.GONE).body("제한 시간 오류: " + ex.getMessage());
     }
 
-    // 5. Redis 서버 연결 오류 처리
+    // 5. 이메일이 존재하지 않을 때의 오류 처리
+    @ExceptionHandler(EmailNotFoundException.class)
+    public ResponseEntity<String> handleEmailNotFoundException(EmailNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("이메일 조회 오류: " + ex.getMessage());
+    }
+
+    // 6. Redis 서버 연결 오류 처리
     @ExceptionHandler(RedisConnectionException.class)
     public ResponseEntity<String> handleRedisConnectionException(RedisConnectionException ex) {
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Redis 서버 연결 오류: " + ex.getMessage());
