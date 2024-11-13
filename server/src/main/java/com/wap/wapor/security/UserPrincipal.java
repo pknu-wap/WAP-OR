@@ -1,28 +1,24 @@
 package com.wap.wapor.security;
 
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
 
+@Getter
 public class UserPrincipal implements UserDetails {
-    private Long id;
-    private String username;
+    private String id;
+    private String nickname;
 
-    public UserPrincipal(Long id, String username) {
+    public UserPrincipal(String id, String username) {
         this.id = id;
-        this.username = username;
-    }
-
-    public Long getId() {
-        return id;
+        this.nickname = username;
     }
 
     @Override
-    public String getUsername() {
-        return username;
-    }
+    public String getUsername() {return"";}
 
     @Override
     public boolean isAccountNonExpired() {

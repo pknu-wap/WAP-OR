@@ -29,7 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (tokenProvider.validateToken(jwt)) {
             // JWT 토큰에서 사용자 ID 추출
-            Long userId = tokenProvider.getUserIdFromJWT(jwt);
+            String userId = tokenProvider.getUserIdFromJWT(jwt);
 
             // UserPrincipal 객체 생성 (권한 없이)
             UserPrincipal userPrincipal = new UserPrincipal(userId, null);
