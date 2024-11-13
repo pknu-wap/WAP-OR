@@ -13,7 +13,7 @@ public class JwtTokenProvider {
     private String jwtSecret;
 
     @Value("${app.jwtExpirationMs}")
-    private int jwtExpirationMs;
+    private long jwtExpirationMs;
 
     // 토큰 생성 메서드
     public String generateToken(UserPrincipal userPrincipal) {
