@@ -20,8 +20,8 @@
 ## 개발 환경
 - Android Studio:
 - Java: 17
-- Spring Boot:
-- Gradle:
+- Spring Boot: 3.3.4
+- Gradle: 8.10.2
 - 협업 툴: Notion, Figma
 
 ## 프로젝트 Overview
