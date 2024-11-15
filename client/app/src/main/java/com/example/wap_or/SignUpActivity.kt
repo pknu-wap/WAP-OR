@@ -38,6 +38,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var lockIcon: ImageView
     private lateinit var lockIcon2: ImageView
     private lateinit var signupButton: Button
+    private lateinit var pwSubmitButtom: Button
     private lateinit var timerTextView: TextView
     private var timeLeftInMillis = (5 * 60 * 1000).toLong()
     interface ApiService {
@@ -75,6 +76,7 @@ class SignUpActivity : AppCompatActivity() {
         wrongInputTextPw = findViewById(R.id.wrongInputTextPw)
         lockIcon = findViewById(R.id.lockIcon)
         lockIcon2 = findViewById(R.id.lockIcon2)
+        pwSubmitButtom = findViewById(R.id.PWSubmitButton)
         signupButton = findViewById(R.id.SignUPButton)
         timerTextView = findViewById(R.id.timer);
         var condition1 = false
@@ -133,56 +135,56 @@ class SignUpActivity : AppCompatActivity() {
                 // 비밀번호 유효성 검사
                 if (!isPasswordValid(s.toString())) {
                     wrongInputTextPw.text = "비밀번호가 조건에 맞지 않습니다."
+                    wrongInputTextPw.setTextColor(Color.parseColor("#FF6464"))
                     wrongInputTextPw.visibility = View.VISIBLE
                     lockIcon.setImageResource(R.drawable.lock_icon)
+                    pwSubmitButtom.visibility = View.INVISIBLE
                 }
                 else
                 {
-                    wrongInputTextPw.visibility = View.INVISIBLE
-                    lockIcon.setImageResource(R.drawable.unlock_icon)
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-
-        // passwordReInputEditText에 대한 TextWatcher
-        passwordReInputEditText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                // 두 비밀번호 일치 여부 검사
-                if(s.toString().isEmpty())
-                {
-                    wrongInputTextPw.visibility = View.INVISIBLE
-                }
-                else if(!isPasswordValid(s.toString()))
-                {
-                    wrongInputTextPw.text = "비밀번호가 조건에 맞지 않습니다."
-                    wrongInputTextPw.visibility = View.VISIBLE
-                    lockIcon2.setImageResource(R.drawable.lock_icon)
-                }
-                else if (arePasswordsMatching(passwordEditText.text.toString(), s.toString()))
-                {
-                    wrongInputTextPw.text = "비밀번호가 확인되었습니다."
+                    wrongInputTextPw.text = "사용가능한 비밀번호 입니다."
                     wrongInputTextPw.setTextColor(Color.parseColor("#3E74C4"))
                     wrongInputTextPw.visibility = View.VISIBLE
-                    lockIcon2.setImageResource(R.drawable.unlock_icon)
-                    passwordEditText.isEnabled = false
-                    passwordReInputEditText.isEnabled = false
-                    condition2 = true
-                    checkConditionsAndShowSignupButton(condition1, condition2)
+                    lockIcon.setImageResource(R.drawable.unlock_icon)
+                    pwSubmitButtom.visibility = View.VISIBLE
                 }
-                else
-                {
-                    wrongInputTextPw.visibility = View.VISIBLE
-                    lockIcon2.setImageResource(R.drawable.lock_icon)
-                }
-
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+
+        pwSubmitButtom.setOnClickListener {
+            val enteredPassword = passwordEditText.text.toString()
+            val reEnteredPassword = passwordReInputEditText.text.toString()
+            if (enteredPassword.isEmpty() || reEnteredPassword.isEmpty()) {
+                wrongInputTextPw.text = "비밀번호를 입력해주세요."
+                wrongInputTextPw.setTextColor(Color.parseColor("#FF6464"))
+                wrongInputTextPw.visibility = View.VISIBLE
+                lockIcon2.setImageResource(R.drawable.lock_icon)
+            } else if (!isPasswordValid(enteredPassword)) {
+                wrongInputTextPw.text = "비밀번호가 조건에 맞지 않습니다."
+                wrongInputTextPw.setTextColor(Color.parseColor("#FF6464"))
+                wrongInputTextPw.visibility = View.VISIBLE
+                lockIcon2.setImageResource(R.drawable.lock_icon)
+            } else if (arePasswordsMatching(enteredPassword, reEnteredPassword)) {
+                wrongInputTextPw.text = "비밀번호가 확인되었습니다."
+                wrongInputTextPw.setTextColor(Color.parseColor("#3E74C4"))
+                wrongInputTextPw.visibility = View.VISIBLE
+                lockIcon2.setImageResource(R.drawable.unlock_icon)
+                // 비밀번호 제출 이후 처리
+                passwordEditText.isEnabled = false
+                passwordReInputEditText.isEnabled = false
+                pwSubmitButtom.isEnabled = false
+                condition2 = true
+                checkConditionsAndShowSignupButton(condition1, condition2)
+            } else {
+                wrongInputTextPw.text = "비밀번호가 일치하지 않습니다."
+                wrongInputTextPw.setTextColor(Color.parseColor("#FF6464"))
+                wrongInputTextPw.visibility = View.VISIBLE
+                lockIcon2.setImageResource(R.drawable.lock_icon)
+            }
+        }
         signupButton.setOnClickListener{
             val intent = Intent(this, PaylogActivity::class.java)
             startActivity(intent)

@@ -240,9 +240,10 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginBottom="10.11dp"
-        android:background="@drawable/rounded_button4"
+        android:background="@drawable/rounded_button5"
         android:text="비밀번호 확인"
-        style="@style/sign_up_style"
+        style="@style/sign_up_style2"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/SignUPButton"
         app:layout_constraintStart_toStartOf="@id/SignUPButton"
         />
