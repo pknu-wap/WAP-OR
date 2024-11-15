@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByIdentifier(String identifier);
     Optional<User> findByIdentifierAndUserType(String identifier, UserType usertype);
+    // identifier 중복 여부 확인 메서드
+    boolean existsByIdentifier(String identifier);
 }
