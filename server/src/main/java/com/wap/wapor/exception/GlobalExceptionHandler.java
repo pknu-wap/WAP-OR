@@ -44,6 +44,31 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Redis 서버 연결 오류: " + ex.getMessage());
     }
 
+    // 7. 이미 존재하는 사용자 예외 처리
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<String> handleUserAlreadyExistsException(UserAlreadyExistsException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("회원 가입 오류: " + ex.getMessage());
+    }
+
+    // 8. 잘못된 자격 증명 예외 처리
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<String> handleInvalidCredentialsException(InvalidCredentialsException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 오류: " + ex.getMessage());
+    }
+
+    // 9. 이메일 인증 상태 오류 처리
+    @ExceptionHandler(EmailNotVerifiedException.class)
+    public ResponseEntity<String> handleEmailNotVerifiedException(EmailNotVerifiedException ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("이메일 인증 오류: " + ex.getMessage());
+    }
+
+    // 10. 비밀번호 유효성 오류 처리
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<String> handleInvalidPasswordException(InvalidPasswordException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호 오류: " + ex.getMessage());
+    }
+
+
     // 그 외 모든 예외 처리
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleAllExceptions(Exception ex) {
