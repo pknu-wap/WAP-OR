@@ -22,4 +22,5 @@ public class KakaoAuthController {
         AuthResponse authResponse = kakaoAuthService.processKakaoLogin(accessToken);
         return ResponseEntity.ok(authResponse);
     }
+
 }

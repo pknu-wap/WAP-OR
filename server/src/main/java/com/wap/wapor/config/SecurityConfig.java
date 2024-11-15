@@ -17,13 +17,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth // Lambda 형태로 권한 설정
                         .requestMatchers("/auth/kakao","/auth/kakao/callback").permitAll() // 인증 없이 접근 허용
                         .anyRequest().authenticated() // 그 외의 모든 요청은 인증 필요
-                )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
-                )
-                .logout(logout -> logout
-                        .permitAll()
                 );
 
         return http.build();
