@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:includeFontPadding="false"
     android:paddingStart="28dp"
-    android:paddingEnd="28dp"
-    >
+    android:paddingEnd="28dp">
+
     <TextView
         android:id="@+id/signUpTitleText"
         android:layout_width="wrap_content"
@@ -234,6 +234,17 @@
         android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/passwordReInput"
         app:layout_constraintStart_toStartOf="@id/passwordReInput"
+        />
+    <Button
+        android:id="@+id/PWSubmitButton"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginBottom="10.11dp"
+        android:background="@drawable/rounded_button4"
+        android:text="비밀번호 확인"
+        style="@style/sign_up_style"
+        app:layout_constraintBottom_toTopOf="@id/SignUPButton"
+        app:layout_constraintStart_toStartOf="@id/SignUPButton"
         />
     <Button
         android:id="@+id/SignUPButton"

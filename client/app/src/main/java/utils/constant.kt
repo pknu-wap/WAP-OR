@@ -1,5 +1,5 @@
 package com.example.wap_or.utils
 
 object Constants {
-    const val BASE_URL = "http://34.47.73.182:8080/"
+    const val BASE_URL = "http://34.22.82.151:8080/"
 }
