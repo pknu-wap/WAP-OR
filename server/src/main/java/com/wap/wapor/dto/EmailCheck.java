@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotEmpty;
 public class EmailCheck {
     @Email
     @NotEmpty(message = "이메일을 입력해 주세요")
-    private String email;
+    private String identifier;
 
     @NotEmpty(message = "인증 번호를 입력해 주세요")
     private String authCode;
