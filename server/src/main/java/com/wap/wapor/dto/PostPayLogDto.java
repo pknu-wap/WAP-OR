@@ -3,8 +3,7 @@ package com.wap.wapor.dto;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Getter;
-import lombok.Setter;
+
 
 @Getter
 @Setter
