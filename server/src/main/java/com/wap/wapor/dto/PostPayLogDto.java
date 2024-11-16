@@ -12,7 +12,7 @@ public class PostPayLogDto {
     private String content;
     private String imgUrl;
     private String category;
-    private String amount;
+    private Long amount;
 
 }
 

@@ -26,11 +26,11 @@ public class PayLog {
     private String title;   //게시글 제목
     private String category; // 카테고리
 
-    private Double amount; // 금액
+    private Long amount; // 금액
 
     private LocalDateTime createdAt; // 작성 시간
 
-    private String imageUrl; // 첨부 이미지 URL
+    private String imgUrl; // 첨부 이미지 URL
 
     private int likeCount = 0; // 좋아요 수 (캐싱)
 
