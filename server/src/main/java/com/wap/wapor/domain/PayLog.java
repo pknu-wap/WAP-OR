@@ -34,7 +34,7 @@ public class PayLog {
 
     private int likeCount = 0; // 좋아요 수 (캐싱)
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "payLog", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Like> likes; // 좋아요 리스트
 }
 
