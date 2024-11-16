@@ -21,6 +21,8 @@ public class PayLogController {
 
     @PostMapping
     public ResponseEntity<Long> createPayLog(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestBody PostPayLogDto postPayLogDto) {
+       Long postId= payLogService.payLogPost(postPayLogDto, userPrincipal);
+       return ResponseEntity.ok(postId);
 
     }
 }
