@@ -38,7 +38,7 @@ public class User {
     private List<PayLog> payLogs; // 사용자가 작성한 게시글 리스트
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Like> likes; // 사용자가 누른 좋아요 리스트
+    private List<Likes> likes; // 사용자가 누른 좋아요 리스트
 
     @PrePersist
     protected void onCreate() {

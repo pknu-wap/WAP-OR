@@ -35,6 +35,6 @@ public class PayLog {
     private int likeCount = 0; // 좋아요 수 (캐싱)
 
     @OneToMany(mappedBy = "payLog", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Like> likes; // 좋아요 리스트
+    private List<Likes> likes; // 좋아요 리스트
 }
 
