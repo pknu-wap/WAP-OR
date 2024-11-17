@@ -32,12 +32,21 @@
         android:id="@+id/post_created_date"
         android:layout_width="wrap_content"
         android:layout_height="14dp"
-        android:layout_marginTop="22.87dp"
-        android:layout_marginEnd="27.82dp"
+        android:layout_marginEnd="27.67dp"
         android:text="1시간 전"
         style="@style/post_created_date_style"
+        app:layout_constraintTop_toTopOf="@id/menu_button"
+        app:layout_constraintEnd_toStartOf="@id/menu_button" />
+    <ImageButton
+        android:id="@+id/menu_button"
+        android:layout_width="2.67dp"
+        android:layout_height="12.94dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="26dp"
+        android:src="@drawable/menu_icon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        />
     <!--중간 게시물 & 이미지 -->
     <TextView
         android:id="@+id/post_main_text"
@@ -80,6 +89,7 @@
         android:layout_height="14dp"
         android:layout_marginStart="20dp"
         android:text="|"
+        android:gravity="center"
         style="@style/post_category_cash_style"
         app:layout_constraintBottom_toBottomOf="@id/post_category"
         app:layout_constraintStart_toEndOf="@id/post_category" />
