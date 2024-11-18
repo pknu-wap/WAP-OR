@@ -9,7 +9,9 @@ import com.example.wap_or.databinding.ItemPostBinding
 class MyViewHolder(val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root)
 
 // 어댑터 클래스
-class PostAdapter(private val datas: MutableList<Post>) : RecyclerView.Adapter<MyViewHolder>() {
+class PostAdapter(private val datas: MutableList<Post>,
+                  private val onItemClick: (Post) -> Unit
+    ) : RecyclerView.Adapter<MyViewHolder>() {
 
     override fun getItemCount(): Int = datas.size
 
@@ -47,6 +49,9 @@ class PostAdapter(private val datas: MutableList<Post>) : RecyclerView.Adapter<M
         } else {
             // 이미지 URL이 없으면 기본 XML 드로어블 사용
             holder.binding.postMainImg.setImageDrawable(defaultDrawable)
+        }
+        holder.binding.root.setOnClickListener {
+            onItemClick(post) // 클릭된 포스트를 콜백으로 전달
         }
     }
 }

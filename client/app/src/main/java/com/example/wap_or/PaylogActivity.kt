@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wap_or.databinding.ActivityPaylogMainBinding
+import android.content.Intent
 
 
 class PaylogActivity : AppCompatActivity() {
@@ -29,7 +30,12 @@ class PaylogActivity : AppCompatActivity() {
         )
 
         // 어댑터 초기화
-        adapter = PostAdapter(postList)
+        adapter = PostAdapter(postList){ post ->
+            // 클릭 이벤트 처리
+            val intent = Intent(this, PostDetailActivity::class.java)
+            //intent.putExtra("POST_ID", post.id) // 포스트 ID를 전달
+            startActivity(intent)
+        }
 
         // RecyclerView 설정
         binding.recyclerView.adapter = adapter
