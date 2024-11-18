@@ -10,19 +10,20 @@ import java.time.LocalDateTime;
 public class VirtualAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "account_id") // snake_case와 일치
     private Long accountId; // 계좌 ID (Primary Key)
 
-    @Column(nullable = false)
+    @Column(name = "balance", nullable = false)
     private Long balance; // 잔액 (기본값 0)
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "create_at", nullable = false, updatable = false)
     private LocalDateTime createAt; // 생성 시간
 
-    @Column(nullable = true)
+    @Column(name = "update_at", nullable = true)
     private LocalDateTime updateAt; // 갱신 시간
 
     @OneToOne
-    @JoinColumn(name = "userId", nullable = false, unique = true)
+    @JoinColumn(name = "user_id", nullable = false, unique = true) // user_id로 수정
     private User user; // User 테이블과 1:1 관계 (외래 키)
 
     @PrePersist
