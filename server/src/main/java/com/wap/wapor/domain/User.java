@@ -9,16 +9,14 @@ import lombok.Data;
 @Entity
 @Data
 public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    @Column(nullable = false, unique = true)
+    private String identifier; // Kakao ID or Email address, Primary Key로 사용
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserType userType; // 사용자의 유형(KAKAO/EMAIL)
-
-    @Column(nullable = false, unique = true)
-    private String identifier; // Kakao ID or Email address
 
     @Column(nullable = true) // 카카오 회원은 null
     private String password;
