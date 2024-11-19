@@ -1,4 +1,5 @@
 package com.example.wap_or
+import AuthRequest
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -40,10 +41,16 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var signupButton: Button
     private lateinit var pwSubmitButtom: Button
     private lateinit var timerTextView: TextView
+    private var condition1 = false
+    private var condition2 = false
     private var timeLeftInMillis = (5 * 60 * 1000).toLong()
+    private var timer: CountDownTimer? = null
     interface ApiService {
         @POST("mailSend")
         fun sendEmail(@Body emailRequest: EmailRequest): Call<Void>
+
+        @POST("mailAuthCheck")
+        fun checkAuthCode(@Body authRequest: AuthRequest): Call<Void>
     }
     object RetrofitInstance {
         private const val BASE_URL = Constants.BASE_URL
@@ -79,19 +86,11 @@ class SignUpActivity : AppCompatActivity() {
         pwSubmitButtom = findViewById(R.id.PWSubmitButton)
         signupButton = findViewById(R.id.SignUPButton)
         timerTextView = findViewById(R.id.timer);
-        var condition1 = false
-        var condition2 = false
 
         submitButton.setOnClickListener {
             val email = emailEditText.text.toString()
             if (isValidEmail(email)) {
                 sendEmailRequest(email)
-                //if()
-//             {
-//                //이미 가입한 이메일인 경우
-//              wrongInputText.visibility = View.VISIBLE
-//              wrongInputText.text = "이미 가입한 이메일입니다."
-//             }
             } else {
                 wrongInputText.visibility = View.VISIBLE
                 CertificationNumEditText.visibility = View.INVISIBLE
@@ -99,34 +98,13 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
         submitButton2.setOnClickListener {
-            val CertificationNum = CertificationNumEditText.text.toString()
-            //인증번호 일치 여부, 만료 여부 api로 검사
-            if (CertificationNum == "") {
-                //텍스트 수정
-                wrongInputText2.text = "인증이 완료되었습니다."
-                wrongInputText2.setTextColor(Color.parseColor("#3E74C4"))
+            val certificationNum = CertificationNumEditText.text.toString()
+            if (certificationNum.isNotEmpty()) {
+                checkAuthCodeRequest(emailEditText.text.toString(), certificationNum)
+            } else {
+                wrongInputText2.text = "인증번호를 입력해주세요."
+                wrongInputText2.setTextColor(Color.parseColor("#FF6464"))
                 wrongInputText2.visibility = View.VISIBLE
-                //타이머 제거
-
-                // 가입하기 조건 1 충족
-                condition1 = true;
-                checkConditionsAndShowSignupButton(condition1, condition2)
-                //이메일, 인증번호 EditText, button 비활성화
-                emailEditText.isEnabled = false
-                submitButton.isEnabled = false
-                CertificationNumEditText.isEnabled = false
-                submitButton2.isEnabled = false
-            }
-//          else if()
-//          {
-//                //인증 시간이 만료된 경우
-//              wrongInputText2.visibility = View.VISIBLE
-//              wrongInputText2.text = "인증 시간이 만료되었습니다."
-//          }
-            else {
-                //인증번호가 일치하지 않는 경우
-                wrongInputText2.visibility = View.VISIBLE
-
             }
         }
         // passwordEditText에 대한 TextWatcher
@@ -233,18 +211,17 @@ class SignUpActivity : AppCompatActivity() {
                 timeLeftInMillis = millisUntilFinished
                 updateTimer()
             }
-
             override fun onFinish() {
                 timerTextView.setText("00:00")
             }
         }.start()
     }
     private fun updateTimer() {
-        val minutes = (timeLeftInMillis / 1000).toInt() / 60
-        val seconds = (timeLeftInMillis / 1000).toInt() % 60
-
-        val timeLeftText = String.format("%02d:%02d", minutes, seconds)
-        timerTextView.setText(timeLeftText)
+        runOnUiThread {
+            val minutes = (timeLeftInMillis / 1000).toInt() / 60
+            val seconds = (timeLeftInMillis / 1000).toInt() % 60
+            timerTextView.text = String.format("%02d:%02d", minutes, seconds)
+        }
     }
     private fun sendEmailRequest(email: String) {
         val emailRequest = EmailRequest(identifier = email)
@@ -255,8 +232,9 @@ class SignUpActivity : AppCompatActivity() {
                     wrongInputText.visibility = View.GONE
                     CertificationNumEditText.visibility = View.VISIBLE
                     submitButton2.visibility = View.VISIBLE
+                    timerTextView.visibility = View.VISIBLE
                     // 타이머 시작
-                    startTimer();
+                    startTimer()
                     // 이메일 유효 시 처리할 코드 추가 ex) 타이머
                     Log.d("Retrofit", "이메일 요청 성공!")
                 } else {
@@ -275,4 +253,46 @@ class SignUpActivity : AppCompatActivity() {
             }
         })
     }
+    private fun checkAuthCodeRequest(identifier: String, authCode: String) {
+        val authRequest = AuthRequest(identifier, authCode)
+        RetrofitInstance.apiService.checkAuthCode(authRequest).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    // 인증 성공 시 처리
+                    wrongInputText2.text = "인증이 완료되었습니다."
+                    wrongInputText2.setTextColor(Color.parseColor("#3E74C4"))
+                    wrongInputText2.visibility = View.VISIBLE
+
+                    // 이메일 인증 완료 처리
+                    emailEditText.isEnabled = false
+                    submitButton.isEnabled = false
+                    CertificationNumEditText.isEnabled = false
+                    submitButton2.isEnabled = false
+                    timerTextView.isEnabled = false
+                    timer?.cancel()
+                    timerTextView.visibility = View.INVISIBLE
+
+                    // 조건 충족 상태 갱신
+                    condition1 = true
+                    checkConditionsAndShowSignupButton(condition1, condition2)
+                } else {
+                    // 실패 시 처리
+                    wrongInputText2.text = "인증번호가 일치하지 않거나 만료되었습니다."
+                    wrongInputText2.setTextColor(Color.parseColor("#FF6464"))
+                    wrongInputText2.visibility = View.VISIBLE
+
+                    Log.e("Retrofit", "요청 실패: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                // 네트워크 오류 처리
+                Log.e("Retrofit", "네트워크 오류: ${t.message}")
+                wrongInputText2.text = "네트워크 오류가 발생했습니다."
+                wrongInputText2.setTextColor(Color.parseColor("#FF6464"))
+                wrongInputText2.visibility = View.VISIBLE
+            }
+        })
+    }
+
 }

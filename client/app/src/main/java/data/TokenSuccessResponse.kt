@@ -1,9 +1,14 @@
 package data
-data class TokenSuccessResponse(
-    val userId: Int,
-    val userType: String,
+data class user(
     val identifier: String,
+    val userType: String,
+    val password: String?,
     val nickname: String,
+    val refreshToken: String?,
     val createdAt: String,
-    val lastLogin: String
+    val lastLogin: String?
+)
+data class TokenSuccessResponse(
+    val token: String,
+    val user: user,
 )

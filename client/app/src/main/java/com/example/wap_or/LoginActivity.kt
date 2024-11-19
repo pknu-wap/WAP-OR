@@ -117,58 +117,48 @@ class LoginActivity : AppCompatActivity() {
         RetrofitInstance.apiService.login(loginRequest).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 try {
+                    // 서버 응답 상태 코드 확인
+                    Log.i("LoginResponse", "Status Code: ${response.code()}")
+
                     when (response.code()) {
                         200 -> {
                             val loginResponse = response.body()
                             if (loginResponse != null) {
-                                // 로그인 성공 시 PaylogActivity로 이동
+                                Log.i("LoginResponse", "Success Response: $loginResponse")
+                                // 성공적으로 PaylogActivity로 이동
                                 val intent = Intent(this@LoginActivity, PaylogActivity::class.java)
                                 startActivity(intent)
-                                finish() // 현재 액티비티 종료
+                                finish()
                             } else {
                                 Log.e("LoginResponse", "Response body is null")
-                                wrongInputTextView.visibility = View.VISIBLE
-                                wrongInputTextView.text = "서버 응답이 올바르지 않습니다."
                             }
                         }
                         401 -> {
-                            response.errorBody()?.let { errorBody ->
-                                try {
-                                    val jsonObject = JSONObject(errorBody.string())
-                                    val errorMessage = jsonObject.optString("message", "인증 실패")
-                                    wrongInputTextView.visibility = View.VISIBLE
-                                    wrongInputTextView.text = errorMessage
-                                } catch (e: JSONException) {
-                                    Log.e("LoginError", "JSON Parsing error: ${e.message}")
-                                    wrongInputTextView.visibility = View.VISIBLE
-                                    wrongInputTextView.text = "알 수 없는 오류가 발생했습니다."
-                                }
-                            } ?: run {
+                            val errorBody = response.errorBody()?.string()
+                            Log.i("LoginResponse", "Error Response Body: $errorBody")
+                            try {
+                                val jsonObject = JSONObject(errorBody ?: "")
+                                val errorMessage = jsonObject.optString("message", "인증 실패")
                                 wrongInputTextView.visibility = View.VISIBLE
-                                wrongInputTextView.text = "서버 오류가 발생했습니다."
+                                wrongInputTextView.text = errorMessage
+                            } catch (e: JSONException) {
+                                Log.e("LoginError", "JSON Parsing error: ${e.message}")
+                                Log.e("LoginError", "Raw Response: $errorBody")
                             }
                         }
                         else -> {
                             val errorBody = response.errorBody()?.string()
-                            val errorMessage = if (!errorBody.isNullOrEmpty()) {
-                                "${response.code()}: $errorBody"
-                            } else {
-                                "로그인에 실패했습니다."
-                            }
-                            Toast.makeText(this@LoginActivity, errorMessage, Toast.LENGTH_SHORT).show()
+                            Log.i("LoginResponse", "Other Response: $errorBody")
+                            Toast.makeText(this@LoginActivity, "로그인 실패: ${response.code()}", Toast.LENGTH_SHORT).show()
                         }
                     }
                 } catch (e: Exception) {
                     Log.e("LoginError", "Exception occurred: ${e.message}")
-                    wrongInputTextView.visibility = View.VISIBLE
-                    wrongInputTextView.text = "오류가 발생했습니다."
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.e("LoginError", "error: ${t.message}")
-                wrongInputTextView.visibility = View.VISIBLE
-                wrongInputTextView.text = "오류가 발생했습니다."
+                Log.e("LoginError", "Network error: ${t.message}")
             }
         })
     }
@@ -181,11 +171,27 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     // 성공 응답 처리
                     val responseBody = response.body()
-                    Log.i("TokenSend", "토큰 전송 성공: ${responseBody?.nickname}")
+                    if (responseBody != null) {
+                        Log.i("TokenSend", "토큰 전송 성공")
+                        Log.i("TokenSend", "Token: ${responseBody.token}")
+                        Log.i(
+                            "TokenSend",
+                            "User Information: " +
+                                    "\nIdentifier: ${responseBody.user.identifier}" +
+                                    "\nUser Type: ${responseBody.user.userType}" +
+                                    "\nPassword: ${responseBody.user.password ?: "N/A"}" +
+                                    "\nNickname: ${responseBody.user.nickname}" +
+                                    "\nRefresh Token: ${responseBody.user.refreshToken ?: "N/A"}" +
+                                    "\nCreated At: ${responseBody.user.createdAt}" +
+                                    "\nLast Login: ${responseBody.user.lastLogin ?: "N/A"}"
+                        )
 
-                    val intent = Intent(this@LoginActivity, PaylogActivity::class.java)
-                    startActivity(intent)
-                    finish() // 현재 액티비티 종료
+                        val intent = Intent(this@LoginActivity, PaylogActivity::class.java)
+                        startActivity(intent)
+                        finish() // 현재 액티비티 종료
+                    } else {
+                        Log.e("TokenSend", "토큰 전송 성공, 그러나 응답 본문이 비어 있음")
+                    }
                 } else {
                     // 실패 응답 처리 - 상태 코드와 메시지 로그에 출력
                     val errorBodyString = response.errorBody()?.string()
