@@ -1,21 +1,25 @@
 package com.wap.wapor.service;
 
+import com.wap.wapor.domain.User;
 import com.wap.wapor.domain.UserType;
 import com.wap.wapor.domain.VirtualAccount;
+import com.wap.wapor.dto.AuthResponse;
 import com.wap.wapor.dto.EmailLoginRequest;
-import com.wap.wapor.domain.User;
 import com.wap.wapor.exception.EmailNotVerifiedException;
 import com.wap.wapor.exception.InvalidCredentialsException;
 import com.wap.wapor.exception.InvalidPasswordException;
 import com.wap.wapor.exception.UserAlreadyExistsException;
 import com.wap.wapor.repository.UserRepository;
 import com.wap.wapor.repository.VirtualAccountRepository;
+import com.wap.wapor.security.JwtTokenProvider;
+import com.wap.wapor.security.UserPrincipal;
 import com.wap.wapor.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.http.HttpStatus;
+
 import java.util.regex.Pattern;
 
 @Service
@@ -25,16 +29,19 @@ public class UserService {
     private final VirtualAccountRepository virtualAccountRepository;
     private final PasswordEncoder passwordEncoder;
     private final RedisUtil redisUtil;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired
     public UserService(UserRepository userRepository,
                        VirtualAccountRepository virtualAccountRepository,
                        PasswordEncoder passwordEncoder,
-                       RedisUtil redisUtil) {
+                       RedisUtil redisUtil,
+                       JwtTokenProvider jwtTokenProvider) {
         this.userRepository = userRepository;
         this.virtualAccountRepository = virtualAccountRepository;
         this.passwordEncoder = passwordEncoder;
         this.redisUtil = redisUtil;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     // 비밀번호 유효성 검사 메서드
@@ -81,14 +88,23 @@ public class UserService {
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully with a virtual account");
     }
 
-    // 이메일 로그인 메서드
-    public ResponseEntity<String> authenticateUser(EmailLoginRequest emailLoginRequest) {
+    // 이메일 로그인 메서드 (JWT 토큰 발급 포함)
+    public ResponseEntity<AuthResponse> authenticateUser(EmailLoginRequest emailLoginRequest) {
+        // 사용자 확인
         User user = userRepository.findByIdentifier(emailLoginRequest.getIdentifier())
                 .orElseThrow(() -> new InvalidCredentialsException("잘못된 이메일 또는 비밀번호입니다."));
 
+        // 비밀번호 검증
         if (!passwordEncoder.matches(emailLoginRequest.getPassword(), user.getPassword())) {
             throw new InvalidCredentialsException("잘못된 이메일 또는 비밀번호입니다.");
         }
-        return ResponseEntity.ok("Email login successful");
+
+        // JWT 토큰 생성
+        UserPrincipal userPrincipal = new UserPrincipal(user.getIdentifier(), user.getNickname());
+        String token = jwtTokenProvider.generateToken(userPrincipal);
+
+        // AuthResponse 생성 및 반환
+        AuthResponse authResponse = new AuthResponse(token, user);
+        return ResponseEntity.ok(authResponse);
     }
 }
