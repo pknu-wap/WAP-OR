@@ -1,5 +1,6 @@
 package com.example.wap_or
 import AuthRequest
+import SignUpRequest
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -51,6 +52,9 @@ class SignUpActivity : AppCompatActivity() {
 
         @POST("mailAuthCheck")
         fun checkAuthCode(@Body authRequest: AuthRequest): Call<Void>
+
+        @POST("api/users/register/email")
+        fun SignUpCode(@Body signupRequest: SignUpRequest): Call<Void>
     }
     object RetrofitInstance {
         private const val BASE_URL = Constants.BASE_URL
@@ -163,10 +167,36 @@ class SignUpActivity : AppCompatActivity() {
                 lockIcon2.setImageResource(R.drawable.lock_icon)
             }
         }
-        signupButton.setOnClickListener{
-            val intent = Intent(this, PaylogActivity::class.java)
-            startActivity(intent)
-            finish()
+        signupButton.setOnClickListener {
+            val email = emailEditText.text.toString()
+            val password = passwordEditText.text.toString()
+            val signupRequest = SignUpRequest(identifier = email, password = password)
+
+            RetrofitInstance.apiService.SignUpCode(signupRequest).enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        // 회원가입 성공 처리
+                        Log.d("Retrofit", "회원가입 성공!")
+                        val intent = Intent(this@SignUpActivity, PaylogActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        // 서버에서 반환한 실패 응답을 로그로 표시
+                        val errorBody = response.errorBody()?.string()
+                        val errorMessage = if (!errorBody.isNullOrEmpty()) {
+                            "회원가입 실패: ${response.code()} - $errorBody"
+                        } else {
+                            "회원가입 실패: ${response.code()} - 오류 메시지 없음"
+                        }
+                        Log.e("Retrofit", errorMessage)
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    // 네트워크 오류를 로그로 표시
+                    Log.e("Retrofit", "네트워크 오류: ${t.message}")
+                }
+            })
         }
     }
     fun checkConditionsAndShowSignupButton(condition1: Boolean, condition2: Boolean) {
@@ -294,5 +324,4 @@ class SignUpActivity : AppCompatActivity() {
             }
         })
     }
-
 }
