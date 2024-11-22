@@ -34,4 +34,5 @@ public class PayLogService {
         PayLog payLogResult=payLogRepository.save(payLog);
         return payLogResult.getId();
     }
+
 }
