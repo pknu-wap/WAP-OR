@@ -3,10 +3,13 @@ package com.wap.wapor.service;
 import com.wap.wapor.domain.PayLog;
 import com.wap.wapor.domain.User;
 import com.wap.wapor.domain.UserType;
+import com.wap.wapor.dto.GetPayLogDto;
 import com.wap.wapor.dto.PostPayLogDto;
 import com.wap.wapor.repository.PayLogRepository;
 import com.wap.wapor.repository.UserRepository;
 import com.wap.wapor.security.UserPrincipal;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,6 +36,22 @@ public class PayLogService {
         payLog.setLikeCount(0);
         PayLog payLogResult=payLogRepository.save(payLog);
         return payLogResult.getId();
+    }
+    public Page<GetPayLogDto> getPublicPayLogs(Pageable pageable) {
+        return payLogRepository.findByIsPublicTrue(pageable)
+                .map(payLog -> {
+                    return new GetPayLogDto(
+                            payLog.getTitle(),
+                            payLog.getContent(),
+                            payLog.getImgUrl(),
+                            payLog.getCategory(),
+                            payLog.getAmount(),
+                            payLog.getLikeCount(),
+                            payLog.getUser().getIdentifier(),
+                            payLog.getUser().getNickname()
+
+                    );
+                });
     }
 
 }
