@@ -65,6 +65,18 @@
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+    <TextView
+        android:id="@+id/emptyMessageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="첫 댓글을 남겨주세요."
+        android:gravity="center"
+        android:visibility="gone"
+        style="@style/comment_post_style"
+        app:layout_constraintTop_toBottomOf="@id/post_horizon"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
     <EditText
         android:id="@+id/comment_input"
         android:layout_width="match_parent"

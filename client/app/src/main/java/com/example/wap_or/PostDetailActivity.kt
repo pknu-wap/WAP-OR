@@ -2,6 +2,7 @@ package com.example.wap_or
 import Comment
 import CommentAdapter
 import android.content.Intent
+import android.view.View
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -22,8 +23,6 @@ class PostDetailActivity : AppCompatActivity() {
             Comment("User2", "2024-11-19", "동의합니다.", 5),
             Comment("User3", "2024-11-18", "도움이 되었습니다.", 8),
         )
-
-
         // RecyclerView 설정
         adapter = CommentAdapter(CommentList) // 어댑터 초기화
         binding.commentRecyclerView.adapter = adapter
@@ -38,5 +37,17 @@ class PostDetailActivity : AppCompatActivity() {
             dividerItemDecoration.setDrawable(it)
         }
         binding.commentRecyclerView.addItemDecoration(dividerItemDecoration)
+        updateUI(CommentList)
+    }
+    private fun updateUI(CommentList: List<Comment>) {
+        if (CommentList.isEmpty()) {
+            // 댓글이 없을 경우
+            binding.emptyMessageTextView.visibility = View.VISIBLE
+            binding.commentRecyclerView.visibility = View.GONE
+        } else {
+            // 댓글이 있을 경우
+            binding.emptyMessageTextView.visibility = View.GONE
+            binding.commentRecyclerView.visibility = View.VISIBLE
+        }
     }
 }
