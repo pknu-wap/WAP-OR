@@ -29,7 +29,15 @@
             android:exported="true"
             android:theme="@style/Theme.WAP_OR" />
         <activity
+            android:name=".LoginTestActivity"
+            android:exported="true"
+            android:theme="@style/Theme.WAP_OR" />
+        <activity
             android:name=".PaylogActivity"
+            android:exported="true"
+            android:theme="@style/Theme.WAP_OR" />
+        <activity
+            android:name=".PostDetailActivity"
             android:exported="true"
             android:theme="@style/Theme.WAP_OR" />
         <activity
