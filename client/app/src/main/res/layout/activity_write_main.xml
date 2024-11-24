@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F6F6F6">
-
     <!-- Toolbar -->
     <include
         android:id="@+id/top_toolbar"
@@ -14,7 +13,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
     <!-- Title Bar -->
     <include
         android:id="@+id/title_bar"

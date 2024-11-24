@@ -10,7 +10,8 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:background="#F6F6F6">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,21 +19,24 @@
             android:orientation="vertical"
             android:layout_marginTop="20dp"
             android:layout_marginStart="28dp"
-            android:layout_marginEnd="28dp">
+            android:layout_marginEnd="28dp"
+            android:background="#F6F6F6">
 
             <!-- 공개/비공개 텍스트 및 필수 표시 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="bottom">
+                android:gravity="bottom"
+                android:background="#F6F6F6">
 
                 <TextView
                     android:id="@+id/publicPrivateLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="공개 / 비공개"
-                    style="@style/paylog_write_style" />
+                    style="@style/paylog_write_style"
+                    android:background="#F6F6F6"/>
 
                 <TextView
                     android:id="@+id/requiredLabel1"
@@ -41,7 +45,8 @@
                     android:text="필수"
                     style="@style/paylog_require_style"
                     android:layout_marginStart="6.81dp"
-                    android:layout_marginBottom="1dp"/>
+                    android:layout_marginBottom="1dp"
+                    android:background="#F6F6F6"/>
             </LinearLayout>
 
             <!-- 공개/비공개 토글 버튼 -->
@@ -49,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                >
+                android:background="#F6F6F6">
 
                 <ToggleButton
                     android:id="@+id/togglePublic"
@@ -79,14 +84,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="bottom"
-                android:layout_marginTop="29.52dp">
+                android:layout_marginTop="29.52dp"
+                android:background="#F6F6F6">
 
                 <TextView
                     android:id="@+id/categoryLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="카테고리"
-                    style="@style/paylog_write_style" />
+                    style="@style/paylog_write_style"
+                    android:background="#F6F6F6"/>
 
                 <TextView
                     android:id="@+id/requiredLabel2"
@@ -95,19 +102,22 @@
                     android:text="필수"
                     style="@style/paylog_require_style"
                     android:layout_marginStart="6.81dp"
-                    android:layout_marginBottom="1dp" />
+                    android:layout_marginBottom="1dp"
+                    android:background="#F6F6F6"/>
             </LinearLayout>
 
             <!-- 카테고리 토글 버튼들 (가로 스크롤) -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14.96dp">
+                android:layout_marginTop="14.96dp"
+                android:background="#F6F6F6">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="#F6F6F6">
 
                     <ToggleButton
                         android:id="@+id/categoryFood"
@@ -171,14 +181,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="29.6dp"
-                android:gravity="bottom">
+                android:gravity="bottom"
+                android:background="#F6F6F6">
 
                 <TextView
                     android:id="@+id/amountLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="금액 입력"
-                    style="@style/paylog_write_style" />
+                    style="@style/paylog_write_style"
+                    android:background="#F6F6F6"/>
 
                 <TextView
                     android:id="@+id/requiredLabel3"
@@ -187,7 +199,8 @@
                     android:text="필수"
                     style="@style/paylog_require_style"
                     android:layout_marginStart="6.81dp"
-                    android:layout_marginBottom="1dp" />
+                    android:layout_marginBottom="1dp"
+                    android:background="#F6F6F6"/>
             </LinearLayout>
 
             <FrameLayout
@@ -201,7 +214,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:hint="금액을 입력하세요."
-                    android:hintTextAppearance="@style/paylog_hint_style"
                     android:fontFamily="@font/inter_18pt_bold"
                     android:textSize="15sp"
                     android:paddingStart="14dp"
@@ -226,14 +238,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="29.6dp"
-                android:gravity="bottom">
+                android:gravity="bottom"
+                android:background="#F6F6F6">
 
                 <TextView
                     android:id="@+id/paylogLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="페이로그 작성"
-                    style="@style/paylog_write_style" />
+                    style="@style/paylog_write_style"
+                    android:background="#F6F6F6"/>
 
                 <TextView
                     android:id="@+id/requiredLabel4"
@@ -242,21 +256,22 @@
                     android:text="필수"
                     style="@style/paylog_require_style"
                     android:layout_marginStart="6.81dp"
-                    android:layout_marginBottom="1dp" />
+                    android:layout_marginBottom="1dp"
+                    android:background="#F6F6F6"/>
             </LinearLayout>
 
             <!-- 게시글 작성 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="14.06dp">
+                android:layout_marginTop="14.06dp"
+                android:background="#F6F6F6">
                 <!-- EditText for content -->
                 <EditText
                     android:id="@+id/postContent"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     android:hint="내용을 입력하세요."
-                    android:hintTextAppearance="@style/paylog_hint_style"
                     android:fontFamily="@font/inter_18pt_bold"
                     android:textSize="15sp"
                     android:paddingStart="14dp"
@@ -339,7 +354,8 @@
 - 홍보 및 판매 관련 바이럴 행위 금지\n
 - 타인의 권리 침해 혹은 불쾌감을 주는 행위 금지"
                 android:textSize="12sp"
-                android:textColor="#888888" />
+                android:textColor="#888888"
+                android:background="#F6F6F6"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

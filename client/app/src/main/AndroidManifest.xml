@@ -41,6 +41,10 @@
             android:exported="true"
             android:theme="@style/Theme.WAP_OR" />
         <activity
+            android:name=".WriteActivity"
+            android:exported="true"
+            android:theme="@style/Theme.WAP_OR" />
+        <activity
             android:name=".SignUpActivity"
             android:exported="true"
             android:theme="@style/Theme.WAP_OR" />

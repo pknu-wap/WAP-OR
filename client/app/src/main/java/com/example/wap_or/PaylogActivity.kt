@@ -47,5 +47,9 @@ class PaylogActivity : AppCompatActivity() {
         ContextCompat.getDrawable(this, R.drawable.divider)
             ?.let { dividerItemDecoration.setDrawable(it) }
         binding.recyclerView.addItemDecoration(dividerItemDecoration)
+        binding.writePostIcon.setOnClickListener {
+            val intent = Intent(this, WriteActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
