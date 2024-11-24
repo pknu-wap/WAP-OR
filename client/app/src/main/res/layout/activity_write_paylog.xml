@@ -190,58 +190,89 @@
                     android:layout_marginBottom="1dp" />
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/amountInput"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:hint="금액을 입력하세요."
-                android:paddingStart="14dp"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:inputType="number"
-                android:layout_marginTop="14.87dp"
-                android:background="@drawable/rounded_border4"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14.87dp">
+
+                <!-- EditText -->
+                <EditText
+                    android:id="@+id/amountInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="금액을 입력하세요."
+                    android:hintTextAppearance="@style/paylog_hint_style"
+                    android:fontFamily="@font/inter_18pt_bold"
+                    android:textSize="15sp"
+                    android:paddingStart="14dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="14dp"
+                    android:inputType="number"
+                    android:background="@drawable/rounded_border4"
+                    />
+                <!-- TextView (오버레이) -->
+                <TextView
+                    android:id="@+id/won"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="won"
+                    style="@style/paylog_won_style"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="14dp" />
+            </FrameLayout>
+            <!-- 페이로그 입력 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="29.6dp"
+                android:gravity="bottom">
+
+                <TextView
+                    android:id="@+id/paylogLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="페이로그 작성"
+                    style="@style/paylog_write_style" />
+
+                <TextView
+                    android:id="@+id/requiredLabel4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="필수"
+                    style="@style/paylog_require_style"
+                    android:layout_marginStart="6.81dp"
+                    android:layout_marginBottom="1dp" />
+            </LinearLayout>
 
             <!-- 게시글 작성 -->
             <EditText
                 android:id="@+id/postContent"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
-                android:hint="페이로그 내용을 작성하세요"
+                android:layout_height="400dp"
+                android:layout_marginTop="14.06dp"
+                android:hint="내용을 입력하세요."
+                android:hintTextAppearance="@style/paylog_hint_style"
+                android:fontFamily="@font/inter_18pt_bold"
+                android:textSize="15sp"
+                android:paddingStart="14dp"
+                android:paddingTop="20dp"
                 android:gravity="top"
-                android:background="@drawable/edit_text_background" />
-
-            <!-- 이미지 추가 -->
-            <LinearLayout
+                android:background="@drawable/rounded_border4"/>
+            <TextView
+                android:id="@+id/communityRules"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp">
-
-                <ImageButton
-                    android:id="@+id/addImage"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_add_photo"
-                    android:background="?attr/selectableItemBackgroundBorderless" />
-
-                <!-- 규칙 설명 -->
-                <TextView
-                    android:id="@+id/communityRules"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text
-                        ="와포어는 누구나 기분 좋게 참여할 수 있는 커뮤니티를 만들기 위해 페이로그 이용규칙을 제정하여 운영하고 있습니다. 이를 위반 시 게시물이 삭제될 수 있습니다. 게시물 작성 전 페이로그 이용 규칙을 확인하시기 바랍니다.\n\n
+                android:layout_marginTop="40dp"
+                android:text
+                    ="와포어는 누구나 기분 좋게 참여할 수 있는 커뮤니티를 만들기 위해 페이로그 이용규칙을 제정하여 운영하고 있습니다. 이를 위반 시 게시물이 삭제될 수 있습니다. 게시물 작성 전 페이로그 이용 규칙을 확인하시기 바랍니다.\n\n
 페이로그 이용 규칙\n
 - 정치, 사회 관련 가치관을 드러내는 행위 금지\n
 - 이념 등 사회적 이슈에 대한 언급, 비유, 은어 사용 금지\n
 - 홍보 및 판매 관련 바이럴 행위 금지\n
 - 타인의 권리 침해 혹은 불쾌감을 주는 행위 금지"
-                    android:textSize="12sp"
-                    android:textColor="#888888" />
-            </LinearLayout>
+                android:textSize="12sp"
+                android:textColor="#888888" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
