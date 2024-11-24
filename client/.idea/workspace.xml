@@ -98,11 +98,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6951d1bb-4375-4a05-95e3-c60bdec42e72" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/add_img.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/inter_18pt_bold.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_write_paylog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_write_paylog.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
