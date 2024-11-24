@@ -1,0 +1,247 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F6F6">
+
+    <!-- ScrollView for the entire layout -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp">
+
+            <!-- 공개/비공개 텍스트 및 필수 표시 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="bottom">
+
+                <TextView
+                    android:id="@+id/publicPrivateLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="공개 / 비공개"
+                    style="@style/paylog_write_style" />
+
+                <TextView
+                    android:id="@+id/requiredLabel1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="필수"
+                    style="@style/paylog_require_style"
+                    android:layout_marginStart="6.81dp"
+                    android:layout_marginBottom="1dp"/>
+            </LinearLayout>
+
+            <!-- 공개/비공개 토글 버튼 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <ToggleButton
+                    android:id="@+id/togglePublic"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="15.47dp"
+                    android:layout_marginEnd="13.85dp"
+                    android:textOn="공개"
+                    android:textOff="공개"
+                    android:background="@drawable/rounded_border3" />
+
+                <ToggleButton
+                    android:id="@+id/togglePrivate"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="15.47dp"
+                    android:textOn="비공개"
+                    android:textOff="비공개"
+                    android:background="@drawable/rounded_border3" />
+            </LinearLayout>
+
+            <!-- 카테고리 텍스트 및 필수 표시 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="bottom"
+                android:layout_marginTop="29.52dp">
+
+                <TextView
+                    android:id="@+id/categoryLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="카테고리"
+                    style="@style/paylog_write_style" />
+
+                <TextView
+                    android:id="@+id/requiredLabel2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="필수"
+                    style="@style/paylog_require_style"
+                    android:layout_marginStart="6.81dp"
+                    android:layout_marginBottom="1dp" />
+            </LinearLayout>
+
+            <!-- 카테고리 토글 버튼들 (가로 스크롤) -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14.96dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ToggleButton
+                        android:id="@+id/categoryFood"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:textOn="식사"
+                        android:textOff="식사"
+                        android:background="@drawable/rounded_border3"
+                        android:layout_marginEnd="8dp" />
+
+                    <ToggleButton
+                        android:id="@+id/categoryCafe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:textOn="카페"
+                        android:textOff="카페"
+                        android:background="@drawable/rounded_border3"
+                        android:layout_marginEnd="8dp" />
+
+                    <ToggleButton
+                        android:id="@+id/categoryLife"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:textOn="생필품"
+                        android:textOff="생필품"
+                        android:background="@drawable/rounded_border3"
+                        android:layout_marginEnd="8dp" />
+
+                    <ToggleButton
+                        android:id="@+id/categoryElectronics"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:textOn="전자기기"
+                        android:textOff="전자기기"
+                        android:background="@drawable/rounded_border3"
+                        android:layout_marginEnd="8dp" />
+
+                    <ToggleButton
+                        android:id="@+id/categoryHobby"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:textOn="취미생활"
+                        android:textOff="취미생활"
+                        android:background="@drawable/rounded_border3"
+                        android:layout_marginEnd="8dp" />
+
+                    <ToggleButton
+                        android:id="@+id/categoryEtc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:textOn="기타"
+                        android:textOff="기타"
+                        android:background="@drawable/rounded_border3"
+                        android:layout_marginEnd="8dp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- 금액 입력 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="29.6dp"
+                android:gravity="bottom">
+
+                <TextView
+                    android:id="@+id/amountLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="금액 입력"
+                    style="@style/paylog_write_style" />
+
+                <TextView
+                    android:id="@+id/requiredLabel3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="필수"
+                    style="@style/paylog_require_style"
+                    android:layout_marginStart="6.81dp"
+                    android:layout_marginBottom="1dp" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/amountInput"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="금액을 입력하세요."
+                android:paddingStart="14dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:inputType="number"
+                android:layout_marginTop="14.87dp"
+                android:background="@drawable/rounded_border4"/>
+
+            <!-- 게시글 작성 -->
+            <EditText
+                android:id="@+id/postContent"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:hint="페이로그 내용을 작성하세요"
+                android:gravity="top"
+                android:background="@drawable/edit_text_background" />
+
+            <!-- 이미지 추가 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+                <ImageButton
+                    android:id="@+id/addImage"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_add_photo"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
+
+                <!-- 규칙 설명 -->
+                <TextView
+                    android:id="@+id/communityRules"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text
+                        ="와포어는 누구나 기분 좋게 참여할 수 있는 커뮤니티를 만들기 위해 페이로그 이용규칙을 제정하여 운영하고 있습니다. 이를 위반 시 게시물이 삭제될 수 있습니다. 게시물 작성 전 페이로그 이용 규칙을 확인하시기 바랍니다.\n\n
+페이로그 이용 규칙\n
+- 정치, 사회 관련 가치관을 드러내는 행위 금지\n
+- 이념 등 사회적 이슈에 대한 언급, 비유, 은어 사용 금지\n
+- 홍보 및 판매 관련 바이럴 행위 금지\n
+- 타인의 권리 침해 혹은 불쾌감을 주는 행위 금지"
+                    android:textSize="12sp"
+                    android:textColor="#888888" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
