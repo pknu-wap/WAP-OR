@@ -52,6 +52,10 @@
             android:name=".AccountActivity"
             android:exported="true"
             android:theme="@style/Theme.WAP_OR" />
+        <activity
+            android:name=".DepositActivity"
+            android:exported="true"
+            android:theme="@style/Theme.WAP_OR" />
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="e8bce7ec34d184937288ff3882612a08" />

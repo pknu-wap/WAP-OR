@@ -9,12 +9,12 @@
     <path
         android:pathData="M239.75,111.5h333.6v196.08h-333.6z"
         android:strokeAlpha="0.15"
-        android:fillColor="url(#pattern0_865_1912)"
+        android:fillColor="@android:color/transparent"
         android:fillAlpha="0.15"/>
     <path
         android:pathData="M-0.01,128.3h350.88v196.08h-350.88z"
         android:strokeAlpha="0.15"
-        android:fillColor="url(#pattern1_865_1912)"
+        android:fillColor="@android:color/transparent"
         android:fillAlpha="0.15"/>
     <path
         android:pathData="M366.77,204.09C344.94,204.09 328.18,196.16 316.94,180.51C309.86,170.65 306.03,158.58 305.87,145.61C305.12,84.78 323.91,50.64 339.8,32.71C356.95,13.36 374.53,8.19 374.71,8.14C378.61,7.08 382.48,6.17 386.18,5.44C390.3,4.63 394.52,4.22 398.71,4.22C417.04,4.22 434.35,11.97 446.21,25.47C460.23,41.44 479.85,51.62 481.27,52.35C481.74,52.61 482.19,52.87 482.64,53.13C500.57,63.56 509.43,85.23 504.16,105.83C485.71,178.09 393.59,200.64 392.67,200.86C383.46,203.01 374.74,204.1 366.77,204.1V204.09Z"

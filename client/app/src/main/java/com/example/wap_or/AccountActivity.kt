@@ -2,9 +2,11 @@ package com.example.wap_or
 import AccountLog
 import AccountLogAdapter
 import VerticalSpaceItemDecoration
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import android.view.View
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.core.content.ContextCompat
@@ -15,6 +17,8 @@ class AccountActivity : BaseActivity() {
     private lateinit var underlineAll: View
     private lateinit var underlineIncome: View
     private lateinit var underlineExpense: View
+    private lateinit var withdrawalButton: Button
+    private lateinit var depositButton: Button
     private lateinit var recyclerView: RecyclerView
     private lateinit var accountLogAdapter: AccountLogAdapter
 
@@ -32,7 +36,8 @@ class AccountActivity : BaseActivity() {
         underlineExpense = findViewById(R.id.underline_expense)
 
         recyclerView = findViewById(R.id.recycler_view)
-
+        withdrawalButton = findViewById(R.id.withdrawal_button)
+        depositButton = findViewById(R.id.deposit_button)
         // 초기 설정
         setSelectedButton(btnAll, underlineAll)
 
@@ -42,6 +47,8 @@ class AccountActivity : BaseActivity() {
 
         // RecyclerView 초기화
         setupRecyclerView()
+        depositButton.setOnClickListener { navigateToDeposit() }
+        withdrawalButton.setOnClickListener { navigateToWrite() }
     }
 
     private fun setSelectedButton(selectedButton: TextView, selectedUnderline: View) {
@@ -69,5 +76,18 @@ class AccountActivity : BaseActivity() {
         recyclerView.adapter = accountLogAdapter
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.spacing_13dp)
         recyclerView.addItemDecoration(VerticalSpaceItemDecoration(spacingInPixels))
+    }
+    private fun navigateToDeposit() {
+        // DepositActivity로 이동
+        val intent = Intent(this, DepositActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+    }
+
+    private fun navigateToWrite() {
+        // WriteActivity로 이동
+        val intent = Intent(this, WriteActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
     }
 }

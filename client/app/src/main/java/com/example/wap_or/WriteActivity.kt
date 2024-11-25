@@ -1,5 +1,4 @@
 package com.example.wap_or
-
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +26,10 @@ class WriteActivity : AppCompatActivity() {
 
         paylogBinding.togglePrivate.setOnClickListener {
             paylogBinding.togglePublic.isChecked = !paylogBinding.togglePrivate.isChecked
+        }
+        val backButton = findViewById<ImageButton>(R.id.backButton)
+        backButton.setOnClickListener {
+            finish() // 현재 액티비티 종료
         }
     }
 }
