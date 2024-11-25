@@ -1,21 +1,20 @@
 package com.example.wap_or
 import Comment
 import CommentAdapter
-import android.content.Intent
 import android.view.View
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wap_or.databinding.ActivityPostDetailBinding
 
-class PostDetailActivity : AppCompatActivity() {
+class PostDetailActivity : BaseActivity() {
     private val binding by lazy { ActivityPostDetailBinding.inflate(layoutInflater) }
     private lateinit var adapter: CommentAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setupBottomNavigation()
 
         // 데이터 리스트 생성
         val CommentList = arrayListOf(

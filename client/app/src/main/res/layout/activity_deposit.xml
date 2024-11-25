@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+    <include
+        android:id="@+id/top_toolbar"
+        layout="@layout/activity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <TextView
+        android:id="@+id/depositTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="입금하기"
+        style="@style/write_title_style"
+        android:layout_marginTop="20.09dp"
+        app:layout_constraintTop_toBottomOf="@+id/top_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="8dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="28.36dp"
+        android:layout_marginTop="24.59dp"
+        android:src="@drawable/back_button"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintTop_toBottomOf="@+id/top_toolbar"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/depositText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="충전할 금액을 입력하세요."
+        style="@style/deposit_title_style"
+        android:layout_marginTop="46.52dp"
+        app:layout_constraintTop_toBottomOf="@id/depositTitleText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:id="@+id/depositSubText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="한 달마다 금액을 충전하고 목표 사용금액을 지켜봐요 !"
+        style="@style/deposit_subtitle_style"
+        android:layout_marginTop="7.89dp"
+        app:layout_constraintTop_toBottomOf="@id/depositText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="34.5dp"
+        android:background="#F8F8F8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/depositSubText"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/myAccount"
+            style="@style/deposit_account_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="39.31dp"
+            android:text="내 계좌"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/balance"
+            style="@style/account_main_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16.68dp"
+            android:text="0원"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/myAccount" />
+
+        <ImageButton
+            android:id="@+id/write"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="10.66dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/write"
+            app:layout_constraintBottom_toBottomOf="@id/balance"
+            app:layout_constraintStart_toEndOf="@+id/balance" />
+
+        <Button
+            android:id="@+id/submitButton"
+            style="@style/account_submit_style"
+            android:layout_width="98.7dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="49.13dp"
+            android:background="@drawable/rounded_button2"
+            android:text="완료"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/balance" />
+
+        <ImageView
+            android:id="@+id/cartSamkim"
+            android:layout_width="327dp"
+            android:layout_height="210dp"
+            android:layout_marginBottom="88dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/cart_samkim"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/won10"
+            android:layout_width="23.56dp"
+            android:layout_height="29.48dp"
+            android:layout_marginStart="57.4dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/won10"
+            app:layout_constraintBottom_toTopOf="@id/cartSamkim"
+            app:layout_constraintStart_toStartOf="@id/cartSamkim" />
+
+        <ImageView
+            android:id="@+id/won100"
+            android:layout_width="34.35dp"
+            android:layout_height="27.43dp"
+            android:layout_marginStart="91.9dp"
+            android:layout_marginTop="7.1dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/won100"
+            app:layout_constraintStart_toStartOf="@id/cartSamkim"
+            app:layout_constraintTop_toTopOf="@id/cartSamkim" />
+
+        <ImageView
+            android:id="@+id/won500"
+            android:layout_width="34.79dp"
+            android:layout_height="43.99dp"
+            android:layout_marginStart="51.53dp"
+            android:layout_marginTop="43.55dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/won500"
+            app:layout_constraintStart_toStartOf="@id/cartSamkim"
+            app:layout_constraintTop_toTopOf="@id/cartSamkim" />
+
+        <ImageView
+            android:id="@+id/cart_front"
+            android:layout_width="112dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="51.53dp"
+            android:layout_marginTop="71dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/cart_front"
+            app:layout_constraintStart_toStartOf="@id/cartSamkim"
+            app:layout_constraintTop_toTopOf="@id/cartSamkim" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
