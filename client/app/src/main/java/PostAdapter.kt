@@ -1,5 +1,12 @@
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.View
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -10,8 +17,10 @@ import com.example.wap_or.databinding.ItemPostBinding
 class MyViewHolder(val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root)
 
 // 어댑터 클래스
-class PostAdapter(private val datas: MutableList<Post>,
-                  private val onItemClick: (Post) -> Unit
+class PostAdapter(
+    private val context: Context,
+    private val datas: MutableList<Post>,
+    private val onItemClick: (Post) -> Unit
     ) : RecyclerView.Adapter<MyViewHolder>() {
 
     override fun getItemCount(): Int = datas.size
@@ -42,6 +51,35 @@ class PostAdapter(private val datas: MutableList<Post>,
             if (position != RecyclerView.NO_POSITION) { // 유효한 위치인지 확인
                 notifyItemChanged(position) // 아이템 갱신
             }
+        }
+        holder.binding.menuButton.setOnClickListener {
+            holder.binding.menu.visibility =
+                if (holder.binding.menu.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+        }
+        holder.binding.post.setOnTouchListener { _, _ ->
+            if (holder.binding.menu.visibility == View.VISIBLE) {
+                holder.binding.menu.visibility = View.GONE
+                return@setOnTouchListener true
+            }
+            false // 이벤트를 소비하지 않고 다른 뷰로 전달
+        }
+        holder.binding.menu.setOnClickListener {
+            val customDialogView = LayoutInflater.from(context).inflate(R.layout.custom_popup_report, null)
+            val customDialog = AlertDialog.Builder(context, R.style.CustomAlertDialog)
+                .setView(customDialogView)
+                .create()
+            customDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            val confirmButton = customDialogView.findViewById<TextView>(R.id.confirm_button)
+            confirmButton.setOnClickListener {
+                customDialog.dismiss()
+            }
+
+            val cancelButton = customDialogView.findViewById<ImageButton>(R.id.cancel_button)
+            cancelButton.setOnClickListener {
+                customDialog.dismiss()
+            }
+            customDialog.show()
         }
 
         // 기본 이미지 리소스 가져오기

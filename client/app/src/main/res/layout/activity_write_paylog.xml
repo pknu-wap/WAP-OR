@@ -75,7 +75,7 @@
                     android:layout_marginTop="15.47dp"
                     android:textOn="비공개"
                     android:textOff="비공개"
-                    android:background="@drawable/rounded_border3" />
+                    android:background="@drawable/rounded_border4" />
             </LinearLayout>
 
             <!-- 카테고리 텍스트 및 필수 표시 -->
@@ -134,7 +134,7 @@
                         android:layout_height="36dp"
                         android:textOn="카페"
                         android:textOff="카페"
-                        android:background="@drawable/rounded_border3"
+                        android:background="@drawable/rounded_border4"
                         android:layout_marginEnd="8dp" />
 
                     <ToggleButton
@@ -143,7 +143,7 @@
                         android:layout_height="36dp"
                         android:textOn="생필품"
                         android:textOff="생필품"
-                        android:background="@drawable/rounded_border3"
+                        android:background="@drawable/rounded_border4"
                         android:layout_marginEnd="8dp" />
 
                     <ToggleButton
@@ -152,7 +152,7 @@
                         android:layout_height="36dp"
                         android:textOn="전자기기"
                         android:textOff="전자기기"
-                        android:background="@drawable/rounded_border3"
+                        android:background="@drawable/rounded_border4"
                         android:layout_marginEnd="8dp" />
 
                     <ToggleButton
@@ -161,7 +161,7 @@
                         android:layout_height="36dp"
                         android:textOn="취미생활"
                         android:textOff="취미생활"
-                        android:background="@drawable/rounded_border3"
+                        android:background="@drawable/rounded_border4"
                         android:layout_marginEnd="8dp" />
 
                     <ToggleButton
@@ -170,7 +170,7 @@
                         android:layout_height="36dp"
                         android:textOn="기타"
                         android:textOff="기타"
-                        android:background="@drawable/rounded_border3"
+                        android:background="@drawable/rounded_border4"
                         android:layout_marginEnd="8dp" />
                 </LinearLayout>
             </HorizontalScrollView>

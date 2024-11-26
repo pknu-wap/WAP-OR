@@ -76,7 +76,6 @@
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_write_paylog.xml">
         <config>
-          <state>Landscape</state>
           <theme>@style/MyCustomTheme</theme>
         </config>
       </layout>
@@ -87,6 +86,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/custom_popup_deposit.xml">
+        <config>
+          <theme>@style/MyCustomTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/custom_popup_report.xml">
         <config>
           <theme>@style/MyCustomTheme</theme>
         </config>
@@ -124,11 +128,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6951d1bb-4375-4a05-95e3-c60bdec42e72" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/post_like_full.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/custom_popup_report.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/PostAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/PostAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/wap_or/AccountActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/wap_or/AccountActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/data/Post.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/data/Post.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/wap_or/PaylogActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/wap_or/PaylogActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/wap_or/WriteActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/wap_or/WriteActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_write_paylog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_write_paylog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_post.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +238,7 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "feature/#25/sign__up-page",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/user/Desktop/project/WAPOR/client/app/src/main/res/drawable",
+    "last_opened_file_path": "C:/Users/user/Desktop/project/WAPOR/client/app/src/main/res/layout",
     "settings.editor.selected.configurable": "AndroidSdkUpdater",
     "show.migrate.to.gradle.popup": "false"
   },
@@ -241,9 +250,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\project\WAPOR\client\app\src\main\res\layout" />
       <recent name="C:\Users\user\Desktop\project\WAPOR\client\app\src\main\res\drawable" />
       <recent name="C:\Users\user\Desktop\project\WAPOR\client\app\src\main\java" />
-      <recent name="C:\Users\user\Desktop\project\WAPOR\client\app\src\main\res\layout" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\user\Desktop\project\WAPOR\client\app\src\main\java\com\example\wap_or" />

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="338.14dp"
+        android:layout_height="137.84dp"
+        android:background="@drawable/popup_top"
+        >
+        <ImageView
+            android:id="@+id/alert_icon"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:src="@drawable/alert_icon"
+            android:layout_marginStart="111.84dp"
+            android:layout_marginTop="40.32dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <TextView
+            android:id="@+id/alert_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="신고 접수완료"
+            style="@style/popup_title_style"
+            android:layout_marginStart="5.62dp"
+            app:layout_constraintBottom_toBottomOf="@id/alert_icon"
+            app:layout_constraintStart_toEndOf="@id/alert_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15.75dp"
+            android:text="신고가 확인되었습니다.\n깨끗한 관리에 힘쓰겠습니다."
+            style="@style/post_main_text_style"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/alert_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <ImageButton
+            android:id="@+id/cancel_button"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/x_icon"
+            android:layout_marginEnd="17.56dp"
+            android:layout_marginTop="14.5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="338.14dp"
+        android:layout_height="47.66dp"
+        android:background="@drawable/popup_bottom"
+        >
+        <TextView
+            android:id="@+id/confirm_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13.72dp"
+            android:text="확인"
+            android:background="@android:color/transparent"
+            style="@style/submit_style"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
