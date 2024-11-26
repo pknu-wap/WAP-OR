@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 class AccountActivity : BaseActivity() {
     private lateinit var btnAll: TextView
@@ -47,7 +48,20 @@ class AccountActivity : BaseActivity() {
 
         // RecyclerView 초기화
         setupRecyclerView()
-        depositButton.setOnClickListener { navigateToDeposit() }
+        depositButton.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("확인해 주세요")
+            builder.setMessage("입금한 금액은 다시 이체할 수 없으며,\n설정된 입금 기간에만 입금이 가능합니다.")
+            builder.setPositiveButton("확인") { dialog, _ ->
+                dialog.dismiss() // 팝업 닫기
+                navigateToDeposit() // 입금 페이지로 이동
+            }
+            builder.setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss() // 팝업 닫기
+            }
+            val dialog = builder.create()
+            dialog.show()
+        }
         withdrawalButton.setOnClickListener { navigateToWrite() }
     }
 
