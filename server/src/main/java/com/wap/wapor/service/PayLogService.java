@@ -54,4 +54,16 @@ public class PayLogService {
                 });
     }
 
+    public void deletePayLog(Long id,UserPrincipal userPrincipal) {
+        PayLog payLog = payLogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("PayLog with id " + id + " does not exist"));
+
+        // 현재 사용자와 PayLog 작성자가 같은지 확인
+        if (!payLog.getUser().getUsername().equals(currentUser.getUsername())) {
+            throw new SecurityException("You do not have permission to delete this PayLog");
+        }
+
+        payLogRepository.deleteById(id);
+    }
+
 }

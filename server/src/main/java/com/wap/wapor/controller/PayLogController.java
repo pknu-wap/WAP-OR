@@ -38,7 +38,7 @@ public class PayLogController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePayLog(@AuthenticationPrincipal UserPrincipal userPrincipal,@PathVariable Long id) {
         try {
-            payLogService.deletePayLog(id);
+            payLogService.deletePayLog(id,userPrincipal);
             return ResponseEntity.noContent().build(); // 204 No Content
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build(); // 404 Not Found
