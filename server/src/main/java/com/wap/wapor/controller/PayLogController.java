@@ -36,7 +36,7 @@ public class PayLogController {
         return payLogService.getPublicPayLogs(pageable);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePayLog(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePayLog(@AuthenticationPrincipal UserPrincipal userPrincipal,@PathVariable Long id) {
         try {
             payLogService.deletePayLog(id);
             return ResponseEntity.noContent().build(); // 204 No Content
