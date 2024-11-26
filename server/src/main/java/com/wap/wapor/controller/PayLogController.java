@@ -35,6 +35,14 @@ public class PayLogController {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
         return payLogService.getPublicPayLogs(pageable);
     }
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePayLog(@PathVariable Long id) {
+        try {
+            payLogService.deletePayLog(id);
+            return ResponseEntity.noContent().build(); // 204 No Content
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build(); // 404 Not Found
+        }
+    }
 
 }
