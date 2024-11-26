@@ -124,9 +124,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6951d1bb-4375-4a05-95e3-c60bdec42e72" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/post_like_full.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/PostAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/PostAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/wap_or/AccountActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/wap_or/AccountActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/custom_popup_deposit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/custom_popup_deposit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/data/Post.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/data/Post.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

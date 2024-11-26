@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.app.AlertDialog
 import android.graphics.Color
-import androidx.core.content.ContextCompat
 class AccountActivity : BaseActivity() {
     private lateinit var btnAll: TextView
     private lateinit var btnIncome: TextView

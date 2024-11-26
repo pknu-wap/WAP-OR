@@ -3,6 +3,7 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.wap_or.R
 import com.example.wap_or.databinding.ItemPostBinding
 
 // MyViewHolder 클래스
@@ -31,6 +32,17 @@ class PostAdapter(private val datas: MutableList<Post>,
         holder.binding.postCash.text = "${post.amount} won"
         holder.binding.postLikeCount.text = post.likes.toString()
         holder.binding.postCommentCount.text = post.comments.toString()
+
+        val likeIconRes = if (post.isLiked) R.drawable.post_like_full else R.drawable.post_like
+        holder.binding.postLikeIcon.setImageResource(likeIconRes)
+
+        holder.binding.postLikeIcon.setOnClickListener {
+            post.isLiked = !post.isLiked // 상태 반전
+            val position = holder.bindingAdapterPosition // 올바른 위치를 가져옴
+            if (position != RecyclerView.NO_POSITION) { // 유효한 위치인지 확인
+                notifyItemChanged(position) // 아이템 갱신
+            }
+        }
 
         // 기본 이미지 리소스 가져오기
         val context = holder.binding.postMainImg.context

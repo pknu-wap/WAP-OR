@@ -6,5 +6,6 @@ data class Post(
     val category: String, //utf변환 준비 or 카테고리 함수
     val amount: Int, //금액 함수 확인
     val likes: Int, //Int형 조심
-    val comments: Int //Int형 조심
+    val comments: Int, //Int형 조심
+    var isLiked: Boolean = false
 )
