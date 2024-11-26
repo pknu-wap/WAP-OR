@@ -32,12 +32,6 @@ public class User {
 
     private LocalDateTime lastLogin; // 사용자가 마지막으로 로그인한 시간 저장
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PayLog> payLogs; // 사용자가 작성한 게시글 리스트
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Likes> likes; // 사용자가 누른 좋아요 리스트
-
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
