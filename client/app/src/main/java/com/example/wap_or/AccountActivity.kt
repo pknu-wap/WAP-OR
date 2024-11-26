@@ -3,13 +3,16 @@ import AccountLog
 import AccountLogAdapter
 import VerticalSpaceItemDecoration
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.TextView
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.app.AlertDialog
+import android.graphics.Color
 import androidx.core.content.ContextCompat
 class AccountActivity : BaseActivity() {
     private lateinit var btnAll: TextView
@@ -49,18 +52,25 @@ class AccountActivity : BaseActivity() {
         // RecyclerView 초기화
         setupRecyclerView()
         depositButton.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("확인해 주세요")
-            builder.setMessage("입금한 금액은 다시 이체할 수 없으며,\n설정된 입금 기간에만 입금이 가능합니다.")
-            builder.setPositiveButton("확인") { dialog, _ ->
-                dialog.dismiss() // 팝업 닫기
-                navigateToDeposit() // 입금 페이지로 이동
+            val customDialogView = layoutInflater.inflate(R.layout.custom_popup_deposit, null)
+            val customDialog = AlertDialog.Builder(this, R.style.CustomAlertDialog)
+                .setView(customDialogView)
+                .create()
+            customDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            val confirmButton = customDialogView.findViewById<TextView>(R.id.confirm_button)
+            confirmButton.setOnClickListener {
+                customDialog.dismiss()
+                navigateToDeposit()
             }
-            builder.setNegativeButton("취소") { dialog, _ ->
-                dialog.dismiss() // 팝업 닫기
+
+            val cancelButton = customDialogView.findViewById<ImageButton>(R.id.cancel_button)
+            cancelButton.setOnClickListener {
+                customDialog.dismiss()
             }
-            val dialog = builder.create()
-            dialog.show()
+
+            customDialog.show()
+
         }
         withdrawalButton.setOnClickListener { navigateToWrite() }
     }
