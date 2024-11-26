@@ -31,7 +31,15 @@ public class SecurityConfig {
 
                 .csrf(csrf -> csrf.disable()) // CSRF 비활성화
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/kakao","/auth/kakao/callback","/mailSend", "/mailAuthCheck", "/api/users/login/email", "/api/users/register/email", "/api/virtual-account/deposit").permitAll() // 인증 없이 접근 허용
+                        // 인증 없이 접근 가능한 엔드포인트
+                        .requestMatchers(
+                                "/auth/kakao",
+                                "/auth/kakao/callback",
+                                "/mailSend",
+                                "/mailAuthCheck",
+                                "/api/users/login/email",
+                                "/api/users/register/email")
+                        .permitAll() // 인증 없이 접근 허용
                         .anyRequest().authenticated() // 그 외의 모든 요청은 인증 필요
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
