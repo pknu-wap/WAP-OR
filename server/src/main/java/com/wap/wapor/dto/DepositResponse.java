@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class DepositResponse {
     private Long accountId;
-    private Long newBalance;
+    private Long Balance;
 }
