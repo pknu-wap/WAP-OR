@@ -1,6 +1,5 @@
 package com.wap.wapor.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +12,5 @@ public class PostPayLogDto {
     private String imgUrl;
     private String category;
     private Long amount;
-
 }
 
