@@ -38,7 +38,7 @@ public class PayLogService {
         return payLogResult.getId();
     }
     public Page<GetPayLogDto> getPublicPayLogs(Pageable pageable) {
-        return payLogRepository.findByIsPublicTrue(pageable)
+        return payLogRepository.findByIsPublic(1,pageable)
                 .map(payLog -> {
                     return new GetPayLogDto(
                             payLog.getTitle(),
