@@ -20,24 +20,19 @@ public class VirtualAccountService {
     private final UserRepository userRepository;
 
     @Transactional
-    public VirtualAccount deposit(Long accountId, Long amount, String identifier) {
+    public VirtualAccount deposit(Long amount, String identifier) {
 
         if (amount == null || amount <= 0) {
             throw new IllegalArgumentException("입금 금액은 0보다 커야 합니다.");
         }
 
         // User 존재 확인
-        User user = userRepository.findById(identifier)
+        User user = userRepository.findByIdentifier(identifier)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with identifier: " + identifier));
 
-        // VirtualAccount 조회
-        VirtualAccount virtualAccount = virtualAccountRepository.findById(accountId)
-                .orElseThrow(() -> new IllegalArgumentException("Account not found with ID: " + accountId));
-
-        // User와 VirtualAccount 연결 확인
-        if (!virtualAccount.getUser().equals(user)) {
-            throw new IllegalArgumentException("Virtual account does not belong to the user with identifier: " + identifier);
-        }
+        // User와 연결된 VirtualAccount 조회
+        VirtualAccount virtualAccount = virtualAccountRepository.findByUser(user)
+                .orElseThrow(() -> new IllegalArgumentException("No virtual account found for user: " + identifier));
 
         // 잔액 업데이트
         virtualAccount.setBalance(virtualAccount.getBalance() + amount);
