@@ -16,5 +16,5 @@ class MainActivity : ComponentActivity() {
         startActivity(loginIntent)
         finish()
     }
-    }
+}
 

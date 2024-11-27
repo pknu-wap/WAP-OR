@@ -33,7 +33,7 @@ import com.example.wap_or.utils.Constants
 interface ApiService {
     @POST("api/users/login/email") // 실제 엔드포인트에 맞게 수정
     //ex http://localhost:8080/api/users/login/email
-    fun login(@Body request: LoginRequest): Call<LoginResponse>
+    fun login(@Body request: LoginRequest): Call<TokenSuccessResponse>
 }
 interface KakaoApiService {
     @POST("/auth/kakao")
@@ -114,23 +114,36 @@ class LoginActivity : AppCompatActivity() {
 
         // 로그인 요청을 보냄
         val loginRequest = LoginRequest(identifier = login, password = password)
-        RetrofitInstance.apiService.login(loginRequest).enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+        RetrofitInstance.apiService.login(loginRequest).enqueue(object : Callback<TokenSuccessResponse> {
+            override fun onResponse(call: Call<TokenSuccessResponse>, response: Response<TokenSuccessResponse>) {
                 try {
                     // 서버 응답 상태 코드 확인
                     Log.i("LoginResponse", "Status Code: ${response.code()}")
 
                     when (response.code()) {
                         200 -> {
-                            val loginResponse = response.body()
-                            if (loginResponse != null) {
-                                Log.i("LoginResponse", "Success Response: $loginResponse")
-                                // 성공적으로 PaylogActivity로 이동
+                            // 성공 응답 처리
+                            val responseBody = response.body()
+                            if (responseBody != null) {
+                                Log.i("TokenSend", "토큰 전송 성공")
+                                Log.i("TokenSend", "Token: ${responseBody.token}")
+                                Log.i(
+                                    "TokenSend",
+                                    "User Information: " +
+                                            "\nIdentifier: ${responseBody.user.identifier}" +
+                                            "\nUser Type: ${responseBody.user.userType}" +
+                                            "\nPassword: ${responseBody.user.password ?: "N/A"}" +
+                                            "\nNickname: ${responseBody.user.nickname}" +
+                                            "\nRefresh Token: ${responseBody.user.refreshToken ?: "N/A"}" +
+                                            "\nCreated At: ${responseBody.user.createdAt}" +
+                                            "\nLast Login: ${responseBody.user.lastLogin ?: "N/A"}"
+                                )
+
                                 val intent = Intent(this@LoginActivity, PaylogActivity::class.java)
                                 startActivity(intent)
-                                finish()
+                                finish() // 현재 액티비티 종료
                             } else {
-                                Log.e("LoginResponse", "Response body is null")
+                                Log.e("TokenSend", "토큰 전송 성공, 그러나 응답 본문이 비어 있음")
                             }
                         }
                         401 -> {
@@ -157,7 +170,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+            override fun onFailure(call: Call<TokenSuccessResponse>, t: Throwable) {
                 Log.e("LoginError", "Network error: ${t.message}")
             }
         })

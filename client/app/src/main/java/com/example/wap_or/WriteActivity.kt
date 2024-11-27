@@ -1,15 +1,19 @@
 package com.example.wap_or
-import android.graphics.Color
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
-import android.provider.MediaStore
-import androidx.activity.result.contract.ActivityResultContracts
+import android.graphics.Color
 import android.os.Bundle
-import android.widget.*
+import android.provider.MediaStore
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
+import android.widget.EditText
+import android.widget.ImageButton
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wap_or.databinding.ActivityWriteMainBinding
+import utils.LineBreakFilter
+
 
 private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
 private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
@@ -23,6 +27,7 @@ class WriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         // Camera launcher 설정
         cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -96,6 +101,7 @@ class WriteActivity : AppCompatActivity() {
                 button.setBackgroundResource(R.drawable.rounded_border3)
             }
         }
+
         paylogBinding.cammerIcon.setOnClickListener{
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             cameraLauncher.launch(cameraIntent)
@@ -108,6 +114,13 @@ class WriteActivity : AppCompatActivity() {
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             galleryLauncher.launch(galleryIntent)
         }
+
+        val postContent = findViewById<EditText>(R.id.postContent)
+        postContent.filters = arrayOf<InputFilter>(
+            LineBreakFilter(9),  // 줄바꿈 9회 이하 제한
+            LengthFilter(300)
+        )
+
         val backButton = findViewById<ImageButton>(R.id.backButton)
         backButton.setOnClickListener {
             finish() // 현재 액티비티 종료
