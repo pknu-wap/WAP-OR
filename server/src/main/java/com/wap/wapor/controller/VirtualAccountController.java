@@ -2,9 +2,13 @@ package com.wap.wapor.controller;
 
 import com.wap.wapor.domain.VirtualAccount;
 import com.wap.wapor.dto.DepositRequest;
+import com.wap.wapor.dto.DepositResponse;
+import com.wap.wapor.security.UserPrincipal;
 import com.wap.wapor.service.VirtualAccountService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,12 +19,19 @@ public class VirtualAccountController {
     private final VirtualAccountService virtualAccountService;
 
     @PostMapping("/deposit")
-    public ResponseEntity<VirtualAccount> deposit(@RequestBody DepositRequest request) {
+    public ResponseEntity<DepositResponse> deposit(
+            @Valid @RequestBody DepositRequest request,
+            @AuthenticationPrincipal UserPrincipal userPrincipal) {
+
         VirtualAccount updatedAccount = virtualAccountService.deposit(
-                request.getAccountId(),
                 request.getAmount(),
-                request.getIdentifier()
+                userPrincipal.getId() // 인증된 사용자 식별자 전달
         );
-        return ResponseEntity.ok(updatedAccount);
+
+        DepositResponse response = new DepositResponse();
+        response.setAccountId(updatedAccount.getAccountId());
+        response.setBalance(updatedAccount.getBalance());
+
+        return ResponseEntity.ok(response);
     }
 }

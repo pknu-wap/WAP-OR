@@ -1,5 +1,6 @@
 package com.wap.wapor.controller;
 
+
 import com.wap.wapor.dto.GetPayLogDto;
 import com.wap.wapor.dto.PostPayLogDto;
 import com.wap.wapor.security.UserPrincipal;
@@ -8,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import com.wap.wapor.dto.PayLogResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -24,11 +27,11 @@ public class PayLogController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> createPayLog(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestBody PostPayLogDto postPayLogDto) {
-       Long postId= payLogService.payLogPost(postPayLogDto, userPrincipal);
-       return ResponseEntity.ok(postId);
-
+    public ResponseEntity<PayLogResponse> createPayLog(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestBody PostPayLogDto postPayLogDto) {
+        PayLogResponse response = payLogService.createPayLog(postPayLogDto, userPrincipal);
+        return ResponseEntity.ok(response);
     }
+
     @GetMapping("/search")
     public List<GetPayLogDto> getPublicPayLogs(
             @RequestParam(defaultValue = "0") int page,
@@ -46,5 +49,7 @@ public class PayLogController {
             return ResponseEntity.notFound().build(); // 404 Not Found
         }
     }
+
+}
 
 }
