@@ -25,6 +25,16 @@ public class Transaction {
     @Column(name = "amount", nullable = false) // 거래 금액 매핑
     private Long amount; // 거래 금액
 
+    @ManyToOne
+    @JoinColumn(name = "paylog_id") // PayLog와 연결
+    private PayLog payLog;
+
+    @Column(name = "category") // 새 필드 추가
+    private String category;
+
+    @Column(name = "balance", nullable = false) // 거래 시점의 잔액
+    private Long balance;
+
     @Column(name = "transaction_date", nullable = false) // 거래 발생 시간 매핑
     private LocalDateTime transactionDate; // 거래 발생 시간
 

@@ -1,5 +1,6 @@
 package com.wap.wapor.controller;
 
+import com.wap.wapor.dto.PayLogResponse;
 import com.wap.wapor.dto.PostPayLogDto;
 import com.wap.wapor.security.UserPrincipal;
 import com.wap.wapor.service.PayLogService;
@@ -21,8 +22,8 @@ public class PayLogController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> createPayLog(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestBody PostPayLogDto postPayLogDto) {
-       Long payLogId= payLogService.createPayLog(postPayLogDto, userPrincipal);
-       return ResponseEntity.ok(payLogId);
+    public ResponseEntity<PayLogResponse> createPayLog(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestBody PostPayLogDto postPayLogDto) {
+        PayLogResponse response = payLogService.createPayLog(postPayLogDto, userPrincipal);
+        return ResponseEntity.ok(response);
     }
 }

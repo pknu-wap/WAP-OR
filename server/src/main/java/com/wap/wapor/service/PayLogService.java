@@ -1,11 +1,10 @@
 package com.wap.wapor.service;
 
-import com.wap.wapor.domain.PayLog;
-import com.wap.wapor.domain.User;
-import com.wap.wapor.domain.UserType;
-import com.wap.wapor.domain.VirtualAccount;
+import com.wap.wapor.domain.*;
+import com.wap.wapor.dto.PayLogResponse;
 import com.wap.wapor.dto.PostPayLogDto;
 import com.wap.wapor.repository.PayLogRepository;
+import com.wap.wapor.repository.TransactionRepository;
 import com.wap.wapor.repository.UserRepository;
 import com.wap.wapor.repository.VirtualAccountRepository;
 import com.wap.wapor.security.UserPrincipal;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,9 +23,10 @@ public class PayLogService {
     private final PayLogRepository payLogRepository;
     private final UserRepository userRepository;
     private final VirtualAccountRepository virtualAccountRepository;
+    private final TransactionRepository transactionRepository; // 추가
 
     @Transactional
-    public Long createPayLog(PostPayLogDto postPayLogDto, UserPrincipal userPrincipal) {
+    public PayLogResponse createPayLog(PostPayLogDto postPayLogDto, UserPrincipal userPrincipal) {
         // KAKAO와 EMAIL 두 가지 유형을 허용
         List<UserType> allowedUserTypes = Arrays.asList(UserType.KAKAO, UserType.EMAIL);
 
@@ -46,9 +45,11 @@ public class PayLogService {
             throw new IllegalArgumentException("잔액이 부족합니다.");
         }
 
+        // 가상계좌 잔액 차감
         virtualAccount.setBalance(virtualAccount.getBalance() - postPayLogDto.getAmount());
         virtualAccountRepository.save(virtualAccount);
 
+        // 페이로그 생성 및 저장
         PayLog payLog = new PayLog();
         payLog.setUser(user);
         payLog.setAmount(postPayLogDto.getAmount()); // 출금 금액
@@ -61,6 +62,17 @@ public class PayLogService {
 
         PayLog savedPayLog = payLogRepository.save(payLog);
 
-        return savedPayLog.getId(); // 생성된 페이로그 ID 반환
+        // 거래 내역 생성 및 저장
+        Transaction transaction = new Transaction();
+        transaction.setVirtualAccount(virtualAccount);
+        transaction.setTransactionType(TransactionType.WITHDRAWAL); // 출금
+        transaction.setAmount(postPayLogDto.getAmount());
+        transaction.setBalance(virtualAccount.getBalance()); // 현재 잔액 저장
+        transaction.setPayLog(savedPayLog); // 페이로그와 연결
+        transaction.setCategory(postPayLogDto.getCategory());
+        transactionRepository.save(transaction);
+
+        // 잔액과 페이로그 ID를 함께 반환
+        return new PayLogResponse(savedPayLog.getId(), virtualAccount.getBalance());
     }
 }
