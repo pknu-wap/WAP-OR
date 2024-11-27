@@ -38,7 +38,8 @@ public class SecurityConfig {
                                 "/mailSend",
                                 "/mailAuthCheck",
                                 "/api/users/login/email",
-                                "/api/users/register/email")
+                                "/api/users/register/email",
+                                "/images/**")
                         .permitAll() // 인증 없이 접근 허용
                         .anyRequest().authenticated() // 그 외의 모든 요청은 인증 필요
                 )
