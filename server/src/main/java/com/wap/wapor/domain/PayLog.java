@@ -35,7 +35,7 @@ public class PayLog {
     @Column(name = "amount") // snake_case로 매핑
     private Long amount; // 금액
     @Column(name = "isPublic")
-    private boolean isPublic;
+    private int isPublic;
     @Column(name = "created_at", nullable = false, updatable = false) // snake_case로 매핑
     private LocalDateTime createdAt; // 작성 시간
 
