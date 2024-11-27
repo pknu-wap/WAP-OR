@@ -67,6 +67,7 @@ public class PayLogService {
         transaction.setVirtualAccount(virtualAccount);
         transaction.setTransactionType(TransactionType.WITHDRAWAL); // 출금 타입
         transaction.setAmount(postPayLogDto.getAmount());
+        transaction.setUserNickname(user.getNickname()); // 사용자 닉네임 설정
         transaction.setTransactionDate(LocalDateTime.now());
         transactionRepository.save(transaction);
 

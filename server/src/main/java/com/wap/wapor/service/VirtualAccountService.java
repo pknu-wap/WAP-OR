@@ -47,6 +47,7 @@ public class VirtualAccountService {
         transaction.setVirtualAccount(virtualAccount);
         transaction.setTransactionType(TransactionType.DEPOSIT);
         transaction.setAmount(amount);
+        transaction.setUserNickname(user.getNickname()); // 사용자 닉네임 설정
         transactionRepository.save(transaction);
 
         // VirtualAccount 업데이트 저장
