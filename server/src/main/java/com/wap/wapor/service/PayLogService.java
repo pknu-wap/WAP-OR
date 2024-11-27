@@ -49,7 +49,8 @@ public class PayLogService {
                             payLog.getAmount(),
                             payLog.getLikeCount(),
                             payLog.getUser().getIdentifier(),
-                            payLog.getUser().getNickname()
+                            payLog.getUser().getNickname(),
+                            payLog.getCreatedAt()
 
                     );
                 });
