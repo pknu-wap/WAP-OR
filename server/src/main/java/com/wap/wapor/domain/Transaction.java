@@ -28,9 +28,6 @@ public class Transaction {
     @Column(name = "transaction_date", nullable = false) // 거래 발생 시간 매핑
     private LocalDateTime transactionDate; // 거래 발생 시간
 
-    @Column(name = "user_nickname", nullable = false) // 사용자 닉네임 추가
-    private String userNickname;
-
     @PrePersist
     protected void onCreate() {
         this.transactionDate = LocalDateTime.now();
