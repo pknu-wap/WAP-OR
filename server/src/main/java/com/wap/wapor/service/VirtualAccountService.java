@@ -47,6 +47,10 @@ public class VirtualAccountService {
         transaction.setVirtualAccount(virtualAccount);
         transaction.setTransactionType(TransactionType.DEPOSIT);
         transaction.setAmount(amount);
+        // 카테고리를 "사용자 입금"으로 고정
+        transaction.setPayLog(null); // 입금은 PayLog와 관계없으므로 null
+        transaction.setCategory("사용자 입금"); // 카테고리 고정값 설정
+
         transactionRepository.save(transaction);
 
         // VirtualAccount 업데이트 저장
