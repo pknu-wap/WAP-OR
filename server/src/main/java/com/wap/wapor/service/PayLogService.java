@@ -34,6 +34,7 @@ public class PayLogService {
         payLog.setImgUrl(postPayLogDto.getImgUrl());
         payLog.setUser(user.get());
         payLog.setLikeCount(0);
+        payLog.setIsPublic(postPayLogDto.getIsPublic());
         PayLog payLogResult=payLogRepository.save(payLog);
         return payLogResult.getId();
     }
