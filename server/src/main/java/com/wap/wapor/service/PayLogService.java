@@ -62,12 +62,14 @@ public class PayLogService {
 
         PayLog savedPayLog = payLogRepository.save(payLog);
 
-        // 거래 내역(Transaction) 생성 및 저장
+        // 거래 내역 생성 및 저장
         Transaction transaction = new Transaction();
         transaction.setVirtualAccount(virtualAccount);
-        transaction.setTransactionType(TransactionType.WITHDRAWAL); // 출금 타입
+        transaction.setTransactionType(TransactionType.WITHDRAWAL); // 출금
         transaction.setAmount(postPayLogDto.getAmount());
-        transaction.setTransactionDate(LocalDateTime.now());
+        transaction.setBalance(virtualAccount.getBalance()); // 현재 잔액 저장
+        transaction.setPayLog(savedPayLog); // 페이로그와 연결
+        transaction.setCategory(postPayLogDto.getCategory());
         transactionRepository.save(transaction);
 
         // 잔액과 페이로그 ID를 함께 반환
