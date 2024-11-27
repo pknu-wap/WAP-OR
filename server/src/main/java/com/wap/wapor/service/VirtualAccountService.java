@@ -21,6 +21,11 @@ public class VirtualAccountService {
 
     @Transactional
     public VirtualAccount deposit(Long accountId, Long amount, String identifier) {
+
+        if (amount == null || amount <= 0) {
+            throw new IllegalArgumentException("입금 금액은 0보다 커야 합니다.");
+        }
+
         // User 존재 확인
         User user = userRepository.findById(identifier)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with identifier: " + identifier));
