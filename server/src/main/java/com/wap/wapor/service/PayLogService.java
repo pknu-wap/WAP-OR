@@ -1,15 +1,25 @@
 package com.wap.wapor.service;
 
+
+import com.wap.wapor.domain.PayLog;
+import com.wap.wapor.domain.User;
+import com.wap.wapor.domain.UserType;
+import com.wap.wapor.dto.GetPayLogDto;
+
 import com.wap.wapor.domain.*;
 import com.wap.wapor.dto.PayLogResponse;
+
 import com.wap.wapor.dto.PostPayLogDto;
 import com.wap.wapor.repository.PayLogRepository;
 import com.wap.wapor.repository.TransactionRepository;
 import com.wap.wapor.repository.UserRepository;
 import com.wap.wapor.repository.VirtualAccountRepository;
 import com.wap.wapor.security.UserPrincipal;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -59,7 +69,7 @@ public class PayLogService {
         payLog.setImgUrl(postPayLogDto.getImgUrl());
         payLog.setCreatedAt(LocalDateTime.now());
         payLog.setLikeCount(0);
-
+        payLog.setIsPublic(postPayLogDto.getIsPublic());
         PayLog savedPayLog = payLogRepository.save(payLog);
 
         // 거래 내역 생성 및 저장
@@ -74,5 +84,35 @@ public class PayLogService {
 
         // 잔액과 페이로그 ID를 함께 반환
         return new PayLogResponse(savedPayLog.getId(), virtualAccount.getBalance());
+    }
+  
+    public Page<GetPayLogDto> getPublicPayLogs(Pageable pageable) {
+        return payLogRepository.findByIsPublic(1,pageable)
+                .map(payLog -> {
+                    return new GetPayLogDto(
+                            payLog.getTitle(),
+                            payLog.getContent(),
+                            payLog.getImgUrl(),
+                            payLog.getCategory(),
+                            payLog.getAmount(),
+                            payLog.getLikeCount(),
+                            payLog.getUser().getIdentifier(),
+                            payLog.getUser().getNickname(),
+                            payLog.getCreatedAt()
+
+                    );
+                });
+    }
+
+    public void deletePayLog(Long id,UserPrincipal userPrincipal) {
+        PayLog payLog = payLogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("PayLog with id " + id + " does not exist"));
+
+        // 현재 사용자와 PayLog 작성자가 같은지 확인
+        if (!payLog.getUser().getIdentifier().equals(userPrincipal.getId())) {
+            throw new SecurityException("You do not have permission to delete this PayLog");
+        }
+
+        payLogRepository.deleteById(id);
     }
 }
