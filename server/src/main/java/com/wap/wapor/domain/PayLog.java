@@ -34,7 +34,8 @@ public class PayLog {
 
     @Column(name = "amount") // snake_case로 매핑
     private Long amount; // 금액
-
+    @Column(name = "isPublic")
+    private boolean isPublic;
     @Column(name = "created_at", nullable = false, updatable = false) // snake_case로 매핑
     private LocalDateTime createdAt; // 작성 시간
 
@@ -43,9 +44,6 @@ public class PayLog {
 
     @Column(name = "like_count") // snake_case로 매핑
     private int likeCount = 0; // 좋아요 수 (캐싱)
-
-    @OneToMany(mappedBy = "payLog", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Likes> likes; // 좋아요 리스트
 
     @PrePersist
     protected void onCreate() {
