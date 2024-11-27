@@ -1,6 +1,7 @@
 package com.wap.wapor.service;
 
 import com.wap.wapor.domain.*;
+import com.wap.wapor.dto.PayLogResponse;
 import com.wap.wapor.dto.PostPayLogDto;
 import com.wap.wapor.repository.PayLogRepository;
 import com.wap.wapor.repository.TransactionRepository;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +26,7 @@ public class PayLogService {
     private final TransactionRepository transactionRepository; // 추가
 
     @Transactional
-    public Long createPayLog(PostPayLogDto postPayLogDto, UserPrincipal userPrincipal) {
+    public PayLogResponse createPayLog(PostPayLogDto postPayLogDto, UserPrincipal userPrincipal) {
         // KAKAO와 EMAIL 두 가지 유형을 허용
         List<UserType> allowedUserTypes = Arrays.asList(UserType.KAKAO, UserType.EMAIL);
 
@@ -71,6 +71,7 @@ public class PayLogService {
         transaction.setTransactionDate(LocalDateTime.now());
         transactionRepository.save(transaction);
 
-        return savedPayLog.getId(); // 생성된 페이로그 ID 반환
+        // 잔액과 페이로그 ID를 함께 반환
+        return new PayLogResponse(savedPayLog.getId(), virtualAccount.getBalance());
     }
 }
