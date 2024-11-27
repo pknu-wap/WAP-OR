@@ -3,6 +3,7 @@ package com.wap.wapor.controller;
 import com.wap.wapor.dto.PostPayLogDto;
 import com.wap.wapor.security.UserPrincipal;
 import com.wap.wapor.service.PayLogService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +22,7 @@ public class PayLogController {
 
     @PostMapping
     public ResponseEntity<Long> createPayLog(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestBody PostPayLogDto postPayLogDto) {
-       Long postId= payLogService.payLogPost(postPayLogDto, userPrincipal);
-       return ResponseEntity.ok(postId);
-
+       Long payLogId= payLogService.createPayLog(postPayLogDto, userPrincipal);
+       return ResponseEntity.ok(payLogId);
     }
 }
