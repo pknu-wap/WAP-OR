@@ -4,6 +4,8 @@ import com.wap.wapor.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 public class GetPayLogDto {
@@ -15,6 +17,7 @@ public class GetPayLogDto {
     private int likeCount;
     private String user_id;
     private String user_nickname;
+    private LocalDateTime createdAt;
 
 }
 
