@@ -8,5 +8,5 @@ import com.wap.wapor.domain.PayLog;
 
 
 public interface PayLogRepository extends JpaRepository<PayLog, Long> {
-    Page<PayLog> findByIsPublicTrue(Pageable pageable);
+    Page<PayLog> findByIsPublic(int isPublic,Pageable pageable);
 }
