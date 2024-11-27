@@ -33,8 +33,47 @@ public class EmailSendService {
     // 인증 번호 생성 및 Redis에 저장 메서드
     public String requestAuthCode(String identifier) {
         String authCode = generateAuthCode();  // 인증 번호 생성
-        String title = "[WAPOR] 회원 가입 인증 번호 요청 메일입니다.";
-        String content = "회원 가입 인증 번호입니다." + "<br><br>" + authCode + "<br>" + "인증 번호를 정확하게 입력해 주세요.";
+        String title = "[WAPOR] 이메일 인증번호입니다.";
+        String content =
+                "<div style='font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; border-radius: 10px; overflow: hidden;'>" +
+                        "<div style='background: linear-gradient(90deg, #3183FF 0%, #79AFFF 100%); padding: 40px; text-align: center;'>" +
+                        "<img src='http://your-server-domain/images/icon.png' alt='앱 로고' style='height: 60px;'>" +
+                        "</div>" +
+                        "<div style='padding: 30px; background-color: #ffffff;'>" +
+                        "<p style='font-size: 20px; color: #333; text-align: center; font-weight: bold;'>와포어 가입을 환영합니다!</p><br>" +
+                        "<p style='font-size: 16px; color: #555; text-align: center; line-height: 1.5;'>" +
+                        "안녕하세요, <img src='http://your-server-domain/images/logo.png' alt='와포어 로고' style='height: 20px; vertical-align: middle;'>입니다.<br>" +
+                        "와포어는 오픈채팅 거지방을 모티브로 한 소비 기록을 공유하는 커뮤니티 기반 가계부 앱입니다. <br>" +
+                        "지금 인증 절차를 완료하고 와포어의 다양한 기능을 경험해 보세요." +
+                        "</p>" +
+                        "<div style='text-align: center; margin: 30px 0;'>" +
+                        "<span style='font-size: 32px; font-weight: bold; color: #3183FF;'>" +
+                        authCode +
+                        "</span>" +
+                        "</div>" +
+                        "<p style='font-size: 14px; color: #888; text-align: center;'>" +
+                        "위 인증번호를 정확히 입력한 후 이메일 인증을 완료하세요.<br>" +
+                        "제한 시간 5분이 지나면 이메일 인증을 다시 요청해야 합니다." +
+                        "</p>" +
+                        "<div style='margin: 20px 0; padding: 15px; background-color: #f1f7ff; border-radius: 10px;'>" +
+                        "<p style='font-size: 14px; color: #555; text-align: left;'>✔ 와포어의 주요 기능:</p>" +
+                        "<ul style='font-size: 14px; color: #555; text-align: left; padding-left: 20px;'>" +
+                        "<li>지출이 있을 때마다 페이 로그를 작성하여 소비 기록을 공유해요.</li>" +
+                        "<li>다양한 사람들과 자유롭게 소통할 수 있어요.</li>" +
+                        "<li>가상 계좌를 통해 소비 목표 금액을 설정하고 입출금 내역을 확인할 수 있어요.</li>" +
+                        "<li>분석 그래프를 통해 소비 습관을 개선하기는 곧... 완성돼요.</li>" +
+                        "</ul>" +
+                        "</div>" +
+                        "<p style='font-size: 14px; color: #555; text-align: center;'>와포어의 개발 과정이 궁금하다면?</p>" +
+                        "<div style='text-align: center; margin-top: 20px;'>" +
+                        "<a href='https://github.com/pknu-wap/WAP-OR' target='_blank' style='text-decoration: none; color: #3183FF; font-size: 16px; font-weight: bold;'>🔗 깃허브 탐색하기</a>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div style='background-color: #3183FF; color: #fff; padding: 40px; text-align: center; font-size: 12px;'>" +
+                        "<p>본 메일은 발신 전용이며 문의에 대한 회신은 처리되지 않습니다.</p>" +
+                        "<p>© 2024 WAPOR. All Rights Reserved</p>" +
+                        "</div>" +
+                        "</div>";
 
         // Redis에 인증 번호 저장 (key: authCode:<identifier>, 만료 시간: 5분)
         redisUtil.setDataExpire("authCode:" + identifier, authCode);
