@@ -41,7 +41,7 @@ public class KakaoAuthService {
 
         ResponseEntity<KakaoUserResponse> response = restTemplate.exchange(
                 userInfoUrl, HttpMethod.GET, request, KakaoUserResponse.class);
-        
+
         if (response.getStatusCode() == HttpStatus.OK) {
             String token;
             User user;
