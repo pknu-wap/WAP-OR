@@ -56,3 +56,4 @@ src/main/resources/secret.properties
 dump.rdb
 # GCP 서비스 계정 키 파일 무시
 src/main/resources/sapient-tangent-442814-u3-87279629ee20.json
+

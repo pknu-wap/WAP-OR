@@ -36,16 +36,19 @@ public class EmailSendService {
         String title = "[WAPOR] 이메일 인증번호입니다.";
         String content =
                 "<div style='font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; border-radius: 10px; overflow: hidden;'>" +
+                        // 상단 헤더 및 로고
                         "<div style='background: linear-gradient(90deg, #3183FF 0%, #79AFFF 100%); padding: 40px; text-align: center;'>" +
-                        "<img src='http://your-server-domain/images/icon.png' alt='앱 로고' style='height: 60px;'>" +
+                        "<img src='http://34.47.73.194:8080/images/icon.png' alt='앱 로고' style='height: 60px; width: auto; max-width: 100%; margin-bottom: 20px;'>" +
                         "</div>" +
+                        // 본문 내용
                         "<div style='padding: 30px; background-color: #ffffff;'>" +
                         "<p style='font-size: 20px; color: #333; text-align: center; font-weight: bold;'>와포어 가입을 환영합니다!</p><br>" +
-                        "<p style='font-size: 16px; color: #555; text-align: center; line-height: 1.5;'>" +
-                        "안녕하세요, <img src='http://your-server-domain/images/logo.png' alt='와포어 로고' style='height: 20px; vertical-align: middle;'>입니다.<br>" +
-                        "와포어는 오픈채팅 거지방을 모티브로 한 소비 기록을 공유하는 커뮤니티 기반 가계부 앱입니다. <br>" +
+                        "<p style='font-size: 16px; color: #555; text-align: center; line-height: 1.8;'>" +
+                        "안녕하세요, <img src='http://34.47.73.194:8080/images/logo.png' alt='와포어 로고' style='height: 24px; width: auto; vertical-align: middle; margin-left: 5px; margin-right: 5px;'>입니다.<br>" +
+                        "와포어는 오픈채팅 거지방을 모티브로 한 소비 기록을 공유하는 커뮤니티 기반 가계부 앱입니다.<br>" +
                         "지금 인증 절차를 완료하고 와포어의 다양한 기능을 경험해 보세요." +
                         "</p>" +
+                        // 인증번호
                         "<div style='text-align: center; margin: 30px 0;'>" +
                         "<span style='font-size: 32px; font-weight: bold; color: #3183FF;'>" +
                         authCode +
@@ -55,6 +58,7 @@ public class EmailSendService {
                         "위 인증번호를 정확히 입력한 후 이메일 인증을 완료하세요.<br>" +
                         "제한 시간 5분이 지나면 이메일 인증을 다시 요청해야 합니다." +
                         "</p>" +
+                        // 주요 기능 소개
                         "<div style='margin: 20px 0; padding: 15px; background-color: #f1f7ff; border-radius: 10px;'>" +
                         "<p style='font-size: 14px; color: #555; text-align: left;'>✔ 와포어의 주요 기능:</p>" +
                         "<ul style='font-size: 14px; color: #555; text-align: left; padding-left: 20px;'>" +
@@ -64,11 +68,13 @@ public class EmailSendService {
                         "<li>분석 그래프를 통해 소비 습관을 개선하기는 곧... 완성돼요.</li>" +
                         "</ul>" +
                         "</div>" +
+                        // 깃허브 링크
                         "<p style='font-size: 14px; color: #555; text-align: center;'>와포어의 개발 과정이 궁금하다면?</p>" +
                         "<div style='text-align: center; margin-top: 20px;'>" +
                         "<a href='https://github.com/pknu-wap/WAP-OR' target='_blank' style='text-decoration: none; color: #3183FF; font-size: 16px; font-weight: bold;'>🔗 깃허브 탐색하기</a>" +
                         "</div>" +
                         "</div>" +
+                        // 푸터
                         "<div style='background-color: #3183FF; color: #fff; padding: 40px; text-align: center; font-size: 12px;'>" +
                         "<p>본 메일은 발신 전용이며 문의에 대한 회신은 처리되지 않습니다.</p>" +
                         "<p>© 2024 WAPOR. All Rights Reserved</p>" +
