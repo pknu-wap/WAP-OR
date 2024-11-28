@@ -68,7 +68,8 @@ public class PayLogService {
         payLog.setCategory(postPayLogDto.getCategory());
         payLog.setContent(postPayLogDto.getContent());
         payLog.setTitle(postPayLogDto.getTitle());
-        payLog.setImgUrl(postPayLogDto.getImgUrl());
+        String createdUrl=gcsFileUploadService.uploadFile(imageFile);   //생성된 이미지 url
+        payLog.setImgUrl(createdUrl);
         payLog.setCreatedAt(LocalDateTime.now());
         payLog.setLikeCount(0);
         payLog.setIsPublic(postPayLogDto.getIsPublic());
