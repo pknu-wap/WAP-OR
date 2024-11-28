@@ -50,6 +50,11 @@ public class PayLogController {
             return ResponseEntity.notFound().build(); // 404 Not Found
         }
     }
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<GetPayLogDto> getPayLog(@PathVariable Long id) {
+        GetPayLogDto getPayLogDto=payLogService.getPayLogDetail(id);
+        return ResponseEntity.ok(getPayLogDto);
+    }
 
 
 }
