@@ -34,6 +34,7 @@ public class PayLogService {
     private final UserRepository userRepository;
     private final VirtualAccountRepository virtualAccountRepository;
     private final TransactionRepository transactionRepository; // 추가
+    private final GCSFileUploadService gcsFileUploadService;
 
     @Transactional
     public PayLogResponse createPayLog(PostPayLogDto postPayLogDto, UserPrincipal userPrincipal) {
