@@ -1,5 +1,6 @@
 package com.wap.wapor.service;
 
+import com.wap.wapor.domain.VirtualAccount;
 import com.wap.wapor.dto.AuthResponse;
 import com.wap.wapor.dto.KakaoUserResponse;
 import com.wap.wapor.domain.User;
@@ -64,7 +65,10 @@ public class KakaoAuthService {
                 newUser.setIdentifier(identifier);
                 newUser.setNickname(kakaoUserResponse.getKakaoAccount().getEmail().split("@")[0]); //@앞까지만 추출해서 닉네임으로 사용
                 user=userRepository.save(newUser);
-
+                VirtualAccount virtualAccount = new VirtualAccount();  //새로운 가상계좌 생성
+                virtualAccount.setUser(user); // 사용자와 계좌 연결
+                virtualAccount.setBalance(0L); // 초기 잔액 설정
+                virtualAccountRepository.save(virtualAccount);
             }
            return new AuthResponse(token,user);
          } else {
