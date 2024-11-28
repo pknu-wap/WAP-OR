@@ -9,7 +9,6 @@ import lombok.Setter;
 public class PostPayLogDto {
     private String title;
     private String content;
-    private String imgUrl;
     private String category;
     private Long amount;
     private int  isPublic;
