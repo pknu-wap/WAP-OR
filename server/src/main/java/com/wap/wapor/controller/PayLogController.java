@@ -28,8 +28,8 @@ public class PayLogController {
     }
 
     @PostMapping
-    public ResponseEntity<PayLogResponse> createPayLog(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestPart("images") List<MultipartFile> imageFile,@RequestPart("paylog")PostPayLogDto postPayLogDto) {
-        PayLogResponse response = payLogService.createPayLog(postPayLogDto, userPrincipal);
+    public ResponseEntity<PayLogResponse> createPayLog(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestPart("images") MultipartFile imageFile,@RequestPart("paylog")PostPayLogDto postPayLogDto) {
+        PayLogResponse response = payLogService.createPayLog(postPayLogDto, userPrincipal,imageFile);
         return ResponseEntity.ok(response);
     }
 

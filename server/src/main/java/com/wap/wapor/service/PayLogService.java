@@ -21,6 +21,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -37,7 +38,7 @@ public class PayLogService {
     private final GCSFileUploadService gcsFileUploadService;
 
     @Transactional
-    public PayLogResponse createPayLog(PostPayLogDto postPayLogDto, UserPrincipal userPrincipal) {
+    public PayLogResponse createPayLog(PostPayLogDto postPayLogDto, UserPrincipal userPrincipal, MultipartFile imageFile) {
         // KAKAO와 EMAIL 두 가지 유형을 허용
         List<UserType> allowedUserTypes = Arrays.asList(UserType.KAKAO, UserType.EMAIL);
 
