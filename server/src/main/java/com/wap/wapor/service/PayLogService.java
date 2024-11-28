@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -106,7 +107,21 @@ public class PayLogService {
                     );
                 });
     }
+public GetPayLogDto getPayLogDetail(Long payLogId) {
+      PayLog findPayLog= payLogRepository.findById(payLogId).get();
 
+    return new GetPayLogDto(
+            findPayLog.getTitle(),
+            findPayLog.getContent(),
+            findPayLog.getImgUrl(),
+            findPayLog.getCategory(),
+            findPayLog.getAmount(),
+            findPayLog.getLikeCount(),
+            findPayLog.getUser().getIdentifier(),
+            findPayLog.getUser().getNickname(),
+            findPayLog.getCreatedAt()
+    );
+}
     public void deletePayLog(Long id,UserPrincipal userPrincipal) {
         PayLog payLog = payLogRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("PayLog with id " + id + " does not exist"));
