@@ -54,3 +54,5 @@ src/main/resources/secret.properties
 
 # Redis 서버의 메모리 상태를 저장한 파일
 dump.rdb
+# GCP 서비스 계정 키 파일 무시
+src/main/resources/sapient-tangent-442814-u3-87279629ee20.json
