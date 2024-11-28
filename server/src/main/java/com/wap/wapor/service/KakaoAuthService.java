@@ -60,8 +60,8 @@ public class KakaoAuthService {
                 newUser.setUserType(UserType.KAKAO);
                 newUser.setIdentifier(identifier);
                 newUser.setNickname(kakaoUserResponse.getKakaoAccount().getEmail().split("@")[0]); //@앞까지만 추출해서 닉네임으로 사용
-                userRepository.save(newUser);
-                user=newUser;
+                user=userRepository.save(newUser);
+
             }
            return new AuthResponse(token,user);
          } else {
