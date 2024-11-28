@@ -37,12 +37,12 @@ public class EmailSendService {
         String content =
                 "<div style='font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; border-radius: 10px; overflow: hidden;'>" +
                         "<div style='background: linear-gradient(90deg, #3183FF 0%, #79AFFF 100%); padding: 40px; text-align: center;'>" +
-                        "<img src='http://your-server-domain/images/icon.png' alt='앱 로고' style='height: 60px;'>" +
+                        "<img src='http://34.47.73.194:8080/images/icon.png' alt='앱 로고' style='height: 60px;'>" +
                         "</div>" +
                         "<div style='padding: 30px; background-color: #ffffff;'>" +
                         "<p style='font-size: 20px; color: #333; text-align: center; font-weight: bold;'>와포어 가입을 환영합니다!</p><br>" +
                         "<p style='font-size: 16px; color: #555; text-align: center; line-height: 1.5;'>" +
-                        "안녕하세요, <img src='http://your-server-domain/images/logo.png' alt='와포어 로고' style='height: 20px; vertical-align: middle;'>입니다.<br>" +
+                        "안녕하세요, <img src='http://34.47.73.194:8080/images/logo.png' alt='와포어 로고' style='height: 20px; vertical-align: middle;'>입니다.<br>" +
                         "와포어는 오픈채팅 거지방을 모티브로 한 소비 기록을 공유하는 커뮤니티 기반 가계부 앱입니다. <br>" +
                         "지금 인증 절차를 완료하고 와포어의 다양한 기능을 경험해 보세요." +
                         "</p>" +
