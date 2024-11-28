@@ -1,10 +1,12 @@
 package com.wap.wapor.service;
 
+import com.wap.wapor.domain.VirtualAccount;
 import com.wap.wapor.dto.AuthResponse;
 import com.wap.wapor.dto.KakaoUserResponse;
 import com.wap.wapor.domain.User;
 import com.wap.wapor.domain.UserType;
 import com.wap.wapor.repository.UserRepository;
+import com.wap.wapor.repository.VirtualAccountRepository;
 import com.wap.wapor.security.JwtTokenProvider;
 import com.wap.wapor.security.UserPrincipal;
 import org.springframework.http.*;
@@ -20,13 +22,15 @@ public class KakaoAuthService {
     private final RestTemplate restTemplate;
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
+    private final VirtualAccountRepository virtualAccountRepository;
     private static final Logger logger = LoggerFactory.getLogger(KakaoAuthService.class);
 
 
-    public KakaoAuthService(RestTemplate restTemplate, UserRepository userRepository, JwtTokenProvider jwtTokenProvider) {
+    public KakaoAuthService(RestTemplate restTemplate, UserRepository userRepository, JwtTokenProvider jwtTokenProvider,VirtualAccountRepository virtualAccountRepository) {
         this.restTemplate = restTemplate;
         this.userRepository = userRepository;
         this.jwtTokenProvider = jwtTokenProvider;
+        this.virtualAccountRepository = virtualAccountRepository;
     }
 
     public AuthResponse processKakaoLogin(String accessToken) {
@@ -37,12 +41,7 @@ public class KakaoAuthService {
 
         ResponseEntity<KakaoUserResponse> response = restTemplate.exchange(
                 userInfoUrl, HttpMethod.GET, request, KakaoUserResponse.class);
-       /* try {
-            KakaoUserResponse responseBody = response.getBody();
-            logger.info("Kakao API Response: {}", responseBody);
-        } catch (Exception e) {
-            logger.error("Error while processing Kakao API response", e);
-        }  */
+
         if (response.getStatusCode() == HttpStatus.OK) {
             String token;
             User user;
@@ -60,8 +59,11 @@ public class KakaoAuthService {
                 newUser.setUserType(UserType.KAKAO);
                 newUser.setIdentifier(identifier);
                 newUser.setNickname(kakaoUserResponse.getKakaoAccount().getEmail().split("@")[0]); //@앞까지만 추출해서 닉네임으로 사용
-                userRepository.save(newUser);
-                user=newUser;
+                user=userRepository.save(newUser);
+                VirtualAccount virtualAccount = new VirtualAccount();  //새로운 가상계좌 생성
+                virtualAccount.setUser(user); // 사용자와 계좌 연결
+                virtualAccount.setBalance(0L); // 초기 잔액 설정
+                virtualAccountRepository.save(virtualAccount);
             }
            return new AuthResponse(token,user);
          } else {

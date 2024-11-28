@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -27,8 +28,8 @@ public class PayLogController {
     }
 
     @PostMapping
-    public ResponseEntity<PayLogResponse> createPayLog(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestBody PostPayLogDto postPayLogDto) {
-        PayLogResponse response = payLogService.createPayLog(postPayLogDto, userPrincipal);
+    public ResponseEntity<PayLogResponse> createPayLog(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestPart("images") MultipartFile imageFile,@RequestPart("paylog")PostPayLogDto postPayLogDto) {
+        PayLogResponse response = payLogService.createPayLog(postPayLogDto, userPrincipal,imageFile);
         return ResponseEntity.ok(response);
     }
 
@@ -49,6 +50,12 @@ public class PayLogController {
             return ResponseEntity.notFound().build(); // 404 Not Found
         }
     }
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<GetPayLogDto> getPayLog(@PathVariable Long id) {
+        GetPayLogDto getPayLogDto=payLogService.getPayLogDetail(id);
+        return ResponseEntity.ok(getPayLogDto);
+    }
+
 
 }
 

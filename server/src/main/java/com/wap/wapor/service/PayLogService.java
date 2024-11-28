@@ -20,7 +20,9 @@ import org.springframework.data.domain.Pageable;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -34,9 +36,10 @@ public class PayLogService {
     private final UserRepository userRepository;
     private final VirtualAccountRepository virtualAccountRepository;
     private final TransactionRepository transactionRepository; // 추가
+    private final GCSFileUploadService gcsFileUploadService;
 
     @Transactional
-    public PayLogResponse createPayLog(PostPayLogDto postPayLogDto, UserPrincipal userPrincipal) {
+    public PayLogResponse createPayLog(PostPayLogDto postPayLogDto, UserPrincipal userPrincipal, MultipartFile imageFile) {
         // KAKAO와 EMAIL 두 가지 유형을 허용
         List<UserType> allowedUserTypes = Arrays.asList(UserType.KAKAO, UserType.EMAIL);
 
@@ -66,7 +69,8 @@ public class PayLogService {
         payLog.setCategory(postPayLogDto.getCategory());
         payLog.setContent(postPayLogDto.getContent());
         payLog.setTitle(postPayLogDto.getTitle());
-        payLog.setImgUrl(postPayLogDto.getImgUrl());
+        String createdUrl=gcsFileUploadService.uploadFile(imageFile);   //생성된 이미지 url
+        payLog.setImgUrl(createdUrl);
         payLog.setCreatedAt(LocalDateTime.now());
         payLog.setLikeCount(0);
         payLog.setIsPublic(postPayLogDto.getIsPublic());
@@ -103,7 +107,21 @@ public class PayLogService {
                     );
                 });
     }
+public GetPayLogDto getPayLogDetail(Long payLogId) {
+      PayLog findPayLog= payLogRepository.findById(payLogId).get();
 
+    return new GetPayLogDto(
+            findPayLog.getTitle(),
+            findPayLog.getContent(),
+            findPayLog.getImgUrl(),
+            findPayLog.getCategory(),
+            findPayLog.getAmount(),
+            findPayLog.getLikeCount(),
+            findPayLog.getUser().getIdentifier(),
+            findPayLog.getUser().getNickname(),
+            findPayLog.getCreatedAt()
+    );
+}
     public void deletePayLog(Long id,UserPrincipal userPrincipal) {
         PayLog payLog = payLogRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("PayLog with id " + id + " does not exist"));
