@@ -5,6 +5,7 @@ import com.wap.wapor.dto.KakaoUserResponse;
 import com.wap.wapor.domain.User;
 import com.wap.wapor.domain.UserType;
 import com.wap.wapor.repository.UserRepository;
+import com.wap.wapor.repository.VirtualAccountRepository;
 import com.wap.wapor.security.JwtTokenProvider;
 import com.wap.wapor.security.UserPrincipal;
 import org.springframework.http.*;
@@ -20,13 +21,15 @@ public class KakaoAuthService {
     private final RestTemplate restTemplate;
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
+    private final VirtualAccountRepository virtualAccountRepository;
     private static final Logger logger = LoggerFactory.getLogger(KakaoAuthService.class);
 
 
-    public KakaoAuthService(RestTemplate restTemplate, UserRepository userRepository, JwtTokenProvider jwtTokenProvider) {
+    public KakaoAuthService(RestTemplate restTemplate, UserRepository userRepository, JwtTokenProvider jwtTokenProvider,VirtualAccountRepository virtualAccountRepository) {
         this.restTemplate = restTemplate;
         this.userRepository = userRepository;
         this.jwtTokenProvider = jwtTokenProvider;
+        this.virtualAccountRepository = virtualAccountRepository;
     }
 
     public AuthResponse processKakaoLogin(String accessToken) {
