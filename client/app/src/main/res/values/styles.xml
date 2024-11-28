@@ -192,6 +192,7 @@
         <item name="android:windowBackground">@android:color/transparent</item> <!-- 투명 배경 -->
         <item name="android:padding">0dp</item> <!-- 기본 패딩 제거 -->
     </style>
+
     <style name="MyCustomTheme" parent="Theme.AppCompat.Light">
         <!-- 기본 배경 색상 -->
         <item name="android:background">#FFFFFF</item>

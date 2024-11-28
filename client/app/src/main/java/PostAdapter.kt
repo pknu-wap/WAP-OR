@@ -12,57 +12,66 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.wap_or.R
 import com.example.wap_or.databinding.ItemPostBinding
+import com.google.gson.Gson
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import kotlin.time.Duration
 
 // MyViewHolder 클래스
 class MyViewHolder(val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root)
 
-// 어댑터 클래스
 class PostAdapter(
     private val context: Context,
-    private val datas: MutableList<Post>,
+    private var postList: MutableList<Post>,
     private val onItemClick: (Post) -> Unit
-    ) : RecyclerView.Adapter<MyViewHolder>() {
+) : RecyclerView.Adapter<MyViewHolder>() {
 
-    override fun getItemCount(): Int = datas.size
+    override fun getItemCount(): Int = postList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val post = datas[position]
 
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val post = postList[position]
+        var isLiked = false;
         // 데이터 바인딩
-        holder.binding.postUsername.text = post.memberName
-        holder.binding.postCreatedDate.text = post.createdTime
-        holder.binding.postMainText.text = post.postContent
+        holder.binding.postUsername.text = post.userNickname
+        holder.binding.postCreatedDate.text = getRelativeTime(post.createdAt)
+        holder.binding.postMainText.text = post.content
         holder.binding.postCategory.text = post.category
         holder.binding.postCash.text = "${post.amount} won"
-        holder.binding.postLikeCount.text = post.likes.toString()
-        holder.binding.postCommentCount.text = post.comments.toString()
+        holder.binding.postLikeCount.text = post.likeCount.toString()
+        holder.binding.postCommentCount.text = "0"
+        //holder.binding.postCommentCount.text = post.comments.toString()
 
-        val likeIconRes = if (post.isLiked) R.drawable.post_like_full else R.drawable.post_like
+        // 좋아요 아이콘 처리
+        val likeIconRes = if (isLiked) R.drawable.post_like_full else R.drawable.post_like
         holder.binding.postLikeIcon.setImageResource(likeIconRes)
 
         holder.binding.postLikeIcon.setOnClickListener {
-            post.isLiked = !post.isLiked // 상태 반전
-            val position = holder.bindingAdapterPosition // 올바른 위치를 가져옴
-            if (position != RecyclerView.NO_POSITION) { // 유효한 위치인지 확인
-                notifyItemChanged(position) // 아이템 갱신
-            }
+            isLiked = !isLiked
+            notifyItemChanged(holder.bindingAdapterPosition)
         }
+
+        // 메뉴 버튼 토글 처리
         holder.binding.menuButton.setOnClickListener {
             holder.binding.menu.visibility =
                 if (holder.binding.menu.visibility == View.VISIBLE) View.GONE else View.VISIBLE
         }
+
+        // 메뉴 닫기 처리
         holder.binding.post.setOnTouchListener { _, _ ->
             if (holder.binding.menu.visibility == View.VISIBLE) {
                 holder.binding.menu.visibility = View.GONE
                 return@setOnTouchListener true
             }
-            false // 이벤트를 소비하지 않고 다른 뷰로 전달
+            false
         }
+
+        // 메뉴 항목 클릭 이벤트 처리
         holder.binding.menu.setOnClickListener {
             val customDialogView = LayoutInflater.from(context).inflate(R.layout.custom_popup_report, null)
             val customDialog = AlertDialog.Builder(context, R.style.CustomAlertDialog)
@@ -82,26 +91,28 @@ class PostAdapter(
             customDialog.show()
         }
 
-        // 기본 이미지 리소스 가져오기
-        val context = holder.binding.postMainImg.context
-        val defaultDrawable = ResourcesCompat.getDrawable(context.resources,
-            context.resources.getIdentifier("ex_img", "drawable", context.packageName),
-            null)
+        // Glide 이미지 로드
+        val defaultDrawable = ResourcesCompat.getDrawable(
+            context.resources,
+            R.drawable.ex_img, // 기본 이미지 리소스 이름을 명시적으로 지정
+            null
+        )
+        Glide.with(context)
+            .load(post.imgUrl) // 이미지 URL
+            .placeholder(defaultDrawable) // 로딩 중 기본 이미지
+            .error(defaultDrawable) // 에러 발생 시 기본 이미지
+            .into(holder.binding.postMainImg)
 
-        // Glide를 사용해 이미지 로드
-        if (!post.imageUrl.isNullOrEmpty()) {
-            // 이미지 URL이 있으면 Glide로 이미지를 로드
-            Glide.with(context)
-                .load(post.imageUrl)
-                .placeholder(defaultDrawable) // 로딩 중일 때 표시할 기본 이미지
-                .error(defaultDrawable)       // 에러 발생 시 표시할 기본 이미지
-                .into(holder.binding.postMainImg)
-        } else {
-            // 이미지 URL이 없으면 기본 XML 드로어블 사용
-            holder.binding.postMainImg.setImageDrawable(defaultDrawable)
-        }
+        // 아이템 클릭 이벤트 처리
         holder.binding.root.setOnClickListener {
-            onItemClick(post) // 클릭된 포스트를 콜백으로 전달
+            onItemClick(post)
         }
+    }
+
+    // 데이터 업데이트 메서드
+    fun updateData(newPosts: List<Post>) {
+        postList.clear()
+        postList.addAll(newPosts)
+        notifyDataSetChanged()
     }
 }

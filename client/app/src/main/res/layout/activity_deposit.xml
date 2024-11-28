@@ -60,6 +60,8 @@
         android:layout_height="0dp"
         android:layout_marginTop="34.5dp"
         android:background="#F8F8F8"
+        android:clickable="false"
+        android:focusable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/depositSubText"
         app:layout_constraintVertical_bias="1.0"
@@ -82,10 +84,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16.68dp"
-            android:text="0원"
+            android:layout_marginEnd="20dp"
+            android:text="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/myAccount" />
+        <TextView
+            android:id="@+id/balance_won"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="원"
+            style="@style/account_main_style"
+            app:layout_constraintTop_toTopOf="@id/balance"
+            app:layout_constraintStart_toEndOf="@id/balance" />
 
         <ImageButton
             android:id="@+id/write"
@@ -94,8 +105,10 @@
             android:layout_marginStart="10.66dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/write"
-            app:layout_constraintBottom_toBottomOf="@id/balance"
-            app:layout_constraintStart_toEndOf="@+id/balance" />
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="@id/balance_won"
+            app:layout_constraintStart_toEndOf="@+id/balance_won" />
 
         <Button
             android:id="@+id/submitButton"
@@ -105,6 +118,8 @@
             android:layout_marginTop="49.13dp"
             android:background="@drawable/rounded_button2"
             android:text="완료"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/balance" />

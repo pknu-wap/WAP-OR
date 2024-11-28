@@ -12,7 +12,7 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.activity_main)
 
         // 앱이 처음 실행되면 LoginActivity로 이동
-        val loginIntent = Intent(this, LoginTestActivity::class.java)
+        val loginIntent = Intent(this, LoginActivity::class.java)
         startActivity(loginIntent)
         finish()
     }

@@ -29,6 +29,8 @@ import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.http.Header
 import com.example.wap_or.utils.Constants
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 
 interface ApiService {
     @POST("api/users/login/email") // 실제 엔드포인트에 맞게 수정
@@ -70,7 +72,12 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var passwordEditText: EditText
     private lateinit var wrongInputTextView: TextView
     private lateinit var signUpButton: Button
-
+    fun saveAuthToken(token: String) {
+        val sharedPreferences = getSharedPreferences("appPrefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("auth_token", token)
+        editor.apply()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_WAP_OR)
         super.onCreate(savedInstanceState)
@@ -78,6 +85,8 @@ class LoginActivity : AppCompatActivity() {
         val appKey = getMetaData("com.kakao.sdk.AppKey")
             ?: throw IllegalStateException("AppKey is missing in AndroidManifest.xml")
         KakaoSdk.init(this, appKey)
+
+
 
         // UI 요소 초기화
         loginButton = findViewById(R.id.LoginButton)
@@ -101,6 +110,7 @@ class LoginActivity : AppCompatActivity() {
         kakaoLoginButton.setOnClickListener {
             performKakaoLogin(it)
         }
+
     }
     private fun performLogin() {
         val login = loginEditText.text.toString()
@@ -138,7 +148,7 @@ class LoginActivity : AppCompatActivity() {
                                             "\nCreated At: ${responseBody.user.createdAt}" +
                                             "\nLast Login: ${responseBody.user.lastLogin ?: "N/A"}"
                                 )
-
+                                saveAuthToken(responseBody.token)
                                 val intent = Intent(this@LoginActivity, PaylogActivity::class.java)
                                 startActivity(intent)
                                 finish() // 현재 액티비티 종료
@@ -198,7 +208,7 @@ class LoginActivity : AppCompatActivity() {
                                     "\nCreated At: ${responseBody.user.createdAt}" +
                                     "\nLast Login: ${responseBody.user.lastLogin ?: "N/A"}"
                         )
-
+                        saveAuthToken(responseBody.token)
                         val intent = Intent(this@LoginActivity, PaylogActivity::class.java)
                         startActivity(intent)
                         finish() // 현재 액티비티 종료
