@@ -41,12 +41,7 @@ public class KakaoAuthService {
 
         ResponseEntity<KakaoUserResponse> response = restTemplate.exchange(
                 userInfoUrl, HttpMethod.GET, request, KakaoUserResponse.class);
-       /* try {
-            KakaoUserResponse responseBody = response.getBody();
-            logger.info("Kakao API Response: {}", responseBody);
-        } catch (Exception e) {
-            logger.error("Error while processing Kakao API response", e);
-        }  */
+        
         if (response.getStatusCode() == HttpStatus.OK) {
             String token;
             User user;
