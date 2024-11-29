@@ -21,7 +21,6 @@ public class VirtualAccountService {
 
     @Transactional
     public VirtualAccount deposit(Long amount, String identifier) {
-
         if (amount == null || amount <= 0) {
             throw new IllegalArgumentException("입금 금액은 0보다 커야 합니다.");
         }
@@ -40,17 +39,29 @@ public class VirtualAccountService {
         // 거래 기록 저장
         Transaction transaction = new Transaction();
         transaction.setVirtualAccount(virtualAccount);
-        transaction.setTransactionType(TransactionType.DEPOSIT); // 입금
-        transaction.setAmount(amount); // 입금 금액
-        transaction.setBalance(virtualAccount.getBalance()); // 거래 시점의 잔액 저장
-
-        // 카테고리를 "사용자 입금"으로 고정
-        transaction.setPayLog(null); // 입금은 PayLog와 관계없으므로 null
-        transaction.setCategory("사용자 입금"); // 카테고리 고정값 설정
+        transaction.setTransactionType(TransactionType.DEPOSIT);
+        transaction.setAmount(amount);
+        transaction.setBalance(virtualAccount.getBalance());
+        transaction.setPayLog(null);
+        transaction.setCategory("사용자 입금");
 
         transactionRepository.save(transaction);
 
         // VirtualAccount 업데이트 저장
         return virtualAccountRepository.save(virtualAccount);
+    }
+
+    @Transactional(readOnly = true)
+    public Long getBalance(String identifier) {
+        // User 존재 확인
+        User user = userRepository.findByIdentifier(identifier)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with identifier: " + identifier));
+
+        // User와 연결된 VirtualAccount 조회
+        VirtualAccount virtualAccount = virtualAccountRepository.findByUser(user)
+                .orElseThrow(() -> new IllegalArgumentException("No virtual account found for user: " + identifier));
+
+        // 현재 계좌 잔액 반환
+        return virtualAccount.getBalance();
     }
 }
