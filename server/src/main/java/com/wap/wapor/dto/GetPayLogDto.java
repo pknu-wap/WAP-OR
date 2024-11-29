@@ -18,6 +18,7 @@ public class GetPayLogDto {
     private String user_id;
     private String user_nickname;
     private LocalDateTime createdAt;
+    private Long paylog_id;
 
 }
 

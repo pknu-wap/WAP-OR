@@ -102,7 +102,8 @@ public class PayLogService {
                             payLog.getLikeCount(),
                             payLog.getUser().getIdentifier(),
                             payLog.getUser().getNickname(),
-                            payLog.getCreatedAt()
+                            payLog.getCreatedAt(),
+                            payLog.getId()
 
                     );
                 });
@@ -119,7 +120,8 @@ public GetPayLogDto getPayLogDetail(Long payLogId) {
             findPayLog.getLikeCount(),
             findPayLog.getUser().getIdentifier(),
             findPayLog.getUser().getNickname(),
-            findPayLog.getCreatedAt()
+            findPayLog.getCreatedAt(),
+            findPayLog.getId()
     );
 }
     public void deletePayLog(Long id,UserPrincipal userPrincipal) {
