@@ -34,4 +34,10 @@ public class VirtualAccountController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/balance")
+    public ResponseEntity<Long> getBalance(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        Long balance = virtualAccountService.getBalance(userPrincipal.getId());
+        return ResponseEntity.ok(balance); // 잔액만 반환
+    }
 }
