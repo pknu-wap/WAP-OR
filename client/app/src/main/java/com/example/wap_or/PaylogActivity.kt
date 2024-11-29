@@ -36,7 +36,7 @@ class PaylogActivity : BaseActivity() {
         // 어댑터 초기화
         adapter = PostAdapter(this, mutableListOf()) { post ->
             val intent = Intent(this, PostDetailActivity::class.java)
-            // intent.putExtra("POST_ID", post.id) // 필요시 데이터 전달
+            intent.putExtra("PAYLOG_ID", post.paylog_id)
             startActivity(intent)
         }
 

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.wap_or.model.LoginRequest
 import com.example.wap_or.utils.Constants
 import data.TokenSuccessResponse
+import okhttp3.OkHttpClient
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Call
@@ -38,10 +39,26 @@ class DepositActivity : AppCompatActivity() {
     object RetrofitInstance {
         private const val BASE_URL = Constants.BASE_URL
 
+        // OkHttpClient 인스턴스 생성 및 인터셉터 추가
+        private val okHttpClient by lazy {
+            OkHttpClient.Builder()
+                .addInterceptor { chain ->
+                    val original = chain.request()
+                    val token = (App.getContext() as App).getAuthToken()
+                    val request = original.newBuilder()
+                        .header("Authorization", "Bearer $token")
+                        .method(original.method, original.body)
+                        .build()
+                    chain.proceed(request)
+                }
+                .build()
+        }
+
         // Retrofit 인스턴스 생성
         private val retrofit by lazy {
             Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }

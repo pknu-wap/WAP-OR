@@ -54,11 +54,20 @@
         android:id="@+id/account_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0원"
+        android:text="0"
         style="@style/account_main_style"
         android:layout_marginTop="39dp"
         app:layout_constraintTop_toBottomOf="@id/account_title"
         app:layout_constraintStart_toStartOf="@id/account_title"
+        />
+    <TextView
+        android:id="@+id/account_amount_won"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="원"
+        style="@style/account_main_style"
+        app:layout_constraintTop_toTopOf="@id/account_amount"
+        app:layout_constraintStart_toEndOf="@id/account_amount"
         />
     <ImageButton
         android:id="@+id/setting_button"

@@ -1,4 +1,5 @@
 package com.example.wap_or
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -12,6 +13,10 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wap_or.databinding.ActivityWriteMainBinding
+import com.example.wap_or.utils.Constants
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import utils.LineBreakFilter
 
 
@@ -27,7 +32,6 @@ class WriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         // Camera launcher 설정
         cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

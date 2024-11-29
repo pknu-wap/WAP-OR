@@ -22,7 +22,8 @@ data class Post(
     val likeCount: Int, //likes
     val userId: String, //저장 해둬야함
     val userNickname: String, //memberName
-    val createdAt: String //createdTime
+    val createdAt: String, //createdTime
+    val paylog_id: Long //게시물 번호
 )
 // 상대 시간 계산 함수
 fun getRelativeTime(createdAt: String): String {
