@@ -1,7 +1,7 @@
 ## WAP-OR: 와포어
 > 함께 절약해요! 가계부 커뮤니티 앱
 
-![alt text](<와포어 메인-1.png>)
+![와포어 메인](https://github.com/pknu-wap/WAP-OR/blob/main/docs/main.png?raw=true)
 
 
 ## 서비스 소개
@@ -18,11 +18,11 @@
 
 ## 프로젝트 Overview
 ### 프로젝트 아키텍처
-![alt text](image.png)
+
 ### 주요 기능
-![alt text](2.png)
-![alt text](3.png)
-![alt text](4.png)
+![1](https://github.com/pknu-wap/WAP-OR/blob/main/docs/2.png?raw=true)
+![2](https://github.com/pknu-wap/WAP-OR/blob/main/docs/3.png?raw=true)
+![3](https://github.com/pknu-wap/WAP-OR/blob/main/docs/4.png?raw=true)
 
 ## 팀원
 | 김도현   | 김유정   | 이강민   | 이동현   |
